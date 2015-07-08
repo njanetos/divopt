@@ -30,3 +30,7 @@
 # Code::Blocks
 *.cbp
 *.layout
+*.Rhistory
+*.so
+*.a
+/bin
