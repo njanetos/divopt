@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1436390274 source:/home/njanetos/Google Drive/Programming/divopt/src/divopt.cpp
+	"../include/divopt.h"
+
+1436389985 /home/njanetos/Google Drive/Programming/divopt/include/divopt.h
+	<armadillo>
+
