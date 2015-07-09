@@ -29,11 +29,20 @@ namespace divopt {
      *  Computes the pdf of a normal random variable.
      *
      * @param mean Vector representing the mean of the random variable.
-     * @param cov  Matrix representing the covariance matrix.
+     * @param cov  Matrix representing the inverse of the covariance matrix.
      * @param loc  Vector representing the location at which the pdf is evaluated.
      */
     double pdf(const arma::mat *mean,
-               const arma::mat *cov,
+               const arma::mat *inv_cov,
+               const arma::mat *loc);
+
+    /**
+     *  Computes the pdf of a normal random variable.
+     *
+     * @param rand_var_norm The random variable to use.
+     * @param loc           Vector representing the location at which the pdf is evaluated.
+     */
+    double pdf(const c_rand_var_norm *rand_var_norm,
                const arma::mat *loc);
 
     /**
