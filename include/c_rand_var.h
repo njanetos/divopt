@@ -1,18 +1,11 @@
 #ifndef C_RAND_VAR_H
 #define C_RAND_VAR_H
 
+#include <stdlib.h>
+
 class c_rand_var {
 
     public:
-
-        /**
-         *  Allocates a new object on the heap and returns a pointer
-         *  to that object.
-         *
-         *  \param clean If true, copy in data.
-         *  \return A pointer to the object. Allocated on the heap.
-         */
-        virtual c_rand_var* clone(bool clean) =0;
 
         /**
          *  Copies in data to the raw data. You have to run unpack() for the
@@ -21,7 +14,7 @@ class c_rand_var {
          *  \param dim_prob The dimension of the raw data vector.
          *  \param x Points to the data to copy.
          */
-        void dat_to_dist(size_t dim_prob, const double *x);
+        void dat_to_dist(const double *x);
 
         /**
          *  Returns the dimension of the optimization problem.

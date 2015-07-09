@@ -1,7 +1,6 @@
 #include "c_rand_var.h"
 
-void c_rand_var::dat_to_dist(size_t dim_prob, const double *x) {
-    raw_data.resize(dim_prob);
+void c_rand_var::dat_to_dist(const double *x) {
     partial_dat_to_dist(0, dim_prob, x);
 }
 

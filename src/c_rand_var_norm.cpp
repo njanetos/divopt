@@ -1,4 +1,5 @@
 #include "c_rand_var_norm.h"
+#include "c_util.h"
 
 c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
@@ -6,7 +7,7 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
     this->dim = dim;
 
     // The dimension of the optimization problem is the mean vector plus the upper triangular Cholesky factorization of the covariance matrix.
-    this->dim_prob = dim*(dim+1)/2;
+    this->dim_prob = dim + dim*(dim+1)/2;
 
 }
 
@@ -20,6 +21,22 @@ size_t c_rand_var_norm::get_dim_prob() {
 
 }
 
+void c_rand_var_norm::pack() {
+
+    for (size_t i = 0; i < dim; ++i) {
+        raw_data[i] = mean(i);
+    }
+
+    size_t k = dim;
+    for (size_t i = 0; i < dim; ++i) {
+        for (size_t j = 0; j <= i; ++j) {
+            raw_data[k] = ch(i, j);
+            ++k;
+        }
+    }
+
+}
+
 void c_rand_var_norm::unpack() {
 
     // Instantiate mean (can be directly written in).
@@ -27,7 +44,7 @@ void c_rand_var_norm::unpack() {
 
     // Instantiate Cholesky factorization, C.
     size_t k = dim;
-    ch = zeros<mat>(dim, dim);
+    ch = arma::zeros<arma::mat>(dim, dim);
     for (size_t i = 0; i < dim; ++i) {
         for (size_t j = 0; j <= i; ++j) {
             ch(i, j) = raw_data[k];
@@ -49,22 +66,6 @@ void c_rand_var_norm::unpack() {
     // Flag inverse matrices as in need of computation
     inv_cov_is_computed = false;
     inv_ch_is_computed = false;
-
-}
-
-void c_rand_var_norm::pack() {
-
-    for (size_t i = 0; i < dim; ++i) {
-        raw_data[i] = mean(i);
-    }
-
-    size_t k = dim;
-    for (size_t i = 0; i < dim; ++i) {
-        for (size_t j = 0; j <= i; ++j) {
-            raw_data[k] = ch(i, j);
-            ++k;
-        }
-    }
 
 }
 
