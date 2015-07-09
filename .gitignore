@@ -35,3 +35,5 @@
 *.a
 /bin
 *.depend
+
+main.cpp
