@@ -29,16 +29,16 @@ clean:
 
 # Indicate dependencies of .ccp files on .hpp files
 divopt.o:
-	g++ -c -std=c++11 -I$(INC) $(SRC)/divopt.cpp
+	g++ -c -I$(INC) $(SRC)/divopt.cpp
 
 c_util.o:
-	g++ -c -std=c++11 -I$(INC) $(SRC)/c_util.cpp
+	g++ -c -I$(INC) $(SRC)/c_util.cpp
 
 c_rand_var_norm.o:
-	g++ -c -std=c++11 -I$(INC) $(SRC)/c_rand_var_norm.cpp
+	g++ -c -I$(INC) $(SRC)/c_rand_var_norm.cpp
 
 c_rand_var.o:
-	g++ -c -std=c++11 -I$(INC) $(SRC)/c_rand_var.cpp
+	g++ -c -I$(INC) $(SRC)/c_rand_var.cpp
 
 c_logger.o:
-	g++ -c -std=c++11 -I$(INC) $(SRC)/c_logger.cpp
+	g++ -c -I$(INC) $(SRC)/c_logger.cpp
