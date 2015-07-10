@@ -13,7 +13,7 @@ INC         = include
 .PHONY: all
 all: $(OUTPUTFILE)
 
-$(OUTPUTFILE): divopt.o
+$(OUTPUTFILE): divopt.o c_util.o c_rand_var_norm.o c_rand_var.o c_logger.o
 	ar ru $@ $^
 	ranlib $@
 
@@ -29,4 +29,16 @@ clean:
 
 # Indicate dependencies of .ccp files on .hpp files
 divopt.o:
-	g++ -c $(SRC)/divopt.cpp
+	g++ -c -std=c++11 -I$(INC) $(SRC)/divopt.cpp
+
+c_util.o:
+	g++ -c -std=c++11 -I$(INC) $(SRC)/c_util.cpp
+
+c_rand_var_norm.o:
+	g++ -c -std=c++11 -I$(INC) $(SRC)/c_rand_var_norm.cpp
+
+c_rand_var.o:
+	g++ -c -std=c++11 -I$(INC) $(SRC)/c_rand_var.cpp
+
+c_logger.o:
+	g++ -c -std=c++11 -I$(INC) $(SRC)/c_logger.cpp

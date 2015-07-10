@@ -1,0 +1,10 @@
+language: cpp
+
+compiler: gcc
+
+script: make
+
+branches:
+  only: master
+
+os: linux
