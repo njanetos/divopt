@@ -1,6 +1,7 @@
 #ifndef C_UTIL_H
 #define C_UTIL_H
 
+#include <stdlib.h>
 
 class c_util
 {
@@ -9,7 +10,7 @@ class c_util
         const static double SQRT_TWO;
         const static double WEIGHTS[];
         const static double ABS[];
-        const static int QUADRATURE_DIM;
+        const static size_t QUADRATURE_DIM;
         const static double WEIGHT_FLOOR;
 };
 

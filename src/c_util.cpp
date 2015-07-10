@@ -12,5 +12,5 @@ const double c_util::ABS[] = {   -2.0201828704560856329290,
                                   0.0000000000000000000000,
                                   0.9585724646138185071128,
                                   2.020182870456085632929};
-const int c_util::QUADRATURE_DIM = 5;
+const size_t c_util::QUADRATURE_DIM = 5;
 const double c_util::WEIGHT_FLOOR = 0.000001;

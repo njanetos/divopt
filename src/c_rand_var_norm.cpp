@@ -50,6 +50,7 @@ double c_rand_var_norm::cdf(arma::mat *loc) {
 arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
 
     c_rand_var_norm temp(this->dim);
+    arma::mat res(dim_prob, 1);
 
     temp.dat_to_dist(&(this->raw_data[0]));
     temp.unpack();
@@ -59,9 +60,11 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
     for (size_t i = 0; i < dim+dim*(dim+1)/2; ++i) {
         temp.raw_data[i] += 0.001;
         temp.unpack();
-        res[i] = (temp.cdf(loc) - base)/0.001;
+        res(i) = (temp.cdf(loc) - base)/0.001;
         temp.raw_data[i] -= 0.001;
     }
+
+    return res;
 
 }
 
@@ -72,31 +75,37 @@ double c_rand_var_norm::div(c_rand_var *var) {
 
     // abs will hold the abscissa combination
     // tr_abs is the transformed position
+    arma::Mat<double> abs(dim, 1);
+    arma::Mat<double> tr_abs(dim, 1);
+
     // index is the current index
-    arma::mat<double> abs(dim);
-    arma::mat<double> tr_abs(dim);
-    arma::mat<size_t> index;
+    size_t index[dim];
+
+    // Initialize index to 0
+    for (size_t i = 0; i < dim; ++i) {
+        index[i] = 0;
+    }
 
     // w_prod is the weight to multiply by
     double w_prod;
 
     // Loop through all possible abscissa combinations
-    while (index(dim-1) < c_util::QUADRATURE_DIM) {
+    while (index[dim-1] < c_util::QUADRATURE_DIM) {
 
         // Start with weight = 1, find total weight by multiplying
         // Start reading in the abscissa values
         w_prod = 1.0;
         for (size_t i = 0; i < dim; ++i) {
-            abs(i) = c_util::ABS[index(i)];
-            w_prod *= c_util::WEIGHTS[index(i)];
+            abs(i) = c_util::ABS[index[i]];
+            w_prod *= c_util::WEIGHTS[index[i]];
         }
 
         // Advance the index by one
-        ++index(0);
+        ++index[0];
         for (size_t i = 0; i < dim-1; ++i) {
-            if (index(i) >= c_util::QUADRATURE_DIM) {
-                index(i) = 0;
-                ++index(i+1);
+            if (index[i] >= c_util::QUADRATURE_DIM) {
+                index[i] = 0;
+                ++index[i+1];
             } else {
                 break;
             }
@@ -122,10 +131,10 @@ arma::mat c_rand_var_norm::div_grad(c_rand_var *oth) {
 
     c_rand_var_norm *curr = (c_rand_var_norm *) oth;
 
-    arma::mat grad_mean = (mean - curr->mean).t()*curr->inv_cov();
-    arma::mat grad_cov = -1*inv_ch().t() + curr->inv_cov()*ch;
+    arma::Mat<double> grad_mean = (mean - curr->mean).t()*curr->inv_cov();
+    arma::Mat<double> grad_cov = -1*inv_ch().t() + curr->inv_cov()*ch;
 
-    arma::mat<double> res(dim_prob);
+    arma::Mat<double> res(dim_prob, 1);
 
     // Copy in results
     for (size_t i = 0; i < dim; ++i) {
@@ -145,7 +154,7 @@ arma::mat c_rand_var_norm::div_grad(c_rand_var *oth) {
 }
 
 double c_rand_var_norm::ent(arma::mat *loc, c_rand_var *var) {
-    return 0.0;
+    return std::log(pdf(loc)/var->pdf(loc));
 }
 
 arma::mat& c_rand_var_norm::inv_cov() {
