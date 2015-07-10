@@ -46,8 +46,23 @@ double c_rand_var_norm::cdf(arma::mat *loc) {
     return ret;
 }
 
+// TODO This needs to use the analytic formula.
 arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
-    return NULL;
+
+    c_rand_var_norm temp(this->dim);
+
+    temp.dat_to_dist(&(this->raw_data[0]));
+    temp.unpack();
+
+    double base = temp.cdf(loc);
+
+    for (size_t i = 0; i < dim+dim*(dim+1)/2; ++i) {
+        temp.raw_data[i] += 0.001;
+        temp.unpack();
+        res[i] = (temp.cdf(loc) - base)/0.001;
+        temp.raw_data[i] -= 0.001;
+    }
+
 }
 
 double c_rand_var_norm::div(c_rand_var *var) {
