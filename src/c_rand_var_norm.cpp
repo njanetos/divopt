@@ -118,7 +118,29 @@ double c_rand_var_norm::div(c_rand_var *var) {
 
 }
 
-void c_rand_var_norm::div_grad(c_rand_var *oth, double *res) {
+arma::mat c_rand_var_norm::div_grad(c_rand_var *oth) {
+
+    c_rand_var_norm *curr = (c_rand_var_norm *) oth;
+
+    arma::mat grad_mean = (mean - curr->mean).t()*curr->inv_cov();
+    arma::mat grad_cov = -1*inv_ch().t() + curr->inv_cov()*ch;
+
+    arma::mat<double> res(dim_prob);
+
+    // Copy in results
+    for (size_t i = 0; i < dim; ++i) {
+        res(i) = grad_mean(i);
+    }
+
+    size_t k = 0;
+    for (size_t i = 0; i < dim; ++i) {
+        for (size_t j = 0; j <= i; ++j) {
+            res(dim+k) = grad_cov(i, j);
+            ++k;
+        }
+    }
+
+    return res;
 
 }
 

@@ -46,9 +46,9 @@ class c_rand_var {
          *  another.
          *
          *  \param oth The other random variable to compute against.
-         *  \param Where to store the results.
+         *  \return A vector containing the gradient.
          */
-        virtual void div_grad(c_rand_var *oth, double *res) =0;
+        virtual arma::mat div_grad(c_rand_var *oth) =0;
 
         /**
          *  Computes the entropy.
