@@ -57,7 +57,7 @@ class c_rand_var {
          *  \param var The distribution to measure the entropy against.
          *  \return The relative entropy at some location.
          */
-        virtual double ent(double *loc, c_rand_var *var) =0;
+        virtual double ent(arma::mat *loc, c_rand_var *var) =0;
 
         /**
          *  Returns the dimension of the state space. (Not the optimization problem!)

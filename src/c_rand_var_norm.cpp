@@ -66,14 +66,63 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
 }
 
 double c_rand_var_norm::div(c_rand_var *var) {
-    return 0.0;
+
+    // Initialize the variable that will hold the divergence.
+    double res = 0.0;
+
+    // abs will hold the abscissa combination
+    // tr_abs is the transformed position
+    // index is the current index
+    arma::mat<double> abs(dim);
+    arma::mat<double> tr_abs(dim);
+    arma::mat<size_t> index;
+
+    // w_prod is the weight to multiply by
+    double w_prod;
+
+    // Loop through all possible abscissa combinations
+    while (index(dim-1) < c_util::QUADRATURE_DIM) {
+
+        // Start with weight = 1, find total weight by multiplying
+        // Start reading in the abscissa values
+        w_prod = 1.0;
+        for (size_t i = 0; i < dim; ++i) {
+            abs(i) = c_util::ABS[index(i)];
+            w_prod *= c_util::WEIGHTS[index(i)];
+        }
+
+        // Advance the index by one
+        ++index(0);
+        for (size_t i = 0; i < dim-1; ++i) {
+            if (index(i) >= c_util::QUADRATURE_DIM) {
+                index(i) = 0;
+                ++index(i+1);
+            } else {
+                break;
+            }
+        }
+
+        // Make sure the weights aren't really small before performing computations.
+        if (w_prod > c_util::WEIGHT_FLOOR) {
+            // Transform the matrix to take into account correlation
+            tr_abs = c_util::SQRT_TWO*ch*abs + mean;
+
+            // Find the entropy and add onto the result, times the weight.
+            res += ent(&tr_abs, var)*w_prod;
+        }
+
+    }
+    res *= gauss_factor;
+
+    return res;
+
 }
 
 void c_rand_var_norm::div_grad(c_rand_var *oth, double *res) {
 
 }
 
-double c_rand_var_norm::ent(double *loc, c_rand_var *var) {
+double c_rand_var_norm::ent(arma::mat *loc, c_rand_var *var) {
     return 0.0;
 }
 

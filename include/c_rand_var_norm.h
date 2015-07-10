@@ -17,7 +17,7 @@ class c_rand_var_norm : public c_rand_var {
         arma::mat cdf_grad(arma::mat *loc);
         double div(c_rand_var *var);
         void div_grad(c_rand_var *oth, double *res);
-        double ent(double *loc, c_rand_var *var);
+        double ent(arma::mat *loc, c_rand_var *var);
         arma::mat& inv_cov();
         arma::mat& inv_ch();
         double pdf(arma::mat *loc);
