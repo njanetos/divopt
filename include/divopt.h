@@ -5,6 +5,7 @@
 #define SQRT_TWO 1.4142135623730950488016
 
 #include<armadillo>
+#include "c_rand_var_norm.h"
 
 namespace divopt {
     /**
@@ -24,65 +25,6 @@ namespace divopt {
                double p,
                arma::mat *mean_new,
                arma::mat *cov_new);
-
-    /**
-     *  Computes the pdf of a normal random variable.
-     *
-     * @param mean Vector representing the mean of the random variable.
-     * @param cov  Matrix representing the inverse of the covariance matrix.
-     * @param loc  Vector representing the location at which the pdf is evaluated.
-     */
-    double pdf(const arma::mat *mean,
-               const arma::mat *inv_cov,
-               const arma::mat *loc);
-
-    /**
-     *  Computes the pdf of a normal random variable.
-     *
-     * @param rand_var_norm The random variable to use.
-     * @param loc           Vector representing the location at which the pdf is evaluated.
-     */
-    double pdf(const c_rand_var_norm *rand_var_norm,
-               const arma::mat *loc);
-
-    /**
-     *  Computes the cdf of a normal random variable.
-     *
-     * @param mean Vector representing the mean of the random variable.
-     * @param cov  Matrix representing the covariance matrix.
-     * @param loc  Vector representing the location at which the cdf is evaluated.
-     */
-    double cdf(const arma::mat *mean,
-               const arma::mat *cov,
-               const arma::mat *per);
-
-    /**
-     *  Computes the divergence of two random variables.
-     *
-     * @param mean_old Vector representing the mean of the random variable in the denominator.
-     * @param cov_old  Matrix representing the covariance matrix in the denominator.
-     * @param mean_new Vector representing the mean of the random variable in the numerator.
-     * @param cov_new  Matrix representing the covariance matrix in the numerator.
-     */
-    double div(const arma::mat *mean_old,
-               const arma::mat *cov_old,
-               const arma::mat *mean_new,
-               const arma::mat *cov_new);
-
-    /**
-     *  Computes the entropy of two random variables at one realization.
-     *
-     * @param mean_old Vector representing the mean of the random variable in the denominator.
-     * @param cov_old  Matrix representing the covariance matrix in the denominator.
-     * @param mean_new Vector representing the mean of the random variable in the numerator.
-     * @param cov_new  Matrix representing the covariance matrix in the numerator.
-     * @param looc     Vector representing the location to evaluate at.
-     */
-    double ent(const arma::mat *mean_old,
-               const arma::mat *cov_old,
-               const arma::mat *mean_new,
-               const arma::mat *cov_new,
-               const arma::mat *loc);
 
     /**
      *  Uses Gauss-Hermite integration to find the expected value of a function.
