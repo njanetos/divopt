@@ -1,5 +1,6 @@
 #include "c_rand_var_norm.h"
 #include "c_util.h"
+#include "c_logger.h"
 
 c_rand_var_norm::c_rand_var_norm(size_t dim) {
 

@@ -4,6 +4,7 @@
 #include <armadillo>
 #include <cmath>
 #include "c_rand_var.h"
+#include "mvtnorm.h"
 
 class c_rand_var_norm : public c_rand_var {
 
