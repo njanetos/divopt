@@ -14,15 +14,15 @@ class c_rand_var {
          *  \param loc The location to compute the cumulative density at.
          *  \return The cumulative density.
          */
-        virtual double cdf(double *loc) =0;
+        virtual double cdf(arma::mat *loc) =0;
 
         /**
          *  Computes the gradient of my cdf at some location.
          *
          *  \param loc Where to evaluate the cdf.
-         *  \param res Where to store the results.
+         *  \return Vector containing the gradient.
          */
-        virtual void cdf_grad(double *loc, double *res) =0;
+        virtual arma::mat cdf_grad(arma::mat *loc) =0;
 
         /**
          *  Copies in data to the raw data. You have to run unpack() for the

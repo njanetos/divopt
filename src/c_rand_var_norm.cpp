@@ -18,12 +18,35 @@ c_rand_var_norm::~c_rand_var_norm() {
 
 }
 
-double c_rand_var_norm::cdf(double *loc) {
-    return 0.0;
+double c_rand_var_norm::cdf(arma::mat *loc) {
+
+    // Find the adjusted score.
+    arma::mat adj_pos = (*loc - mean) / sqrt(cov.diag());
+
+    // Read in the raw data for the correlation matrix
+    // to pass to CDF computing library.
+    double * locRaw = adj_pos.memptr();
+    double raw_data_temp[dim*(dim-1)/2];
+
+    size_t k = 0;
+    for (size_t i = 0; i < dim; ++i) {
+        for (size_t j = 0; j < i; ++j) {
+            raw_data_temp[k] = corr(i, j);
+            ++k;
+        }
+    }
+
+    double error;
+    double ret;
+    if (pmvnorm_P(dim, locRaw, raw_data_temp, &error, &ret) != 0) {
+        log().warning() << "CDF may have issues. Error tolerance: " << error;
+    }
+
+    return ret;
 }
 
-void c_rand_var_norm::cdf_grad(double *loc, double *res) {
-
+arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
+    return NULL;
 }
 
 double c_rand_var_norm::div(c_rand_var *var) {

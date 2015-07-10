@@ -12,8 +12,8 @@ class c_rand_var_norm : public c_rand_var {
         c_rand_var_norm(size_t dim);
         virtual ~c_rand_var_norm();
 
-        double cdf(double *loc);
-        void cdf_grad(double *loc, double *res);
+        double cdf(arma::mat *loc);
+        arma::mat cdf_grad(arma::mat *loc);
         double div(c_rand_var *var);
         void div_grad(c_rand_var *oth, double *res);
         double ent(double *loc, c_rand_var *var);
