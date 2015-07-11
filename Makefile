@@ -2,7 +2,7 @@
 CLEANEXTS   = o a
 
 # Specify the target file and the install directory
-OUTPUTFILE  = divopt.a
+OUTPUTFILE  = libdivopt.a
 HEADER		  = divopt.h
 INSTALLDIR  = /usr/lib/divopt
 
