@@ -14,7 +14,7 @@ script:
 
 after_success:
 - cd tests
-- g++ -L"../" -L"../lib/" c_tests.cpp -ldivopt -lMvtnorm -larmadillo -o c_tests
+- g++ -L"../" -L"../lib/" c_tests.cpp -ldivopt -lMvtnorm -larmadillo -lgcov -o c_tests
 - ./c_tests
 - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
 
