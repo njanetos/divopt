@@ -11,6 +11,8 @@ before_install:
 
 script:
 - make
+
+after_success:
 - cd tests
 - cxxtestgen --error-printer -o c_tests.cpp c_tests.h
 - g++ -I"../include" c_tests.cpp -L../ -L../lib -ldivopt -lMvtnorm -larmadillo -o c_tests
