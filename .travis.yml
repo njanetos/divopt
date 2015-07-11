@@ -8,6 +8,7 @@ addons:
   apt:
     packages:
     - libarmadillo2
+    - libarmadillo-dev
 
 script: make
 
