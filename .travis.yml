@@ -10,7 +10,7 @@ before_install:
 - sudo pip install cpp-coveralls
 
 script:
-- ./configure --enable-gcov && make
+- make
 
 after_success:
 - cd tests
