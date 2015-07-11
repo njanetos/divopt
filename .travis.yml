@@ -6,15 +6,16 @@ sudo: required
 
 before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -y libarmadillo2 libarmadillo-dev
+- sudo apt-get install -y libarmadillo2 libarmadillo-dev cpp-coveralls
 
 script:
-- make
+- ./configure --enable-gcov && make
 
 after_success:
 - cd tests
 - g++ -L"../" -L"../lib/" c_tests.cpp -ldivopt -lMvtnorm -larmadillo -o c_tests
 - ./c_tests
+- coveralls --exclude lib --exclude tests --gcov-options '\-lp'
 
 branches:
   only: master
