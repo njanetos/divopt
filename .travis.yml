@@ -5,10 +5,9 @@ compiler: gcc
 sudo: required
 
 before_install:
+- sudo apt-add-repository ppa:dhart/ppa
 - sudo apt-get update -qq
-- sudo apt-get install -y libarmadillo2
-- sudo apt-get install -y libarmadillo-dev
-- sudo apt-get install -y cxxtest
+- sudo apt-get install -y libarmadillo2 libarmadillo-dev cxxtest
 
 script:
 - make
