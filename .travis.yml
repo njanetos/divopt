@@ -5,21 +5,15 @@ compiler: gcc
 sudo: required
 
 before_install:
-- sudo apt-add-repository -y ppa:dhart/ppa
 - sudo apt-get update -qq
 - sudo apt-get install -y libarmadillo2 libarmadillo-dev
-- sudo apt-get install -y cxxtest
-env: CXXTEST=/usr/include
 
 script:
-- dpkg -L cxxtest
-- echo $PATH
 - make
 
 after_success:
 - cd tests
-- cxxtestgen --error-printer -o c_tests.cpp c_tests.h
-- g++ -I"../include" c_tests.cpp -L../ -L../lib -ldivopt -lMvtnorm -larmadillo -o c_tests
+- g++ -L"../" -L"../lib/" c_tests.cpp -ldivopt -lMvtnorm -larmadillo -o c_tests
 - ./c_tests
 
 branches:
