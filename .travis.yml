@@ -2,6 +2,13 @@ language: cpp
 
 compiler: gcc
 
+sudo: required
+
+before_install:
+- sudo apt-get update
+- sudo apt-get install libarmadillo4
+- sudo apt-get install libarmadillo-dev
+
 script: make
 
 branches:
