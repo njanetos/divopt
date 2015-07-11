@@ -10,6 +10,10 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
     // The dimension of the optimization problem is the mean vector plus the upper triangular Cholesky factorization of the covariance matrix.
     this->dim_prob = dim + dim*(dim+1)/2;
 
+    // Flag expensive computations as not yet complete.
+    inv_ch_is_computed = false;
+    inv_cov_is_computed = false;
+
     // Prepare the raw data
     raw_data.resize(dim_prob);
 

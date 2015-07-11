@@ -31,7 +31,7 @@ class c_rand_var_norm : public c_rand_var {
 
     protected:
 
-        bool inv_ch_is_computed = false, inv_cov_is_computed = false;
+        bool inv_ch_is_computed, inv_cov_is_computed;
         arma::mat m_inv_cov, m_inv_ch;
 
 };
