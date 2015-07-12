@@ -5,7 +5,7 @@ LIB 				= lib
 
 CLEANEXTS   = o a gcno
 CC					= g++
-CFLAGS			= -Wall -fexceptions -g -std=c++11 -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
+CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
 LIBS				= -L$(LIB) -lgcov -larmadillo -lMvtnorm
 
 _DEPS = divopt.h mvtnorm.h c_util.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp
