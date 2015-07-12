@@ -27,7 +27,8 @@ $(OUTPUTFILE): $(OBJ)
 .PHONY: clean
 clean:
 	rm -f $(OUT)/*.o *~ core $(INC)/*~
-	rm -f $(OUT)/*.gcno *~ core $(INC)/*~ 
+	rm -f $(OUT)/*.gcno *~ core $(INC)/*~
+	rm -f $(OUT)/*.gcda *~ core $(INC)/*~ 
 	rm $(OUTPUTFILE)
 
 # Dependencies

@@ -37,3 +37,8 @@ libdivopt.a
 
 main.cpp
 /tests/c_tests
+divopt
+
+# gcov
+*.gcno
+*.gcda
