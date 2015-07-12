@@ -1,44 +1,36 @@
-# Specify extensions of files to delete when cleaning
-CLEANEXTS   = o a
-
 # Specify the target file and the install directory
-OUTPUTFILE  = libdivopt.a
-HEADER		  = divopt.h
-INSTALLDIR  = /usr/lib/divopt
-
 SRC         = src
 INC         = include
+OUT 			  = obj
+LIB 				= lib
+
+CLEANEXTS   = o a gcno
+CC					= g++
+CFLAGS			= -Wall -fexceptions -g -std=c++11 -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
+LIBS				= -L$(LIB) -lgcov -larmadillo -lMvtnorm
+
+_DEPS = divopt.h mvtnorm.h c_util.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp
+DEPS = $(patsubst %,$(INC)/%,$(_DEPS))
+
+_OBJ = divopt.o c_util.o c_rand_var_norm.o c_rand_var.o c_logger.o c_tests.o
+OBJ = $(patsubst %,$(OUT)/%,$(_OBJ))
+
+OUTPUTFILE = divopt
 
 # Default target
 .PHONY: all
 all: $(OUTPUTFILE)
 
-$(OUTPUTFILE): divopt.o c_util.o c_rand_var_norm.o c_rand_var.o c_logger.o
-	ar ru $@ $^
-	ranlib $@
-
-.PHONY: install
-install:
-	mkdir -p $(INSTALLDIR)
-	cp -p $(OUTPUTFILE) $(INSTALLDIR)
-	cp -p $(INC)/$(HEADER) $(INSTALLDIR)
+$(OUTPUTFILE): $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 clean:
-	for file in $(CLEANEXTS); do rm -f *.$$file; done
+	rm -f $(OUT)/*.o *~ core $(INC)/*~
+	rm -f $(OUT)/*.gcno *~ core $(INC)/*~ 
+	rm $(OUTPUTFILE)
 
-# Indicate dependencies of .ccp files on .hpp files
-divopt.o:
-	g++ -c -fprofile-arcs -ftest-coverage -lgcov -I$(INC) $(SRC)/divopt.cpp
+# Dependencies
 
-c_util.o:
-	g++ -c -fprofile-arcs -ftest-coverage -lgcov -I$(INC) $(SRC)/c_util.cpp
-
-c_rand_var_norm.o:
-	g++ -c -fprofile-arcs -ftest-coverage -lgcov -I$(INC) $(SRC)/c_rand_var_norm.cpp
-
-c_rand_var.o:
-	g++ -c -fprofile-arcs -ftest-coverage -lgcov -I$(INC) $(SRC)/c_rand_var.cpp
-
-c_logger.o:
-	g++ -c -fprofile-arcs -ftest-coverage -lgcov -I$(INC) $(SRC)/c_logger.cpp
+$(OUT)/%.o: $(SRC)/%.cpp $(DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
