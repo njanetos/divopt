@@ -34,9 +34,9 @@ TEST_CASE("Statistics and probability") {
         rand_var_norm.pack();
         rand_var_norm.unpack();
 
-        REQUIRE(rand_var_norm.mean(0, 0) == 0.2);
+        REQUIRE( (rand_var_norm.mean(0, 0) == 0.2) );
 
-        REQUIRE(rand_var_norm.inv_ch()(0, 0) == 1);
+        REQUIRE( (rand_var_norm.inv_ch()(0, 0) == 1) );
 
     }
 
@@ -58,7 +58,7 @@ TEST_CASE("Statistics and probability") {
         location(0) = 0.2;
         location(1) = 0.4;
 
-        REQUIRE(std::abs(rand_var_norm.pdf(&location) - 0.061589) < 0.01);
+        REQUIRE( (std::abs(rand_var_norm.pdf(&location) - 0.061589) < 0.01) );
 
     }
 
@@ -80,12 +80,12 @@ TEST_CASE("Statistics and probability") {
         location(0) = -0.2;
         location(1) = 0.1;
 
-        REQUIRE(std::abs(rand_var_norm.cdf(&location) - 0.087040) < 0.05);
+        REQUIRE( (std::abs(rand_var_norm.cdf(&location) - 0.087040) < 0.05) );
 
         location(0) = 0.2;
         location(1) = 0.1;
 
-        REQUIRE(std::abs(rand_var_norm.cdf(&location) - 0.13182) < 0.05);
+        REQUIRE( (std::abs(rand_var_norm.cdf(&location) - 0.13182) < 0.05) );
 
     }
 
@@ -119,11 +119,11 @@ TEST_CASE("Statistics and probability") {
         location(0) = -0.2;
         location(1) = 0.1;
 
-        REQUIRE(std::abs(rand_var_norm.ent(&location, &rand_var_norm2) + 0.72020) < 0.01);
+        REQUIRE( (std::abs(rand_var_norm.ent(&location, &rand_var_norm2) + 0.72020) < 0.01) );
 
-        REQUIRE(std::abs(rand_var_norm.div(&rand_var_norm2) - 1.8025) < 0.01);
+        REQUIRE( (std::abs(rand_var_norm.div(&rand_var_norm2) - 1.8025) < 0.01) );
 
-        REQUIRE(std::abs(rand_var_norm.div(&rand_var_norm)) < 0.01);
+        REQUIRE( (std::abs(rand_var_norm.div(&rand_var_norm)) < 0.01) );
 
     }
 
