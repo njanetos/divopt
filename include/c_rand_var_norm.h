@@ -14,6 +14,7 @@ class c_rand_var_norm : public c_rand_var {
         virtual ~c_rand_var_norm();
 
         double cdf(arma::mat *loc);
+        double cdf(std::vector<c_inequality> *inequalities);
         arma::mat cdf_grad(arma::mat *loc);
         double div(c_rand_var *var);
         arma::mat div_grad(c_rand_var *oth);

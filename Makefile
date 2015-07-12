@@ -8,10 +8,10 @@ CC					= g++
 CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
 LIBS				= -L$(LIB) -lgcov -larmadillo -lMvtnorm
 
-_DEPS = divopt.h mvtnorm.h c_util.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp
+_DEPS = divopt.h mvtnorm.h c_util.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp c_constraint.h c_inequality.h
 DEPS = $(patsubst %,$(INC)/%,$(_DEPS))
 
-_OBJ = divopt.o c_util.o c_rand_var_norm.o c_rand_var.o c_logger.o c_tests.o
+_OBJ = divopt.o c_util.o c_rand_var_norm.o c_rand_var.o c_logger.o c_tests.o c_constraint.o c_inequality.o
 OBJ = $(patsubst %,%,$(_OBJ))
 
 OUTPUTFILE = divopt

@@ -7,6 +7,7 @@ enum class binary_relation { GEQ, LEQ };
 
 class c_inequality {
     public:
+
         c_inequality(size_t dim, float val, binary_relation bin);
         virtual ~c_inequality();
 
@@ -15,6 +16,11 @@ class c_inequality {
         binary_relation get_binary_relation();
 
     protected:
+
+        size_t dim;
+        float val;
+        binary_relation bin;
+
     private:
 };
 

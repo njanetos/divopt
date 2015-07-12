@@ -20,9 +20,15 @@ class c_constraint {
     public:
 
         /**
-         *  Initializes a new, empty set of constraints.
+         *  Initializes a new, empty set of constraints. prob is default
+         *  set to 0.5.
          */
         c_constraint();
+
+        /**
+         *  Initializes a new, empty set of constraints, and sets prob.
+         */
+        c_constraint(float prob);
 
         virtual ~c_constraint();
 
@@ -49,14 +55,21 @@ class c_constraint {
          *  Tests whether the given constraint is satisfied against
          *  @p rand_var.
          *  \param rand_var The random variable to test against.
+         *  \return True if satisfied.
          */
-        bool is_satisfied(c_rand_var rand_var);
+        bool is_satisfied(c_rand_var *rand_var);
 
         /**
          *  Sets the probability of the described conditions holding.
          *  \param prob The probability.
          */
-        void set_prob(double prob);
+        void set_prob(float prob);
+
+        /**
+         *  Returns the probability of this event occuring.
+         *  \return The probability.
+         */
+        float get_prob();
 
     protected:
 

@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <vector>
+#include <armadillo>
+#include "c_inequality.h"
 
 class c_rand_var {
 
@@ -15,6 +17,14 @@ class c_rand_var {
          *  \return The cumulative density.
          */
         virtual double cdf(arma::mat *loc) =0;
+
+        /**
+         *  Returns the probability of some event.
+         *
+         *  \param inequalities The inequalities that define the event.
+         *  \return The cumulative density.
+         */
+        virtual double cdf(std::vector<c_inequality> *inequalities) =0;
 
         /**
          *  Computes the gradient of my cdf at some location.

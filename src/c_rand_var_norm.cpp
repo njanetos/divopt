@@ -48,6 +48,13 @@ double c_rand_var_norm::cdf(arma::mat *loc) {
     }
 
     return ret;
+
+}
+
+double c_rand_var_norm::cdf(std::vector<c_inequality> *inequalities) {
+
+    return 0.0;
+
 }
 
 // TODO This needs to use the analytic formula.
@@ -218,12 +225,16 @@ void c_rand_var_norm::pack() {
 }
 
 double c_rand_var_norm::pdf(arma::mat *loc) {
+
     arma::mat expint = exp(-0.5*(*loc - mean).t()*inv_cov()*(*loc - mean));
     return norm_factor*expint(0);
+
 }
 
 arma::mat c_rand_var_norm::pdf_grad(arma::mat *loc) {
+
     return NULL;
+
 }
 
 void c_rand_var_norm::unpack() {
