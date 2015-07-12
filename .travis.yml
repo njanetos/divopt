@@ -29,7 +29,8 @@ after_success:
 - mv -v ${TRAVIS_BUILD_DIR}/documentation/* .
 - git add . -A
 - git commit -m "Automatic Travis update of documentation"
-- git push origin gh-pages
+- git remote set-url origin git@github.com:njanetos/divopt.git
+- git push origin
 notifications:
   email:
     on_success: change
