@@ -16,6 +16,7 @@ after_success:
 - ./divopt
 - coveralls --exclude lib --exclude include --exclude src/c_logger.cpp --gcov-options '\-lp'
 - export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
+- sudo apt-get install doxygen
 - doxygen config.doxygen
 - cd ..
 - git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
