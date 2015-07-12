@@ -11,13 +11,4 @@ namespace divopt {
 
     }
 
-double gauss_hermite(const arma::mat *mean,
-const arma::mat *cov,
-double (*func)(const arma::mat *loc)) {
-return 0.0;
-}
-
-double gauss_hermite(const arma::mat *mean, const arma::mat *cov, double (*func)(const arma::mat *loc), size_t grid) {
-return 0.0;
-}
 }
