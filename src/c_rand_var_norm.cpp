@@ -158,7 +158,9 @@ arma::mat c_rand_var_norm::div_grad(c_rand_var *oth) {
 }
 
 double c_rand_var_norm::ent(arma::mat *loc, c_rand_var *var) {
+
     return std::log(pdf(loc)/var->pdf(loc));
+
 }
 
 arma::mat& c_rand_var_norm::inv_cov() {
