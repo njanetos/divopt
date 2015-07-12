@@ -25,6 +25,7 @@ after_success:
 - git config user.email "nejanetos@gmail.com"
 - git checkout gh-pages
 - git pull origin gh-pages
+- git rm -rf .
 - mv -v ${TRAVIS_BUILD_DIR}/documentation/* .
 - git add . -A
 - git commit -m "Automatic Travis update of documentation"
