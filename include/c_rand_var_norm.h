@@ -6,6 +6,9 @@
 #include "c_rand_var.h"
 #include "mvtnorm.h"
 
+/**
+ * @brief Represents an n-dimensional normal random variable.
+ */
 class c_rand_var_norm : public c_rand_var {
 
     public:
@@ -19,8 +22,21 @@ class c_rand_var_norm : public c_rand_var {
         double div(c_rand_var *var);
         arma::mat div_grad(c_rand_var *oth);
         double ent(arma::mat *loc, c_rand_var *var);
+
+        /**
+         *  Returns the inverse of the covariance matrix. Since this
+         *  is an expensive operation, it is only inverted when called.
+         *  \return The inverse of the covariance matrix.
+         */
         arma::mat& inv_cov();
+
+        /**
+         *  Returns the inverse of the Cholesky matrix. Since this
+         *  is an expensive operation, it is only inverted when called.
+         *  \return The inverse of the Cholesky matrix.
+         */
         arma::mat& inv_ch();
+
         double pdf(arma::mat *loc);
         arma::mat pdf_grad(arma::mat *loc);
         void pack();

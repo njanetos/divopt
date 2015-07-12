@@ -6,6 +6,18 @@
 #include <armadillo>
 #include "c_inequality.h"
 
+/**
+ * @brief Represents a random variable.
+ *
+ * Abstract class that represents a random variable. Contains
+ * functions for finding the cdf, the pdf, the entropy, the
+ * divergence, and the gradients of all these things. Every
+ * random variable is represented by a vector of raw data,
+ * implementing classes are responsible for packing and
+ * unpacking that raw data to form the elements of the random
+ * variable itself. The gradients are always with respect to the
+ * vector of raw data.
+ */
 class c_rand_var {
 
     public:

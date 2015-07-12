@@ -15,6 +15,24 @@ script:
 after_success:
 - ./divopt
 - coveralls --exclude lib --exclude include --exclude src/c_logger.cpp --gcov-options '\-lp'
+- export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
+- doxygen config.doxygen
+- cd ..
+- git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+- cd gh-pages
+- git config user.name "Nick Janetos"
+- git config user.email "nejanetos@gmail.com"
+- git checkout gh-pages
+- git pull origin gh-pages
+- mv -v ${TRAVIS_BUILD_DIR}/documentation/* .
+- git add . -A
+- git commit -m "Automatic Travis update of documentation"
+- git push origin gh-pages
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
 
 branches:
   only: master

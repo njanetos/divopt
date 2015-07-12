@@ -42,3 +42,5 @@ divopt
 # gcov
 *.gcno
 *.gcda
+
+/documentation
