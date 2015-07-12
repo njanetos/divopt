@@ -1,4 +1,4 @@
-#include "../include/divopt.h"
+#include "divopt.h"
 
 namespace divopt {
 
