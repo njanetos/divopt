@@ -38,12 +38,15 @@ std::vector<c_inequality> divopt::c_util::reduce(const std::vector<c_inequality>
 
 }
 
-std::vector<c_inequality> divopt::c_util::reduce(c_constraint constraint,
+std::vector<c_inequality> divopt::c_util::reduce(c_constraint *constraint,
                                                  size_t dim1,
                                                  size_t dim2) {
 
-    return reduce(&(*constraint.get_inequalities())[dim1],
-                  &(*constraint.get_inequalities())[dim2]);
+    // TODO: Fix this
+    std::vector< std::vector<c_inequality> > vec;
+    vec = *(constraint->get_inequalities());
+
+    return reduce(&vec[dim1], &vec[dim2]);
 
 }
 

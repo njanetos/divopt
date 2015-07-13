@@ -142,15 +142,14 @@ TEST_CASE("Nuts and bolts of events") {
     constraint.add_inequality(inequality1, 0);
     constraint.add_inequality(inequality2, 0);
     constraint.add_inequality(inequality3, 1);
+    constraint.add_inequality(inequality4, 0);
 
-    c_constraint comb;
+    std::vector<c_inequality> comb;
 
-    //comb = c_util::reduce(, &constraint[1]);
+    comb = c_util::reduce(&constraint, 0, 1);
 
-}
+    REQUIRE( comb.size() == 2 );
 
-TEST_CASE("Optimization") {
-
-    REQUIRE( 1 == 0 );
+    REQUIRE( comb[0].get_val() == 0.2f );
 
 }

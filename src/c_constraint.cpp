@@ -33,7 +33,8 @@ void divopt::c_constraint::add_inequality(std::vector<c_inequality> inequalities
 
 void divopt::c_constraint::add_inequality(c_inequality inequality, size_t pos) {
 
-    inequalities[pos].push_back(inequality);
+    if (inequalities.size() < pos + 1) inequalities.resize(pos + 1);
+    (inequalities[pos]).push_back(inequality);
 
 }
 

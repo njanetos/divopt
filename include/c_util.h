@@ -31,7 +31,7 @@ namespace divopt {
              *  \param dim2 The second set of ANDs to pull from.
              *  \return The result.
              */
-            static std::vector<c_inequality> reduce(c_constraint constraint,
+            static std::vector<c_inequality> reduce(c_constraint *constraint,
                                                     size_t dim1,
                                                     size_t dim2);
 
