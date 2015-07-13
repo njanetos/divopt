@@ -16,7 +16,7 @@ after_success:
 - coveralls --exclude lib --exclude include --exclude src/c_logger.cpp --gcov-options
   '\-lp'
 - export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
-- sudo apt-get install doxygen
+- sudo apt-get --no-install-recommends install doxygen
 - doxygen config.doxygen
 - cd ..
 - git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
@@ -28,7 +28,8 @@ after_success:
 - git rm -rf .
 - mv -v ${TRAVIS_BUILD_DIR}/documentation/* .
 - git add . -A
-- git commit -m "Automatic Travis update of documentation"
+- CHANGESET=$(git rev-parse --verify HEAD)
+- git commit -m "Automatic Travis update of documentation ${CHANGESET}"
 - git remote set-url origin git@github.com:njanetos/divopt.git
 - git push origin
 notifications:
