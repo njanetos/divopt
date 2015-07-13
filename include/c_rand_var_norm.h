@@ -16,7 +16,6 @@ namespace divopt {
         public:
 
             c_rand_var_norm(size_t dim);
-            virtual ~c_rand_var_norm();
 
             double cdf(arma::mat *loc);
             double cdf(std::vector<c_inequality> *inequalities);

@@ -13,10 +13,6 @@ divopt::c_constraint::c_constraint(float prob) {
 
 }
 
-divopt::c_constraint::~c_constraint() {
-    //dtor
-}
-
 void divopt::c_constraint::add_inequality(c_inequality inequality) {
 
     std::vector<c_inequality> new_inequalities;

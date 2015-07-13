@@ -21,7 +21,6 @@ namespace divopt {
              *  \param The direction of the inequality, e.g., GEQ.
              */
             c_inequality(size_t dim, float val, e_binary_relation bin);
-            virtual ~c_inequality();
 
             /**
              *  Returns the dimension of the state space on which this inequality acts.

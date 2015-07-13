@@ -33,8 +33,6 @@ namespace divopt {
              */
             c_constraint(float prob);
 
-            virtual ~c_constraint();
-
             /**
              *  Adds an inequality onto the last set of ANDs.
              *  \param inequality The inequality to add.

@@ -6,10 +6,6 @@ divopt::c_inequality::c_inequality(size_t dim, float val, e_binary_relation bin)
     this->bin = bin;
 }
 
-divopt::c_inequality::~c_inequality() {
-    //dtor
-}
-
 size_t divopt::c_inequality::get_dim() const {
     return dim;
 }

@@ -19,10 +19,6 @@ divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
 }
 
-divopt::c_rand_var_norm::~c_rand_var_norm() {
-
-}
-
 double divopt::c_rand_var_norm::cdf(arma::mat *loc) {
 
     // Find the adjusted score.
