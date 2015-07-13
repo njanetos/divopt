@@ -64,7 +64,16 @@ bool divopt::c_util::null_event(const c_inequality *ineq1,
 int divopt::c_util::is_nested(const c_inequality *ineq1,
                               const c_inequality *ineq2) {
 
-    return -1;
+    // Not a null event, so there are only three cases
+    int res = -1;
+    if (ineq1->binary_relation == ineq2->binary_relation) {
+        if (ineq1->binary_relation == divopt::binary_relation::GEQ) {
+            (ineq1->val > ineq2->val) ? res = 0 : res = 1;
+        } else {
+            (ineq1->val > ineq2->val) ? res = 1 : res = 0;
+        }
+    }
+    return res;
 
 }
 
