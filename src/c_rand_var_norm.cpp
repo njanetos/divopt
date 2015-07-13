@@ -2,7 +2,7 @@
 #include "c_util.h"
 #include "c_logger.h"
 
-c_rand_var_norm::c_rand_var_norm(size_t dim) {
+divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
     // Set the dimension of the state space.
     this->dim = dim;
@@ -19,11 +19,11 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
 }
 
-c_rand_var_norm::~c_rand_var_norm() {
+divopt::c_rand_var_norm::~c_rand_var_norm() {
 
 }
 
-double c_rand_var_norm::cdf(arma::mat *loc) {
+double divopt::c_rand_var_norm::cdf(arma::mat *loc) {
 
     // Find the adjusted score.
     arma::mat adj_pos = (*loc - mean) / sqrt(cov.diag());
@@ -51,14 +51,14 @@ double c_rand_var_norm::cdf(arma::mat *loc) {
 
 }
 
-double c_rand_var_norm::cdf(std::vector<c_inequality> *inequalities) {
+double divopt::c_rand_var_norm::cdf(std::vector<c_inequality> *inequalities) {
 
     return 0.0;
 
 }
 
 // TODO This needs to use the analytic formula.
-arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
+arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat *loc) {
 
     c_rand_var_norm temp(this->dim);
     arma::mat res(dim_prob, 1);
@@ -79,7 +79,7 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat *loc) {
 
 }
 
-double c_rand_var_norm::div(c_rand_var *var) {
+double divopt::c_rand_var_norm::div(c_rand_var *var) {
 
     // Initialize the variable that will hold the divergence.
     double res = 0.0;
@@ -138,7 +138,7 @@ double c_rand_var_norm::div(c_rand_var *var) {
 
 }
 
-arma::mat c_rand_var_norm::div_grad(c_rand_var *oth) {
+arma::mat divopt::c_rand_var_norm::div_grad(c_rand_var *oth) {
 
     c_rand_var_norm *curr = (c_rand_var_norm *) oth;
 
@@ -164,13 +164,13 @@ arma::mat c_rand_var_norm::div_grad(c_rand_var *oth) {
 
 }
 
-double c_rand_var_norm::ent(arma::mat *loc, c_rand_var *var) {
+double divopt::c_rand_var_norm::ent(arma::mat *loc, c_rand_var *var) {
 
     return std::log(pdf(loc)/var->pdf(loc));
 
 }
 
-arma::mat& c_rand_var_norm::inv_cov() {
+arma::mat& divopt::c_rand_var_norm::inv_cov() {
 
     // Check if the inverse covariance matrix has already been computed.
     if (!inv_cov_is_computed) {
@@ -187,7 +187,7 @@ arma::mat& c_rand_var_norm::inv_cov() {
 
 }
 
-arma::mat& c_rand_var_norm::inv_ch() {
+arma::mat& divopt::c_rand_var_norm::inv_ch() {
 
     // Check if the inverse of the Cholesky factorization has been computed.
     if (!inv_ch_is_computed) {
@@ -208,7 +208,7 @@ arma::mat& c_rand_var_norm::inv_ch() {
 
 }
 
-void c_rand_var_norm::pack() {
+void divopt::c_rand_var_norm::pack() {
 
     for (size_t i = 0; i < dim; ++i) {
         raw_data[i] = mean(i);
@@ -224,20 +224,20 @@ void c_rand_var_norm::pack() {
 
 }
 
-double c_rand_var_norm::pdf(arma::mat *loc) {
+double divopt::c_rand_var_norm::pdf(arma::mat *loc) {
 
     arma::mat expint = exp(-0.5*(*loc - mean).t()*inv_cov()*(*loc - mean));
     return norm_factor*expint(0);
 
 }
 
-arma::mat c_rand_var_norm::pdf_grad(arma::mat *loc) {
+arma::mat divopt::c_rand_var_norm::pdf_grad(arma::mat *loc) {
 
     return NULL;
 
 }
 
-void c_rand_var_norm::unpack() {
+void divopt::c_rand_var_norm::unpack() {
 
     // Instantiate mean (can be directly written in).
     mean = arma::mat(&raw_data[0], dim, 1, true, true);

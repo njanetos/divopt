@@ -1,16 +1,68 @@
 #include "c_util.h"
 
-const double c_util::PI =         3.1415926535897932384626;
-const double c_util::SQRT_TWO =   1.4142135623730950488016;
-const double c_util::WEIGHTS[] ={ 0.0199532420590459132077,
-                                  0.3936193231522411598285,
-                                  0.9453087204829418812260,
-                                  0.3936193231522411598285,
-                                  0.0199532420590459132077};
-const double c_util::ABS[] = {   -2.0201828704560856329290,
-                                 -0.9585724646138185071128,
-                                  0.0000000000000000000000,
-                                  0.9585724646138185071128,
-                                  2.020182870456085632929};
-const size_t c_util::QUADRATURE_DIM = 5;
-const double c_util::WEIGHT_FLOOR = 0.000001;
+using namespace divopt;
+
+std::vector<c_inequality> divopt::c_util::reduce(const std::vector<c_inequality> *ineq1,
+                                                 const std::vector<c_inequality> *ineq2) {
+
+    // Results stored in res
+    std::vector<c_inequality> res;
+
+    // Combine the two vectors
+    res = *ineq1;
+    res.insert(res.end(), ineq2->begin(), ineq2->end());
+
+    // Check for zero probability events
+    for (size_t i = 0; i < res.size(); ++i) {
+        for (size_t j = i+1; j < res.size(); ++j) {
+            // If it's a zero probability event, return an empty vector
+            if (c_util::null_event(&res[i], &res[j])) {
+                res.empty();
+                return res;
+            }
+        }
+    }
+
+    // Combine redundant vectors
+    for (std::vector<c_inequality>::iterator i = res.end() - 1; i >= res.begin(); --i) {
+        for (std::vector<c_inequality>::iterator j = i + 1; j < res.end(); ++j) {
+            // If it's redundant, eliminate the redundant one
+            int red = c_util::is_nested(&*i, &*j);
+            if (red != -1) {
+                (red == 0) ? res.erase(i) : res.erase(j);
+            }
+        }
+    }
+
+    return res;
+
+}
+
+bool divopt::c_util::null_event(const c_inequality *ineq1,
+                                const c_inequality *ineq2) {
+
+    return false;
+
+}
+
+int divopt::c_util::is_nested(const c_inequality *ineq1,
+                              const c_inequality *ineq2) {
+
+    return -1;
+
+}
+
+const double divopt::c_util::PI =         3.1415926535897932384626;
+const double divopt::c_util::SQRT_TWO =   1.4142135623730950488016;
+const double divopt::c_util::WEIGHTS[] ={ 0.0199532420590459132077,
+                                          0.3936193231522411598285,
+                                          0.9453087204829418812260,
+                                          0.3936193231522411598285,
+                                          0.0199532420590459132077};
+const double divopt::c_util::ABS[] = {   -2.0201828704560856329290,
+                                         -0.9585724646138185071128,
+                                          0.0000000000000000000000,
+                                          0.9585724646138185071128,
+                                          2.020182870456085632929};
+const size_t divopt::c_util::QUADRATURE_DIM = 5;
+const double divopt::c_util::WEIGHT_FLOOR = 0.000001;

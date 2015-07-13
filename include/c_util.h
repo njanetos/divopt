@@ -2,16 +2,53 @@
 #define C_UTIL_H
 
 #include <stdlib.h>
+#include <vector>
+#include "c_inequality.h"
 
-class c_util
-{
-    public:
-        const static double PI;
-        const static double SQRT_TWO;
-        const static double WEIGHTS[];
-        const static double ABS[];
-        const static size_t QUADRATURE_DIM;
-        const static double WEIGHT_FLOOR;
-};
+namespace divopt {
+
+    class c_util
+    {
+
+        public:
+
+            /**
+             *  Combines two ORs into an AND, eliminating redundant inequality constraints,
+             *  and returning an empty vector if the probability is zero.
+             *  \param ineq1 Points to the first vector to combine.
+             *  \param ineq2 Points to the second vector to combine.
+             *  \return The result.
+             */
+            static std::vector<c_inequality> reduce(const std::vector<c_inequality> *ineq1,
+                                                    const std::vector<c_inequality> *ineq2);
+
+            /**
+             *  Checks whether these two inequalities describe an empty event.
+             *  \param ineq1 The first inequality.
+             *  \param ineq2 The second inequality.
+             *  \return True if, e.g., x1 > 0.2 AND x1 < 0.1.
+             */
+            static bool null_event(const c_inequality *ineq1,
+                                   const c_inequality *ineq2);
+
+            /**
+             *  Returns whether one inequality nests another inequality.
+             *  \param ineq1 The first inequality.
+             *  \param ineq2 The second inequality.
+             *  \return -1 if neither nests the other, 0 if the first nests the second, etc.
+             */
+            static int is_nested(const c_inequality *ineq1,
+                                 const c_inequality *ineq2);
+
+            const static double PI;
+            const static double SQRT_TWO;
+            const static double WEIGHTS[];
+            const static double ABS[];
+            const static size_t QUADRATURE_DIM;
+            const static double WEIGHT_FLOOR;
+
+    };
+
+}
 
 #endif // C_UTIL_H
