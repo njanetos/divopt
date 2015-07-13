@@ -1,5 +1,7 @@
 #include "c_constraint.h"
 
+using namespace divopt;
+
 divopt::c_constraint::c_constraint() {
     std::vector< std::vector<c_inequality> > inequalities;
     prob = 0.5;
@@ -49,13 +51,19 @@ bool divopt::c_constraint::is_satisfied(c_rand_var *rand_var) {
 
 float divopt::c_constraint::eval_prob(c_rand_var *rand_var) {
 
-
+    return 0.5;
 
 }
 
 void divopt::c_constraint::set_prob(float prob) {
 
     this->prob = prob;
+
+}
+
+std::vector< std::vector<c_inequality> > * divopt::c_constraint::get_inequalities() {
+
+    return &inequalities;
 
 }
 

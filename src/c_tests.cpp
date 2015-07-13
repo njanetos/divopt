@@ -2,7 +2,10 @@
 #include <armadillo>
 #include "catch.hpp"
 #include "c_rand_var_norm.h"
+#include "c_constraint.h"
+#include "c_inequality.h"
 #include "c_logger.h"
+#include "c_util.h"
 
 using namespace divopt;
 
@@ -124,6 +127,25 @@ TEST_CASE("Divergence and entropy") {
     REQUIRE( (std::abs(rand_var_norm.div(&rand_var_norm2) - 1.8025) < 0.01) );
 
     REQUIRE( (std::abs(rand_var_norm.div(&rand_var_norm)) < 0.01) );
+
+}
+
+TEST_CASE("Nuts and bolts of events") {
+
+    c_inequality inequality1(0, 0.2, e_binary_relation::GEQ);
+    c_inequality inequality2(1, -0.1, e_binary_relation::LEQ);
+    c_inequality inequality3(0, 0.3, e_binary_relation::GEQ);
+    c_inequality inequality4(0, 0.4, e_binary_relation::GEQ);
+
+    c_constraint constraint;
+
+    constraint.add_inequality(inequality1, 0);
+    constraint.add_inequality(inequality2, 0);
+    constraint.add_inequality(inequality3, 1);
+
+    c_constraint comb;
+
+    //comb = c_util::reduce(, &constraint[1]);
 
 }
 

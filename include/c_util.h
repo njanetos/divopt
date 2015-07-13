@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "c_inequality.h"
+#include "c_constraint.h"
 
 namespace divopt {
 
@@ -21,6 +22,18 @@ namespace divopt {
              */
             static std::vector<c_inequality> reduce(const std::vector<c_inequality> *ineq1,
                                                     const std::vector<c_inequality> *ineq2);
+
+            /**
+             *  Combines two ORs into an AND, eliminating redundant inequality constraints,
+             *  and returning an empty vector if the probability is zero.
+             *  \param constraint The constraint to draw the data from.
+             *  \param dim1 The first set of ANDs to pull from.
+             *  \param dim2 The second set of ANDs to pull from.
+             *  \return The result.
+             */
+            static std::vector<c_inequality> reduce(c_constraint constraint,
+                                                    size_t dim1,
+                                                    size_t dim2);
 
             /**
              *  Checks whether these two inequalities describe an empty event.

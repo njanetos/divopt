@@ -5,7 +5,7 @@
 
 namespace divopt {
 
-    enum class binary_relation { GEQ, LEQ };
+    enum class e_binary_relation { GEQ, LEQ };
 
     /**
      * @brief Encodes information about an inequality in one dimension.
@@ -20,7 +20,7 @@ namespace divopt {
              *  \param The value on the left side, e.g., 0.3.
              *  \param The direction of the inequality, e.g., GEQ.
              */
-            c_inequality(size_t dim, float val, binary_relation bin);
+            c_inequality(size_t dim, float val, e_binary_relation bin);
             virtual ~c_inequality();
 
             /**
@@ -39,13 +39,13 @@ namespace divopt {
              *  Returns the direction of the binary relationship.
              *  \return The direction of the binary relation.
              */
-            binary_relation get_binary_relation() const;
+            e_binary_relation get_binary_relation() const;
 
         protected:
 
             size_t dim;
             float val;
-            binary_relation bin;
+            e_binary_relation bin;
 
     };
 

@@ -38,6 +38,15 @@ std::vector<c_inequality> divopt::c_util::reduce(const std::vector<c_inequality>
 
 }
 
+std::vector<c_inequality> divopt::c_util::reduce(c_constraint constraint,
+                                                 size_t dim1,
+                                                 size_t dim2) {
+
+    return reduce(&(*constraint.get_inequalities())[dim1],
+                  &(*constraint.get_inequalities())[dim2]);
+
+}
+
 bool divopt::c_util::null_event(const c_inequality *ineq1,
                                 const c_inequality *ineq2) {
 
@@ -50,11 +59,11 @@ bool divopt::c_util::null_event(const c_inequality *ineq1,
     // Check the two other cases
 
     // x1 > v1, x1 < v2, v2 < v1
-    if (ineq1->get_binary_relation() == divopt::binary_relation::GEQ &&
+    if (ineq1->get_binary_relation() == divopt::e_binary_relation::GEQ &&
         ineq2->get_val() < ineq1->get_val()) return false;
 
     // x1 < v1, x1 > v2, v2 > v1
-    if (ineq1->get_binary_relation() == divopt::binary_relation::LEQ &&
+    if (ineq1->get_binary_relation() == divopt::e_binary_relation::LEQ &&
         ineq2->get_val() > ineq1->get_val()) return false;
 
     return true;
@@ -67,7 +76,7 @@ int divopt::c_util::is_nested(const c_inequality *ineq1,
     // Not a null event, so there are only three cases
     int res = -1;
     if (ineq1->get_binary_relation() == ineq2->get_binary_relation()) {
-        if (ineq1->get_binary_relation() == divopt::binary_relation::GEQ) {
+        if (ineq1->get_binary_relation() == divopt::e_binary_relation::GEQ) {
             (ineq1->get_val() > ineq2->get_val()) ? res = 0 : res = 1;
         } else {
             (ineq1->get_val() > ineq2->get_val()) ? res = 1 : res = 0;

@@ -77,6 +77,12 @@ namespace divopt {
             void set_prob(float prob);
 
             /**
+             *  Returns a pointer to the underlying set of inequalities.
+             *  \return Pointer to the inequalities.
+             */
+            std::vector< std::vector<c_inequality> > * get_inequalities();
+
+            /**
              *  Returns the probability of this event occuring.
              *  \return The probability.
              */
