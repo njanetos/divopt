@@ -41,7 +41,23 @@ std::vector<c_inequality> divopt::c_util::reduce(const std::vector<c_inequality>
 bool divopt::c_util::null_event(const c_inequality *ineq1,
                                 const c_inequality *ineq2) {
 
-    return false;
+    // If they're not the same dimension, then they can't be a null event
+    if (ineq1->dim != ineq2->dim) return false;
+
+    // If they point in the same direction, then they can't be a null event
+    if (ineq1->binary_relation == ineq2->binary_relation) return false;
+
+    // Check the two other cases
+
+    // x1 > v1, x1 < v2, v2 < v1
+    if (ineq1->binary_relation == divopt::binary_relation::GEQ &&
+        ineq2->val < ineq1->val) return false;
+
+    // x1 < v1, x1 > v2, v2 > v1
+    if (ineq1->binary_relation == divopt::binary_relation::LEQ &&
+        ineq2->val > ineq1->val) return false;
+
+    return true;
 
 }
 
