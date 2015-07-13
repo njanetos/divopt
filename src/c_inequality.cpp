@@ -10,14 +10,14 @@ divopt::c_inequality::~c_inequality() {
     //dtor
 }
 
-size_t divopt::c_inequality::get_dim() {
+size_t divopt::c_inequality::get_dim() const {
     return dim;
 }
 
-float divopt::c_inequality::get_val() {
+float divopt::c_inequality::get_val() const {
     return val;
 }
 
-divopt::binary_relation divopt::c_inequality::get_binary_relation() {
+divopt::binary_relation divopt::c_inequality::get_binary_relation() const {
     return bin;
 }

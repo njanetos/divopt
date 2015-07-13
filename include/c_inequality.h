@@ -27,19 +27,19 @@ namespace divopt {
              *  Returns the dimension of the state space on which this inequality acts.
              *  \return The dimension.
              */
-            size_t get_dim();
+            size_t get_dim() const;
 
             /**
              *  Returns the value on the left hand side of the inequality.
              *  \return The value.
              */
-            float get_val();
+            float get_val() const;
 
             /**
              *  Returns the direction of the binary relationship.
              *  \return The direction of the binary relation.
              */
-            binary_relation get_binary_relation();
+            binary_relation get_binary_relation() const;
 
         protected:
 

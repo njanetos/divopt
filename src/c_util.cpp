@@ -42,20 +42,20 @@ bool divopt::c_util::null_event(const c_inequality *ineq1,
                                 const c_inequality *ineq2) {
 
     // If they're not the same dimension, then they can't be a null event
-    if (ineq1->dim != ineq2->dim) return false;
+    if (ineq1->get_dim() != ineq2->get_dim()) return false;
 
     // If they point in the same direction, then they can't be a null event
-    if (ineq1->binary_relation == ineq2->binary_relation) return false;
+    if (ineq1->get_binary_relation() == ineq2->get_binary_relation()) return false;
 
     // Check the two other cases
 
     // x1 > v1, x1 < v2, v2 < v1
-    if (ineq1->binary_relation == divopt::binary_relation::GEQ &&
-        ineq2->val < ineq1->val) return false;
+    if (ineq1->get_binary_relation() == divopt::binary_relation::GEQ &&
+        ineq2->get_val() < ineq1->get_val()) return false;
 
     // x1 < v1, x1 > v2, v2 > v1
-    if (ineq1->binary_relation == divopt::binary_relation::LEQ &&
-        ineq2->val > ineq1->val) return false;
+    if (ineq1->get_binary_relation() == divopt::binary_relation::LEQ &&
+        ineq2->get_val() > ineq1->get_val()) return false;
 
     return true;
 
@@ -66,11 +66,11 @@ int divopt::c_util::is_nested(const c_inequality *ineq1,
 
     // Not a null event, so there are only three cases
     int res = -1;
-    if (ineq1->binary_relation == ineq2->binary_relation) {
-        if (ineq1->binary_relation == divopt::binary_relation::GEQ) {
-            (ineq1->val > ineq2->val) ? res = 0 : res = 1;
+    if (ineq1->get_binary_relation() == ineq2->get_binary_relation()) {
+        if (ineq1->get_binary_relation() == divopt::binary_relation::GEQ) {
+            (ineq1->get_val() > ineq2->get_val()) ? res = 0 : res = 1;
         } else {
-            (ineq1->val > ineq2->val) ? res = 1 : res = 0;
+            (ineq1->get_val() > ineq2->get_val()) ? res = 1 : res = 0;
         }
     }
     return res;

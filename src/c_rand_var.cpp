@@ -17,13 +17,13 @@ void divopt::c_rand_var::partial_dat_to_dist(size_t lower, size_t upper, const d
 
 }
 
-double divopt::c_rand_var::get_dim() {
+double divopt::c_rand_var::get_dim() const {
 
     return dim;
 
 }
 
-double divopt::c_rand_var::get_dim_prob() {
+double divopt::c_rand_var::get_dim_prob() const {
 
     return dim_prob;
 

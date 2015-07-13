@@ -87,13 +87,13 @@ namespace divopt {
              *  Returns the dimension of the state space. (Not the optimization problem!)
              *  \return The dimension of the state space.
              */
-            double get_dim();
+            double get_dim() const;
 
             /**
              *  Returns the dimension of the optimization problem. (Not the state space!)
              *  \return The dimension of the optimization problem.
              */
-            double get_dim_prob();
+            double get_dim_prob() const;
 
             /**
              *  Takes the non-raw-data aspects and reads them into the raw data.
