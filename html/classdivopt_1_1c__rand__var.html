@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>divopt: c_rand_var Class Reference</title>
+<title>divopt: divopt::c_rand_var Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -75,64 +75,84 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><b>divopt</b>      </li>
+      <li class="navelem"><a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a>      </li>
+    </ul>
+  </div>
 </div>
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">c_rand_var Class Reference</div>  </div>
+<div class="title">divopt::c_rand_var Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="c_rand_var" -->
+<!-- doxytag: class="divopt::c_rand_var" -->
 <p>Represents a random variable.  
- <a href="classc__rand__var.html#details">More...</a></p>
+ <a href="classdivopt_1_1c__rand__var.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="c__rand__var_8h_source.html">c_rand_var.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for c_rand_var:</div>
+Inheritance diagram for divopt::c_rand_var:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classc__rand__var.png" usemap="#c_rand_var_map" alt=""/>
-  <map id="c_rand_var_map" name="c_rand_var_map">
-<area href="classc__rand__var__norm.html" title="Represents an n-dimensional normal random variable." alt="c_rand_var_norm" shape="rect" coords="0,56,113,80"/>
+  <img src="classdivopt_1_1c__rand__var.png" usemap="#divopt::c_rand_var_map" alt=""/>
+  <map id="divopt::c_rand_var_map" name="divopt::c_rand_var_map">
+<area href="classdivopt_1_1c__rand__var__norm.html" title="Represents an n-dimensional normal random variable." alt="divopt::c_rand_var_norm" shape="rect" coords="0,56,153,80"/>
 </map>
  </div></div>
 
-<p><a href="classc__rand__var-members.html">List of all members.</a></p>
+<p><a href="classdivopt_1_1c__rand__var-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#af0642e6451929280d9e891a2ccc1cda2">cdf</a> (arma::mat *loc)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#aab4b9f6c1fb36b312010c884eda79a34">cdf</a> (std::vector&lt; <a class="el" href="classc__inequality.html">c_inequality</a> &gt; *inequalities)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a6568080871f61f97a41403703821382f">cdf_grad</a> (arma::mat *loc)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a6f6444f2ecadfa4f331ac3d6db5a11e0">dat_to_dist</a> (const double *x)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a784534f9e6efae57d7a97638a73ed6a7">div</a> (<a class="el" href="classc__rand__var.html">c_rand_var</a> *var)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a9de6c00c256815f16fc79158cf5faed5">div_grad</a> (<a class="el" href="classc__rand__var.html">c_rand_var</a> *oth)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#ad3498ddaa214968329cfde0ddd014e9f">ent</a> (arma::mat *loc, <a class="el" href="classc__rand__var.html">c_rand_var</a> *var)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#adaa290ff5474bcb3e1d9435ad40760a3">get_dim</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a9a49e11be71157d78cec2093d65f1193">get_dim_prob</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a341609737c79d17bc124917bd8c1200c">pack</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a878978cf57b2072ba32bcaab8da04a74">partial_dat_to_dist</a> (size_t lower, size_t upper, const double *x)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#abbb41e718f8b417f251e7578311b644d">pdf</a> (arma::mat *loc)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a67f5455a4fcb957cf6dfc060a3d7be96">pdf_grad</a> (arma::mat *loc)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#aba4668d9a6e515c488b8e5764ef83977">unpack</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">cdf</a> (arma::mat *loc)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a4ae3877a3c46cacee48c48f7effac56b">cdf</a> (std::vector&lt; <a class="el" href="classdivopt_1_1c__inequality.html">c_inequality</a> &gt; *inequalities)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a98aad18751922552e96d1808745b34d6">cdf_grad</a> (arma::mat *loc)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a45fac8707b07c02eb2e6ea0fff47994a">dat_to_dist</a> (const double *x)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a921fa0ba7a22c97cc0594888d221e379">div</a> (<a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *var)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a88c4e86c9ee59bd5a93a59e57442ec5c">div_grad</a> (<a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *oth)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a8671b4803b5b589eed65f8c2c4008dff">ent</a> (arma::mat *loc, <a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *var)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#ae2463f769d55c59961d9a82e8ef318b2">get_dim</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#aef27f4c3b3b2f9a77d7ee6576c064525">get_dim_prob</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a5dfd6f96919dc469f93d6d4341cb4cd2">pack</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a5ddef49beaa10e3dfd0e6e58af104c19">partial_dat_to_dist</a> (size_t lower, size_t upper, const double *x)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a631139ddccf1de90af2b8cb9a7f6d50a">pdf</a> (arma::mat *loc)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a6fa8732f6467cfb9b71b9590c2f88e5b">pdf_grad</a> (arma::mat *loc)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#af2b87125538d2ccf2fd427d104c5397d">unpack</a> ()=0</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a6bdf916d8aa06727128106e54bc36813">dim</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#af0c3924c20a6118bbe142637f735bd32">dim_prob</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__rand__var.html#a259d5bac81373870d51a9cbac2e4aa5b">raw_data</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#ad263b31b0e272d1c00a7368362ed19e4">dim</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#accebcd3c62fcf1958e6d21b82bd0d4ae">dim_prob</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a5817d4b94c53e6e6a7f8d4027cbce4e1">raw_data</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Represents a random variable. </p>
 <p>Abstract class that represents a random variable. Contains functions for finding the cdf, the pdf, the entropy, the divergence, and the gradients of all these things. Every random variable is represented by a vector of raw data, implementing classes are responsible for packing and unpacking that raw data to form the elements of the random variable itself. The gradients are always with respect to the vector of raw data. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af0642e6451929280d9e891a2ccc1cda2"></a><!-- doxytag: member="c_rand_var::cdf" ref="af0642e6451929280d9e891a2ccc1cda2" args="(arma::mat *loc)=0" -->
+<a class="anchor" id="a04962b760cf8d3b62cecaf84db8888d6"></a><!-- doxytag: member="divopt::c_rand_var::cdf" ref="a04962b760cf8d3b62cecaf84db8888d6" args="(arma::mat *loc)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double <a class="el" href="classc__rand__var.html#af0642e6451929280d9e891a2ccc1cda2">c_rand_var::cdf</a> </td>
+          <td class="memname">virtual float <a class="el" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">divopt::c_rand_var::cdf</a> </td>
           <td>(</td>
           <td class="paramtype">arma::mat *&#160;</td>
           <td class="paramname"><em>loc</em></td><td>)</td>
@@ -150,18 +170,18 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The cumulative density. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#a56fc03e43408f91e8f4e75c99bf2f4d7">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#acf9741d640440ebf2b216ef6941a423e">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aab4b9f6c1fb36b312010c884eda79a34"></a><!-- doxytag: member="c_rand_var::cdf" ref="aab4b9f6c1fb36b312010c884eda79a34" args="(std::vector&lt; c_inequality &gt; *inequalities)=0" -->
+<a class="anchor" id="a4ae3877a3c46cacee48c48f7effac56b"></a><!-- doxytag: member="divopt::c_rand_var::cdf" ref="a4ae3877a3c46cacee48c48f7effac56b" args="(std::vector&lt; c_inequality &gt; *inequalities)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double <a class="el" href="classc__rand__var.html#af0642e6451929280d9e891a2ccc1cda2">c_rand_var::cdf</a> </td>
+          <td class="memname">virtual float <a class="el" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">divopt::c_rand_var::cdf</a> </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classc__inequality.html">c_inequality</a> &gt; *&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classdivopt_1_1c__inequality.html">c_inequality</a> &gt; *&#160;</td>
           <td class="paramname"><em>inequalities</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -177,16 +197,16 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The cumulative density. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#a916fcce06db769b62842d1836105af9a">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#a96006e8533878fcc4e60e4eaca636d7b">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6568080871f61f97a41403703821382f"></a><!-- doxytag: member="c_rand_var::cdf_grad" ref="a6568080871f61f97a41403703821382f" args="(arma::mat *loc)=0" -->
+<a class="anchor" id="a98aad18751922552e96d1808745b34d6"></a><!-- doxytag: member="divopt::c_rand_var::cdf_grad" ref="a98aad18751922552e96d1808745b34d6" args="(arma::mat *loc)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual arma::mat <a class="el" href="classc__rand__var.html#a6568080871f61f97a41403703821382f">c_rand_var::cdf_grad</a> </td>
+          <td class="memname">virtual arma::mat <a class="el" href="classdivopt_1_1c__rand__var.html#a98aad18751922552e96d1808745b34d6">divopt::c_rand_var::cdf_grad</a> </td>
           <td>(</td>
           <td class="paramtype">arma::mat *&#160;</td>
           <td class="paramname"><em>loc</em></td><td>)</td>
@@ -204,16 +224,16 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Vector containing the gradient. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#aded89fa173879155b4392478ad5d6516">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#af3cdc507ce57431b8e7adf31d9d43b25">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6f6444f2ecadfa4f331ac3d6db5a11e0"></a><!-- doxytag: member="c_rand_var::dat_to_dist" ref="a6f6444f2ecadfa4f331ac3d6db5a11e0" args="(const double *x)" -->
+<a class="anchor" id="a45fac8707b07c02eb2e6ea0fff47994a"></a><!-- doxytag: member="divopt::c_rand_var::dat_to_dist" ref="a45fac8707b07c02eb2e6ea0fff47994a" args="(const double *x)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classc__rand__var.html#a6f6444f2ecadfa4f331ac3d6db5a11e0">c_rand_var::dat_to_dist</a> </td>
+          <td class="memname">void <a class="el" href="classdivopt_1_1c__rand__var.html#a45fac8707b07c02eb2e6ea0fff47994a">divopt::c_rand_var::dat_to_dist</a> </td>
           <td>(</td>
           <td class="paramtype">const double *&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -222,7 +242,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Copies in data to the raw data. You have to run <a class="el" href="classc__rand__var.html#aba4668d9a6e515c488b8e5764ef83977">unpack()</a> for the changes to be reflected.</p>
+<p>Copies in data to the raw data. You have to run <a class="el" href="classdivopt_1_1c__rand__var.html#af2b87125538d2ccf2fd427d104c5397d">unpack()</a> for the changes to be reflected.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">dim_prob</td><td>The dimension of the raw data vector. </td></tr>
@@ -233,14 +253,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a784534f9e6efae57d7a97638a73ed6a7"></a><!-- doxytag: member="c_rand_var::div" ref="a784534f9e6efae57d7a97638a73ed6a7" args="(c_rand_var *var)=0" -->
+<a class="anchor" id="a921fa0ba7a22c97cc0594888d221e379"></a><!-- doxytag: member="divopt::c_rand_var::div" ref="a921fa0ba7a22c97cc0594888d221e379" args="(c_rand_var *var)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double <a class="el" href="classc__rand__var.html#a784534f9e6efae57d7a97638a73ed6a7">c_rand_var::div</a> </td>
+          <td class="memname">virtual double <a class="el" href="classdivopt_1_1c__rand__var.html#a921fa0ba7a22c97cc0594888d221e379">divopt::c_rand_var::div</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classc__rand__var.html">c_rand_var</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *&#160;</td>
           <td class="paramname"><em>var</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -256,18 +276,18 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The Kullback-Leibler divergence. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#aba262aea9fece40742860ab75c90e187">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#abdf1ec21f17eb4d67e48603550f3e134">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9de6c00c256815f16fc79158cf5faed5"></a><!-- doxytag: member="c_rand_var::div_grad" ref="a9de6c00c256815f16fc79158cf5faed5" args="(c_rand_var *oth)=0" -->
+<a class="anchor" id="a88c4e86c9ee59bd5a93a59e57442ec5c"></a><!-- doxytag: member="divopt::c_rand_var::div_grad" ref="a88c4e86c9ee59bd5a93a59e57442ec5c" args="(c_rand_var *oth)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual arma::mat <a class="el" href="classc__rand__var.html#a9de6c00c256815f16fc79158cf5faed5">c_rand_var::div_grad</a> </td>
+          <td class="memname">virtual arma::mat <a class="el" href="classdivopt_1_1c__rand__var.html#a88c4e86c9ee59bd5a93a59e57442ec5c">divopt::c_rand_var::div_grad</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classc__rand__var.html">c_rand_var</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *&#160;</td>
           <td class="paramname"><em>oth</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -283,16 +303,16 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A vector containing the gradient. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#a94e7cee17224da9a2f2f7d997a0c477c">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#af6c8d8d58ab0a0e9e18d09ea610aa346">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad3498ddaa214968329cfde0ddd014e9f"></a><!-- doxytag: member="c_rand_var::ent" ref="ad3498ddaa214968329cfde0ddd014e9f" args="(arma::mat *loc, c_rand_var *var)=0" -->
+<a class="anchor" id="a8671b4803b5b589eed65f8c2c4008dff"></a><!-- doxytag: member="divopt::c_rand_var::ent" ref="a8671b4803b5b589eed65f8c2c4008dff" args="(arma::mat *loc, c_rand_var *var)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double <a class="el" href="classc__rand__var.html#ad3498ddaa214968329cfde0ddd014e9f">c_rand_var::ent</a> </td>
+          <td class="memname">virtual double <a class="el" href="classdivopt_1_1c__rand__var.html#a8671b4803b5b589eed65f8c2c4008dff">divopt::c_rand_var::ent</a> </td>
           <td>(</td>
           <td class="paramtype">arma::mat *&#160;</td>
           <td class="paramname"><em>loc</em>, </td>
@@ -300,7 +320,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classc__rand__var.html">c_rand_var</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *&#160;</td>
           <td class="paramname"><em>var</em>&#160;</td>
         </tr>
         <tr>
@@ -321,19 +341,19 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The relative entropy at some location. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#ad367a0e8dcd7b6169092c00bcc5a37e6">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#afdb198ee63254712f7c6aa0021a30ca9">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="adaa290ff5474bcb3e1d9435ad40760a3"></a><!-- doxytag: member="c_rand_var::get_dim" ref="adaa290ff5474bcb3e1d9435ad40760a3" args="()" -->
+<a class="anchor" id="ae2463f769d55c59961d9a82e8ef318b2"></a><!-- doxytag: member="divopt::c_rand_var::get_dim" ref="ae2463f769d55c59961d9a82e8ef318b2" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classc__rand__var.html#adaa290ff5474bcb3e1d9435ad40760a3">c_rand_var::get_dim</a> </td>
+          <td class="memname">double <a class="el" href="classdivopt_1_1c__rand__var.html#ae2463f769d55c59961d9a82e8ef318b2">divopt::c_rand_var::get_dim</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -343,15 +363,15 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9a49e11be71157d78cec2093d65f1193"></a><!-- doxytag: member="c_rand_var::get_dim_prob" ref="a9a49e11be71157d78cec2093d65f1193" args="()" -->
+<a class="anchor" id="aef27f4c3b3b2f9a77d7ee6576c064525"></a><!-- doxytag: member="divopt::c_rand_var::get_dim_prob" ref="aef27f4c3b3b2f9a77d7ee6576c064525" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classc__rand__var.html#a9a49e11be71157d78cec2093d65f1193">c_rand_var::get_dim_prob</a> </td>
+          <td class="memname">double <a class="el" href="classdivopt_1_1c__rand__var.html#aef27f4c3b3b2f9a77d7ee6576c064525">divopt::c_rand_var::get_dim_prob</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -361,12 +381,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a341609737c79d17bc124917bd8c1200c"></a><!-- doxytag: member="c_rand_var::pack" ref="a341609737c79d17bc124917bd8c1200c" args="()=0" -->
+<a class="anchor" id="a5dfd6f96919dc469f93d6d4341cb4cd2"></a><!-- doxytag: member="divopt::c_rand_var::pack" ref="a5dfd6f96919dc469f93d6d4341cb4cd2" args="()=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classc__rand__var.html#a341609737c79d17bc124917bd8c1200c">c_rand_var::pack</a> </td>
+          <td class="memname">virtual void <a class="el" href="classdivopt_1_1c__rand__var.html#a5dfd6f96919dc469f93d6d4341cb4cd2">divopt::c_rand_var::pack</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [pure virtual]</code></td>
@@ -376,16 +396,16 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Takes the non-raw-data aspects and reads them into the raw data. </p>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#a970f1cf5ef6c612a2ecb80c7a144415d">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#aa132723e7b1639d39649042c84afe703">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a878978cf57b2072ba32bcaab8da04a74"></a><!-- doxytag: member="c_rand_var::partial_dat_to_dist" ref="a878978cf57b2072ba32bcaab8da04a74" args="(size_t lower, size_t upper, const double *x)" -->
+<a class="anchor" id="a5ddef49beaa10e3dfd0e6e58af104c19"></a><!-- doxytag: member="divopt::c_rand_var::partial_dat_to_dist" ref="a5ddef49beaa10e3dfd0e6e58af104c19" args="(size_t lower, size_t upper, const double *x)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classc__rand__var.html#a878978cf57b2072ba32bcaab8da04a74">c_rand_var::partial_dat_to_dist</a> </td>
+          <td class="memname">void <a class="el" href="classdivopt_1_1c__rand__var.html#a5ddef49beaa10e3dfd0e6e58af104c19">divopt::c_rand_var::partial_dat_to_dist</a> </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>lower</em>, </td>
@@ -410,7 +430,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Partially copies in data to the raw data. You have to run <a class="el" href="classc__rand__var.html#aba4668d9a6e515c488b8e5764ef83977">unpack()</a> for the changes to be reflected.</p>
+<p>Partially copies in data to the raw data. You have to run <a class="el" href="classdivopt_1_1c__rand__var.html#af2b87125538d2ccf2fd427d104c5397d">unpack()</a> for the changes to be reflected.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">lower</td><td>Starting index to copy into. </td></tr>
@@ -422,12 +442,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abbb41e718f8b417f251e7578311b644d"></a><!-- doxytag: member="c_rand_var::pdf" ref="abbb41e718f8b417f251e7578311b644d" args="(arma::mat *loc)=0" -->
+<a class="anchor" id="a631139ddccf1de90af2b8cb9a7f6d50a"></a><!-- doxytag: member="divopt::c_rand_var::pdf" ref="a631139ddccf1de90af2b8cb9a7f6d50a" args="(arma::mat *loc)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double <a class="el" href="classc__rand__var.html#abbb41e718f8b417f251e7578311b644d">c_rand_var::pdf</a> </td>
+          <td class="memname">virtual double <a class="el" href="classdivopt_1_1c__rand__var.html#a631139ddccf1de90af2b8cb9a7f6d50a">divopt::c_rand_var::pdf</a> </td>
           <td>(</td>
           <td class="paramtype">arma::mat *&#160;</td>
           <td class="paramname"><em>loc</em></td><td>)</td>
@@ -445,16 +465,16 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The density. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#a403476d54f19da0350700b343a7266b2">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#a4b2bec9177f3e1ba8e7b3a212a6138b7">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a67f5455a4fcb957cf6dfc060a3d7be96"></a><!-- doxytag: member="c_rand_var::pdf_grad" ref="a67f5455a4fcb957cf6dfc060a3d7be96" args="(arma::mat *loc)=0" -->
+<a class="anchor" id="a6fa8732f6467cfb9b71b9590c2f88e5b"></a><!-- doxytag: member="divopt::c_rand_var::pdf_grad" ref="a6fa8732f6467cfb9b71b9590c2f88e5b" args="(arma::mat *loc)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual arma::mat <a class="el" href="classc__rand__var.html#a67f5455a4fcb957cf6dfc060a3d7be96">c_rand_var::pdf_grad</a> </td>
+          <td class="memname">virtual arma::mat <a class="el" href="classdivopt_1_1c__rand__var.html#a6fa8732f6467cfb9b71b9590c2f88e5b">divopt::c_rand_var::pdf_grad</a> </td>
           <td>(</td>
           <td class="paramtype">arma::mat *&#160;</td>
           <td class="paramname"><em>loc</em></td><td>)</td>
@@ -472,16 +492,16 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A vector with the gradient. </dd></dl>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#adc6534281e460b63961d4359828c9250">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#ae6de55fcebe4d49d010e76943b53eb23">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aba4668d9a6e515c488b8e5764ef83977"></a><!-- doxytag: member="c_rand_var::unpack" ref="aba4668d9a6e515c488b8e5764ef83977" args="()=0" -->
+<a class="anchor" id="af2b87125538d2ccf2fd427d104c5397d"></a><!-- doxytag: member="divopt::c_rand_var::unpack" ref="af2b87125538d2ccf2fd427d104c5397d" args="()=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classc__rand__var.html#aba4668d9a6e515c488b8e5764ef83977">c_rand_var::unpack</a> </td>
+          <td class="memname">virtual void <a class="el" href="classdivopt_1_1c__rand__var.html#af2b87125538d2ccf2fd427d104c5397d">divopt::c_rand_var::unpack</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [pure virtual]</code></td>
@@ -491,17 +511,17 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Instantiates `non-raw-data' aspects of the distribution. </p>
 
-<p>Implemented in <a class="el" href="classc__rand__var__norm.html#a2f7c2b04715b73ac9a7dca38d9eec2b8">c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#a74609f0002a3d05501ef3a3896938669">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a6bdf916d8aa06727128106e54bc36813"></a><!-- doxytag: member="c_rand_var::dim" ref="a6bdf916d8aa06727128106e54bc36813" args="" -->
+<a class="anchor" id="ad263b31b0e272d1c00a7368362ed19e4"></a><!-- doxytag: member="divopt::c_rand_var::dim" ref="ad263b31b0e272d1c00a7368362ed19e4" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t <a class="el" href="classc__rand__var.html#a6bdf916d8aa06727128106e54bc36813">c_rand_var::dim</a><code> [protected]</code></td>
+          <td class="memname">size_t <a class="el" href="classdivopt_1_1c__rand__var.html#ad263b31b0e272d1c00a7368362ed19e4">divopt::c_rand_var::dim</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -510,12 +530,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af0c3924c20a6118bbe142637f735bd32"></a><!-- doxytag: member="c_rand_var::dim_prob" ref="af0c3924c20a6118bbe142637f735bd32" args="" -->
+<a class="anchor" id="accebcd3c62fcf1958e6d21b82bd0d4ae"></a><!-- doxytag: member="divopt::c_rand_var::dim_prob" ref="accebcd3c62fcf1958e6d21b82bd0d4ae" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t <a class="el" href="classc__rand__var.html#af0c3924c20a6118bbe142637f735bd32">c_rand_var::dim_prob</a><code> [protected]</code></td>
+          <td class="memname">size_t <a class="el" href="classdivopt_1_1c__rand__var.html#accebcd3c62fcf1958e6d21b82bd0d4ae">divopt::c_rand_var::dim_prob</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -524,12 +544,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a259d5bac81373870d51a9cbac2e4aa5b"></a><!-- doxytag: member="c_rand_var::raw_data" ref="a259d5bac81373870d51a9cbac2e4aa5b" args="" -->
+<a class="anchor" id="a5817d4b94c53e6e6a7f8d4027cbce4e1"></a><!-- doxytag: member="divopt::c_rand_var::raw_data" ref="a5817d4b94c53e6e6a7f8d4027cbce4e1" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;double&gt; <a class="el" href="classc__rand__var.html#a259d5bac81373870d51a9cbac2e4aa5b">c_rand_var::raw_data</a><code> [protected]</code></td>
+          <td class="memname">std::vector&lt;double&gt; <a class="el" href="classdivopt_1_1c__rand__var.html#a5817d4b94c53e6e6a7f8d4027cbce4e1">divopt::c_rand_var::raw_data</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -560,7 +580,7 @@ Protected Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 13 2015 13:00:53 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unpack',['unpack',['../classc__rand__var.html#aba4668d9a6e515c488b8e5764ef83977',1,'c_rand_var::unpack()'],['../classc__rand__var__norm.html#a2f7c2b04715b73ac9a7dca38d9eec2b8',1,'c_rand_var_norm::unpack()']]]
+  ['unpack',['unpack',['../classdivopt_1_1c__rand__var.html#af2b87125538d2ccf2fd427d104c5397d',1,'divopt::c_rand_var::unpack()'],['../classdivopt_1_1c__rand__var__norm.html#a74609f0002a3d05501ef3a3896938669',1,'divopt::c_rand_var_norm::unpack()']]]
 ];

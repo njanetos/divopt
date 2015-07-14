@@ -1,0 +1,333 @@
+\hypertarget{classdivopt_1_1c__rand__var}{\section{divopt\-:\-:c\-\_\-rand\-\_\-var \-Class \-Reference}
+\label{classdivopt_1_1c__rand__var}\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}}
+}
+
+
+\-Represents a random variable.  
+
+
+
+
+{\ttfamily \#include $<$c\-\_\-rand\-\_\-var.\-h$>$}
+
+\-Inheritance diagram for divopt\-:\-:c\-\_\-rand\-\_\-var\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdivopt_1_1c__rand__var}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual float \hyperlink{classdivopt_1_1c__rand__var_a04962b760cf8d3b62cecaf84db8888d6}{cdf} (arma\-::mat $\ast$loc)=0
+\item 
+virtual float \hyperlink{classdivopt_1_1c__rand__var_a4ae3877a3c46cacee48c48f7effac56b}{cdf} (std\-::vector$<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $\ast$inequalities)=0
+\item 
+virtual arma\-::mat \hyperlink{classdivopt_1_1c__rand__var_a98aad18751922552e96d1808745b34d6}{cdf\-\_\-grad} (arma\-::mat $\ast$loc)=0
+\item 
+void \hyperlink{classdivopt_1_1c__rand__var_a45fac8707b07c02eb2e6ea0fff47994a}{dat\-\_\-to\-\_\-dist} (const double $\ast$x)
+\item 
+virtual double \hyperlink{classdivopt_1_1c__rand__var_a921fa0ba7a22c97cc0594888d221e379}{div} (\hyperlink{classdivopt_1_1c__rand__var}{c\-\_\-rand\-\_\-var} $\ast$var)=0
+\item 
+virtual arma\-::mat \hyperlink{classdivopt_1_1c__rand__var_a88c4e86c9ee59bd5a93a59e57442ec5c}{div\-\_\-grad} (\hyperlink{classdivopt_1_1c__rand__var}{c\-\_\-rand\-\_\-var} $\ast$oth)=0
+\item 
+virtual double \hyperlink{classdivopt_1_1c__rand__var_a8671b4803b5b589eed65f8c2c4008dff}{ent} (arma\-::mat $\ast$loc, \hyperlink{classdivopt_1_1c__rand__var}{c\-\_\-rand\-\_\-var} $\ast$var)=0
+\item 
+double \hyperlink{classdivopt_1_1c__rand__var_ae2463f769d55c59961d9a82e8ef318b2}{get\-\_\-dim} () const 
+\item 
+double \hyperlink{classdivopt_1_1c__rand__var_aef27f4c3b3b2f9a77d7ee6576c064525}{get\-\_\-dim\-\_\-prob} () const 
+\item 
+virtual void \hyperlink{classdivopt_1_1c__rand__var_a5dfd6f96919dc469f93d6d4341cb4cd2}{pack} ()=0
+\item 
+void \hyperlink{classdivopt_1_1c__rand__var_a5ddef49beaa10e3dfd0e6e58af104c19}{partial\-\_\-dat\-\_\-to\-\_\-dist} (size\-\_\-t lower, size\-\_\-t upper, const double $\ast$x)
+\item 
+virtual double \hyperlink{classdivopt_1_1c__rand__var_a631139ddccf1de90af2b8cb9a7f6d50a}{pdf} (arma\-::mat $\ast$loc)=0
+\item 
+virtual arma\-::mat \hyperlink{classdivopt_1_1c__rand__var_a6fa8732f6467cfb9b71b9590c2f88e5b}{pdf\-\_\-grad} (arma\-::mat $\ast$loc)=0
+\item 
+virtual void \hyperlink{classdivopt_1_1c__rand__var_af2b87125538d2ccf2fd427d104c5397d}{unpack} ()=0
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\-\_\-t \hyperlink{classdivopt_1_1c__rand__var_ad263b31b0e272d1c00a7368362ed19e4}{dim}
+\item 
+size\-\_\-t \hyperlink{classdivopt_1_1c__rand__var_accebcd3c62fcf1958e6d21b82bd0d4ae}{dim\-\_\-prob}
+\item 
+std\-::vector$<$ double $>$ \hyperlink{classdivopt_1_1c__rand__var_a5817d4b94c53e6e6a7f8d4027cbce4e1}{raw\-\_\-data}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Represents a random variable. 
+
+\-Abstract class that represents a random variable. \-Contains functions for finding the cdf, the pdf, the entropy, the divergence, and the gradients of all these things. \-Every random variable is represented by a vector of raw data, implementing classes are responsible for packing and unpacking that raw data to form the elements of the random variable itself. \-The gradients are always with respect to the vector of raw data. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classdivopt_1_1c__rand__var_a04962b760cf8d3b62cecaf84db8888d6}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf@{cdf}}
+\index{cdf@{cdf}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{cdf}]{\setlength{\rightskip}{0pt plus 5cm}virtual float {\bf divopt\-::c\-\_\-rand\-\_\-var\-::cdf} (
+\begin{DoxyParamCaption}
+\item[{arma\-::mat $\ast$}]{loc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a04962b760cf8d3b62cecaf84db8888d6}
+\-Returns the cumulative density at a location.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em loc} & \-The location to compute the cumulative density at. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The cumulative density. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_acf9741d640440ebf2b216ef6941a423e}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a4ae3877a3c46cacee48c48f7effac56b}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf@{cdf}}
+\index{cdf@{cdf}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{cdf}]{\setlength{\rightskip}{0pt plus 5cm}virtual float {\bf divopt\-::c\-\_\-rand\-\_\-var\-::cdf} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf c\-\_\-inequality} $>$ $\ast$}]{inequalities}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a4ae3877a3c46cacee48c48f7effac56b}
+\-Returns the probability of some event.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em inequalities} & \-The inequalities that define the event. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The cumulative density. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_a96006e8533878fcc4e60e4eaca636d7b}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a98aad18751922552e96d1808745b34d6}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf\-\_\-grad@{cdf\-\_\-grad}}
+\index{cdf\-\_\-grad@{cdf\-\_\-grad}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{cdf\-\_\-grad}]{\setlength{\rightskip}{0pt plus 5cm}virtual arma\-::mat {\bf divopt\-::c\-\_\-rand\-\_\-var\-::cdf\-\_\-grad} (
+\begin{DoxyParamCaption}
+\item[{arma\-::mat $\ast$}]{loc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a98aad18751922552e96d1808745b34d6}
+\-Computes the gradient of my cdf at some location.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em loc} & \-Where to evaluate the cdf. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Vector containing the gradient. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_af3cdc507ce57431b8e7adf31d9d43b25}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a45fac8707b07c02eb2e6ea0fff47994a}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!dat\-\_\-to\-\_\-dist@{dat\-\_\-to\-\_\-dist}}
+\index{dat\-\_\-to\-\_\-dist@{dat\-\_\-to\-\_\-dist}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{dat\-\_\-to\-\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf divopt\-::c\-\_\-rand\-\_\-var\-::dat\-\_\-to\-\_\-dist} (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{x}
+\end{DoxyParamCaption}
+)}}\label{classdivopt_1_1c__rand__var_a45fac8707b07c02eb2e6ea0fff47994a}
+\-Copies in data to the raw data. \-You have to run \hyperlink{classdivopt_1_1c__rand__var_af2b87125538d2ccf2fd427d104c5397d}{unpack()} for the changes to be reflected.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em dim\-\_\-prob} & \-The dimension of the raw data vector. \\
+\hline
+{\em x} & \-Points to the data to copy. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classdivopt_1_1c__rand__var_a921fa0ba7a22c97cc0594888d221e379}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!div@{div}}
+\index{div@{div}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{div}]{\setlength{\rightskip}{0pt plus 5cm}virtual double {\bf divopt\-::c\-\_\-rand\-\_\-var\-::div} (
+\begin{DoxyParamCaption}
+\item[{{\bf c\-\_\-rand\-\_\-var} $\ast$}]{var}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a921fa0ba7a22c97cc0594888d221e379}
+\-Computes the divergence.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em var} & \-The distribution to find the divergence against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The \-Kullback-\/\-Leibler divergence. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_abdf1ec21f17eb4d67e48603550f3e134}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a88c4e86c9ee59bd5a93a59e57442ec5c}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!div\-\_\-grad@{div\-\_\-grad}}
+\index{div\-\_\-grad@{div\-\_\-grad}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{div\-\_\-grad}]{\setlength{\rightskip}{0pt plus 5cm}virtual arma\-::mat {\bf divopt\-::c\-\_\-rand\-\_\-var\-::div\-\_\-grad} (
+\begin{DoxyParamCaption}
+\item[{{\bf c\-\_\-rand\-\_\-var} $\ast$}]{oth}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a88c4e86c9ee59bd5a93a59e57442ec5c}
+\-Computes the gradient of the divergence between this random variable and another.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em oth} & \-The other random variable to compute against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-A vector containing the gradient. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_af6c8d8d58ab0a0e9e18d09ea610aa346}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a8671b4803b5b589eed65f8c2c4008dff}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!ent@{ent}}
+\index{ent@{ent}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{ent}]{\setlength{\rightskip}{0pt plus 5cm}virtual double {\bf divopt\-::c\-\_\-rand\-\_\-var\-::ent} (
+\begin{DoxyParamCaption}
+\item[{arma\-::mat $\ast$}]{loc, }
+\item[{{\bf c\-\_\-rand\-\_\-var} $\ast$}]{var}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a8671b4803b5b589eed65f8c2c4008dff}
+\-Computes the entropy.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em loc} & \-The location to compute the entropy at. \\
+\hline
+{\em var} & \-The distribution to measure the entropy against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The relative entropy at some location. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_afdb198ee63254712f7c6aa0021a30ca9}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_ae2463f769d55c59961d9a82e8ef318b2}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!get\-\_\-dim@{get\-\_\-dim}}
+\index{get\-\_\-dim@{get\-\_\-dim}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{get\-\_\-dim}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf divopt\-::c\-\_\-rand\-\_\-var\-::get\-\_\-dim} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classdivopt_1_1c__rand__var_ae2463f769d55c59961d9a82e8ef318b2}
+\-Returns the dimension of the state space. (\-Not the optimization problem!) \begin{DoxyReturn}{\-Returns}
+\-The dimension of the state space. 
+\end{DoxyReturn}
+\hypertarget{classdivopt_1_1c__rand__var_aef27f4c3b3b2f9a77d7ee6576c064525}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!get\-\_\-dim\-\_\-prob@{get\-\_\-dim\-\_\-prob}}
+\index{get\-\_\-dim\-\_\-prob@{get\-\_\-dim\-\_\-prob}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{get\-\_\-dim\-\_\-prob}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf divopt\-::c\-\_\-rand\-\_\-var\-::get\-\_\-dim\-\_\-prob} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classdivopt_1_1c__rand__var_aef27f4c3b3b2f9a77d7ee6576c064525}
+\-Returns the dimension of the optimization problem. (\-Not the state space!) \begin{DoxyReturn}{\-Returns}
+\-The dimension of the optimization problem. 
+\end{DoxyReturn}
+\hypertarget{classdivopt_1_1c__rand__var_a5dfd6f96919dc469f93d6d4341cb4cd2}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!pack@{pack}}
+\index{pack@{pack}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{pack}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf divopt\-::c\-\_\-rand\-\_\-var\-::pack} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a5dfd6f96919dc469f93d6d4341cb4cd2}
+\-Takes the non-\/raw-\/data aspects and reads them into the raw data. 
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_aa132723e7b1639d39649042c84afe703}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a5ddef49beaa10e3dfd0e6e58af104c19}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!partial\-\_\-dat\-\_\-to\-\_\-dist@{partial\-\_\-dat\-\_\-to\-\_\-dist}}
+\index{partial\-\_\-dat\-\_\-to\-\_\-dist@{partial\-\_\-dat\-\_\-to\-\_\-dist}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{partial\-\_\-dat\-\_\-to\-\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf divopt\-::c\-\_\-rand\-\_\-var\-::partial\-\_\-dat\-\_\-to\-\_\-dist} (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{lower, }
+\item[{size\-\_\-t}]{upper, }
+\item[{const double $\ast$}]{x}
+\end{DoxyParamCaption}
+)}}\label{classdivopt_1_1c__rand__var_a5ddef49beaa10e3dfd0e6e58af104c19}
+\-Partially copies in data to the raw data. \-You have to run \hyperlink{classdivopt_1_1c__rand__var_af2b87125538d2ccf2fd427d104c5397d}{unpack()} for the changes to be reflected.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em lower} & \-Starting index to copy into. \\
+\hline
+{\em upper} & \-Ending index to copy into. \\
+\hline
+{\em x} & \-The data to copy. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classdivopt_1_1c__rand__var_a631139ddccf1de90af2b8cb9a7f6d50a}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!pdf@{pdf}}
+\index{pdf@{pdf}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{pdf}]{\setlength{\rightskip}{0pt plus 5cm}virtual double {\bf divopt\-::c\-\_\-rand\-\_\-var\-::pdf} (
+\begin{DoxyParamCaption}
+\item[{arma\-::mat $\ast$}]{loc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a631139ddccf1de90af2b8cb9a7f6d50a}
+\-Returns the density at a location.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em loc} & \-The location to compute the density at. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The density. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_a4b2bec9177f3e1ba8e7b3a212a6138b7}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_a6fa8732f6467cfb9b71b9590c2f88e5b}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!pdf\-\_\-grad@{pdf\-\_\-grad}}
+\index{pdf\-\_\-grad@{pdf\-\_\-grad}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{pdf\-\_\-grad}]{\setlength{\rightskip}{0pt plus 5cm}virtual arma\-::mat {\bf divopt\-::c\-\_\-rand\-\_\-var\-::pdf\-\_\-grad} (
+\begin{DoxyParamCaption}
+\item[{arma\-::mat $\ast$}]{loc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a6fa8732f6467cfb9b71b9590c2f88e5b}
+\-Returns the gradient of the density at some location.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em loc} & \-The location to compute the gradient at. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-A vector with the gradient. 
+\end{DoxyReturn}
+
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_ae6de55fcebe4d49d010e76943b53eb23}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+\hypertarget{classdivopt_1_1c__rand__var_af2b87125538d2ccf2fd427d104c5397d}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!unpack@{unpack}}
+\index{unpack@{unpack}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{unpack}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf divopt\-::c\-\_\-rand\-\_\-var\-::unpack} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_af2b87125538d2ccf2fd427d104c5397d}
+\-Instantiates `non-\/raw-\/data' aspects of the distribution. 
+
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_a74609f0002a3d05501ef3a3896938669}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classdivopt_1_1c__rand__var_ad263b31b0e272d1c00a7368362ed19e4}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!dim@{dim}}
+\index{dim@{dim}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{dim}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t {\bf divopt\-::c\-\_\-rand\-\_\-var\-::dim}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}\label{classdivopt_1_1c__rand__var_ad263b31b0e272d1c00a7368362ed19e4}
+\-The dimension of the state space. (\-Not the optimization problem!) \hypertarget{classdivopt_1_1c__rand__var_accebcd3c62fcf1958e6d21b82bd0d4ae}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!dim\-\_\-prob@{dim\-\_\-prob}}
+\index{dim\-\_\-prob@{dim\-\_\-prob}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{dim\-\_\-prob}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t {\bf divopt\-::c\-\_\-rand\-\_\-var\-::dim\-\_\-prob}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}\label{classdivopt_1_1c__rand__var_accebcd3c62fcf1958e6d21b82bd0d4ae}
+\-The dimension of the problem. (\-Not the state space!) \hypertarget{classdivopt_1_1c__rand__var_a5817d4b94c53e6e6a7f8d4027cbce4e1}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!raw\-\_\-data@{raw\-\_\-data}}
+\index{raw\-\_\-data@{raw\-\_\-data}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
+\subsubsection[{raw\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ {\bf divopt\-::c\-\_\-rand\-\_\-var\-::raw\-\_\-data}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a5817d4b94c53e6e6a7f8d4027cbce4e1}
+\-The raw data of the problem. \-Should be of length dim\-\_\-prob. 
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/c\-\_\-rand\-\_\-var.\-h\item 
+src/c\-\_\-rand\-\_\-var.\-cpp\end{DoxyCompactItemize}

@@ -83,30 +83,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
 <a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="keyword">enum class</span> binary_relation { GEQ, LEQ };
+<a name="l00006"></a>00006 <span class="keyword">class </span>c_util;
 <a name="l00007"></a>00007 
-<a name="l00011"></a><a class="code" href="classc__inequality.html">00011</a> <span class="keyword">class </span><a class="code" href="classc__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a> {
-<a name="l00012"></a>00012     <span class="keyword">public</span>:
-<a name="l00013"></a>00013 
-<a name="l00020"></a>00020         <a class="code" href="classc__inequality.html#ada032a618e56bdaa99b1c24ae556d700">c_inequality</a>(<span class="keywordtype">size_t</span> dim, <span class="keywordtype">float</span> val, binary_relation bin);
-<a name="l00021"></a>00021         <span class="keyword">virtual</span> ~<a class="code" href="classc__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a>();
-<a name="l00022"></a>00022 
-<a name="l00027"></a>00027         <span class="keywordtype">size_t</span> <a class="code" href="classc__inequality.html#ac476147d31b420279abe35a980e1fccd">get_dim</a>();
-<a name="l00028"></a>00028 
-<a name="l00033"></a>00033         <span class="keywordtype">float</span> <a class="code" href="classc__inequality.html#a78a1f4d784ea3dd8b83345f14f28ede2">get_val</a>();
-<a name="l00034"></a>00034 
-<a name="l00039"></a>00039         binary_relation <a class="code" href="classc__inequality.html#ab85ed92bf1208be7c9aa8822c63fc816">get_binary_relation</a>();
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041     <span class="keyword">protected</span>:
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043         <span class="keywordtype">size_t</span> dim;
-<a name="l00044"></a>00044         <span class="keywordtype">float</span> val;
-<a name="l00045"></a>00045         binary_relation bin;
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keyword">private</span>:
-<a name="l00048"></a>00048 };
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 <span class="preprocessor">#endif // C_INEQUALITY_H</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="keyword">namespace </span>divopt {
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011     <span class="keyword">enum class</span> e_binary_relation { GEQ, LEQ };
+<a name="l00012"></a>00012 
+<a name="l00016"></a><a class="code" href="classdivopt_1_1c__inequality.html">00016</a>     <span class="keyword">class </span><a class="code" href="classdivopt_1_1c__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a> {
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018         <span class="keyword">public</span>:
+<a name="l00019"></a>00019 
+<a name="l00026"></a>00026             <a class="code" href="classdivopt_1_1c__inequality.html#a3d4de45d504aaf879da1f7d7ae25f861">c_inequality</a>(<span class="keywordtype">size_t</span> dim, <span class="keywordtype">float</span> val, e_binary_relation bin);
+<a name="l00027"></a>00027 
+<a name="l00032"></a>00032             <span class="keywordtype">size_t</span> <a class="code" href="classdivopt_1_1c__inequality.html#afb5dd6c446121411ed6c448d626fc140">get_dim</a>() <span class="keyword">const</span>;
+<a name="l00033"></a>00033 
+<a name="l00038"></a>00038             <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__inequality.html#a1a8d25293c061d3c401dd0b80182831a">get_val</a>() <span class="keyword">const</span>;
+<a name="l00039"></a>00039 
+<a name="l00044"></a>00044             e_binary_relation <a class="code" href="classdivopt_1_1c__inequality.html#a5ee170b0008faf856d8977ac367a1322">get_binary_relation</a>() <span class="keyword">const</span>;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046         <span class="keyword">protected</span>:
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048             <span class="keywordtype">size_t</span> dim;
+<a name="l00049"></a>00049             <span class="keywordtype">float</span> val;
+<a name="l00050"></a>00050             e_binary_relation bin;
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     };
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 }
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 <span class="preprocessor">#endif // C_INEQUALITY_H</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -125,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 13 2015 13:00:53 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

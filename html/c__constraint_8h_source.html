@@ -84,36 +84,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;c_inequality.h&quot;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &quot;c_rand_var.h&quot;</span>
 <a name="l00006"></a>00006 
-<a name="l00019"></a><a class="code" href="classc__constraint.html">00019</a> <span class="keyword">class </span><a class="code" href="classc__constraint.html" title="Encodes information about a constraint on a random variable.">c_constraint</a> {
-<a name="l00020"></a>00020     <span class="keyword">public</span>:
-<a name="l00021"></a>00021 
-<a name="l00026"></a>00026         <a class="code" href="classc__constraint.html#a8c1bb0a6e6788679dff5ff39df46a4af">c_constraint</a>();
-<a name="l00027"></a>00027 
-<a name="l00031"></a>00031         <a class="code" href="classc__constraint.html#a8c1bb0a6e6788679dff5ff39df46a4af">c_constraint</a>(<span class="keywordtype">float</span> prob);
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033         <span class="keyword">virtual</span> ~<a class="code" href="classc__constraint.html" title="Encodes information about a constraint on a random variable.">c_constraint</a>();
-<a name="l00034"></a>00034 
-<a name="l00039"></a>00039         <span class="keywordtype">void</span> <a class="code" href="classc__constraint.html#a749f55d6860135890b3082d271945db4">add_inequality</a>(<a class="code" href="classc__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a> inequality);
-<a name="l00040"></a>00040 
-<a name="l00045"></a>00045         <span class="keywordtype">void</span> <a class="code" href="classc__constraint.html#a749f55d6860135890b3082d271945db4">add_inequality</a>(std::vector&lt;c_inequality&gt; inequalities);
-<a name="l00046"></a>00046 
-<a name="l00052"></a>00052         <span class="keywordtype">void</span> <a class="code" href="classc__constraint.html#a749f55d6860135890b3082d271945db4">add_inequality</a>(<a class="code" href="classc__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a> inequality, <span class="keywordtype">size_t</span> pos);
-<a name="l00053"></a>00053 
-<a name="l00060"></a>00060         <span class="keywordtype">bool</span> <a class="code" href="classc__constraint.html#ac7c5c4d5fe85658606365702d12862c2">is_satisfied</a>(<a class="code" href="classc__rand__var.html" title="Represents a random variable.">c_rand_var</a> *rand_var);
-<a name="l00061"></a>00061 
-<a name="l00066"></a>00066         <span class="keywordtype">void</span> <a class="code" href="classc__constraint.html#abf0c9672d7a270429444fa2103a4845e">set_prob</a>(<span class="keywordtype">float</span> prob);
-<a name="l00067"></a>00067 
-<a name="l00072"></a>00072         <span class="keywordtype">float</span> <a class="code" href="classc__constraint.html#af340872986035c2703a7ea67c972b538">get_prob</a>();
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074     <span class="keyword">protected</span>:
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076         std::vector&lt; std::vector&lt;c_inequality&gt; &gt; inequalities;
-<a name="l00077"></a>00077         <span class="keywordtype">float</span> prob;
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079     <span class="keyword">private</span>:
-<a name="l00080"></a>00080 };
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 <span class="preprocessor">#endif // C_CONSTRAINT_H</span>
+<a name="l00007"></a>00007 <span class="keyword">namespace </span>divopt {
+<a name="l00008"></a>00008 
+<a name="l00021"></a><a class="code" href="classdivopt_1_1c__constraint.html">00021</a>     <span class="keyword">class </span><a class="code" href="classdivopt_1_1c__constraint.html" title="Encodes information about a constraint on a random variable.">c_constraint</a> {
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023         <span class="keyword">public</span>:
+<a name="l00024"></a>00024 
+<a name="l00029"></a>00029             <a class="code" href="classdivopt_1_1c__constraint.html#af7708cbcea2a4c3a9c75f9cae4aa86c9">c_constraint</a>();
+<a name="l00030"></a>00030 
+<a name="l00034"></a>00034             <a class="code" href="classdivopt_1_1c__constraint.html#af7708cbcea2a4c3a9c75f9cae4aa86c9">c_constraint</a>(<span class="keywordtype">float</span> prob);
+<a name="l00035"></a>00035 
+<a name="l00040"></a>00040             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__constraint.html#a263411cb48b03426e79f0a510f754cba">add_inequality</a>(<a class="code" href="classdivopt_1_1c__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a> inequality);
+<a name="l00041"></a>00041 
+<a name="l00046"></a>00046             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__constraint.html#a263411cb48b03426e79f0a510f754cba">add_inequality</a>(std::vector&lt;c_inequality&gt; inequalities);
+<a name="l00047"></a>00047 
+<a name="l00053"></a>00053             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__constraint.html#a263411cb48b03426e79f0a510f754cba">add_inequality</a>(<a class="code" href="classdivopt_1_1c__inequality.html" title="Encodes information about an inequality in one dimension.">c_inequality</a> inequality, <span class="keywordtype">size_t</span> pos);
+<a name="l00054"></a>00054 
+<a name="l00061"></a>00061             <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__constraint.html#a615ea0956d9c28712f8eeeaecb29e0d9">eval_prob</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *rand_var);
+<a name="l00062"></a>00062 
+<a name="l00069"></a>00069             <span class="keywordtype">bool</span> <a class="code" href="classdivopt_1_1c__constraint.html#ae07db5dcb26bdedc94768c62b7c403d8">is_satisfied</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *rand_var);
+<a name="l00070"></a>00070 
+<a name="l00075"></a>00075             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__constraint.html#a4eab366ff54ab0397a5a50cf70a312f4">set_prob</a>(<span class="keywordtype">float</span> prob);
+<a name="l00076"></a>00076 
+<a name="l00081"></a>00081             std::vector&lt; std::vector&lt;c_inequality&gt; &gt; * <a class="code" href="classdivopt_1_1c__constraint.html#a115deba8a25f3bcd8d799e930db969c4">get_inequalities</a>();
+<a name="l00082"></a>00082 
+<a name="l00087"></a>00087             <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__constraint.html#a8d49fcb40dfdd2f99c90b36840a77d16">get_prob</a>();
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089         <span class="keyword">protected</span>:
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091             std::vector&lt; std::vector&lt;c_inequality&gt; &gt; inequalities;
+<a name="l00092"></a>00092             <span class="keywordtype">float</span> prob;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094     };
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096 }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 <span class="preprocessor">#endif // C_CONSTRAINT_H</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -132,7 +138,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 13 2015 13:00:53 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

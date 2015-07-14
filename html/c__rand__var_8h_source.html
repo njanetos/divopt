@@ -86,49 +86,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;armadillo&gt;</span>
 <a name="l00007"></a>00007 <span class="preprocessor">#include &quot;c_inequality.h&quot;</span>
 <a name="l00008"></a>00008 
-<a name="l00021"></a><a class="code" href="classc__rand__var.html">00021</a> <span class="keyword">class </span><a class="code" href="classc__rand__var.html" title="Represents a random variable.">c_rand_var</a> {
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023     <span class="keyword">public</span>:
+<a name="l00009"></a>00009 <span class="keyword">namespace </span>divopt {
+<a name="l00010"></a>00010 
+<a name="l00023"></a><a class="code" href="classdivopt_1_1c__rand__var.html">00023</a>     <span class="keyword">class </span><a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> {
 <a name="l00024"></a>00024 
-<a name="l00031"></a>00031         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#af0642e6451929280d9e891a2ccc1cda2">cdf</a>(arma::mat *loc) =0;
-<a name="l00032"></a>00032 
-<a name="l00039"></a>00039         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#af0642e6451929280d9e891a2ccc1cda2">cdf</a>(std::vector&lt;c_inequality&gt; *inequalities) =0;
-<a name="l00040"></a>00040 
-<a name="l00047"></a>00047         <span class="keyword">virtual</span> arma::mat <a class="code" href="classc__rand__var.html#a6568080871f61f97a41403703821382f">cdf_grad</a>(arma::mat *loc) =0;
-<a name="l00048"></a>00048 
-<a name="l00056"></a>00056         <span class="keywordtype">void</span> <a class="code" href="classc__rand__var.html#a6f6444f2ecadfa4f331ac3d6db5a11e0">dat_to_dist</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> *x);
-<a name="l00057"></a>00057 
-<a name="l00064"></a>00064         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#a784534f9e6efae57d7a97638a73ed6a7">div</a>(<a class="code" href="classc__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var) =0;
-<a name="l00065"></a>00065 
-<a name="l00073"></a>00073         <span class="keyword">virtual</span> arma::mat <a class="code" href="classc__rand__var.html#a9de6c00c256815f16fc79158cf5faed5">div_grad</a>(<a class="code" href="classc__rand__var.html" title="Represents a random variable.">c_rand_var</a> *oth) =0;
-<a name="l00074"></a>00074 
-<a name="l00082"></a>00082         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#ad3498ddaa214968329cfde0ddd014e9f">ent</a>(arma::mat *loc, <a class="code" href="classc__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var) =0;
-<a name="l00083"></a>00083 
-<a name="l00088"></a>00088         <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#adaa290ff5474bcb3e1d9435ad40760a3">get_dim</a>();
-<a name="l00089"></a>00089 
-<a name="l00094"></a>00094         <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#a9a49e11be71157d78cec2093d65f1193">get_dim_prob</a>();
-<a name="l00095"></a>00095 
-<a name="l00099"></a>00099         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classc__rand__var.html#a341609737c79d17bc124917bd8c1200c">pack</a>() =0;
-<a name="l00100"></a>00100 
-<a name="l00109"></a>00109         <span class="keywordtype">void</span> <a class="code" href="classc__rand__var.html#a878978cf57b2072ba32bcaab8da04a74">partial_dat_to_dist</a>(<span class="keywordtype">size_t</span> lower, <span class="keywordtype">size_t</span> upper, <span class="keyword">const</span> <span class="keywordtype">double</span> *x);
-<a name="l00110"></a>00110 
-<a name="l00117"></a>00117         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classc__rand__var.html#abbb41e718f8b417f251e7578311b644d">pdf</a>(arma::mat *loc) =0;
-<a name="l00118"></a>00118 
-<a name="l00126"></a>00126         <span class="keyword">virtual</span> arma::mat <a class="code" href="classc__rand__var.html#a67f5455a4fcb957cf6dfc060a3d7be96">pdf_grad</a>(arma::mat *loc) =0;
-<a name="l00127"></a>00127 
-<a name="l00131"></a>00131         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classc__rand__var.html#aba4668d9a6e515c488b8e5764ef83977">unpack</a>() =0;
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133     <span class="keyword">protected</span>:
+<a name="l00025"></a>00025         <span class="keyword">public</span>:
+<a name="l00026"></a>00026 
+<a name="l00033"></a>00033             <span class="keyword">virtual</span> <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">cdf</a>(arma::mat *loc) =0;
+<a name="l00034"></a>00034 
+<a name="l00041"></a>00041             <span class="keyword">virtual</span> <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">cdf</a>(std::vector&lt;c_inequality&gt; *inequalities) =0;
+<a name="l00042"></a>00042 
+<a name="l00049"></a>00049             <span class="keyword">virtual</span> arma::mat <a class="code" href="classdivopt_1_1c__rand__var.html#a98aad18751922552e96d1808745b34d6">cdf_grad</a>(arma::mat *loc) =0;
+<a name="l00050"></a>00050 
+<a name="l00058"></a>00058             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a45fac8707b07c02eb2e6ea0fff47994a">dat_to_dist</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> *x);
+<a name="l00059"></a>00059 
+<a name="l00066"></a>00066             <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a921fa0ba7a22c97cc0594888d221e379">div</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var) =0;
+<a name="l00067"></a>00067 
+<a name="l00075"></a>00075             <span class="keyword">virtual</span> arma::mat <a class="code" href="classdivopt_1_1c__rand__var.html#a88c4e86c9ee59bd5a93a59e57442ec5c">div_grad</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *oth) =0;
+<a name="l00076"></a>00076 
+<a name="l00084"></a>00084             <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a8671b4803b5b589eed65f8c2c4008dff">ent</a>(arma::mat *loc, <a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var) =0;
+<a name="l00085"></a>00085 
+<a name="l00090"></a>00090             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var.html#ae2463f769d55c59961d9a82e8ef318b2">get_dim</a>() <span class="keyword">const</span>;
+<a name="l00091"></a>00091 
+<a name="l00096"></a>00096             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var.html#aef27f4c3b3b2f9a77d7ee6576c064525">get_dim_prob</a>() <span class="keyword">const</span>;
+<a name="l00097"></a>00097 
+<a name="l00101"></a>00101             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a5dfd6f96919dc469f93d6d4341cb4cd2">pack</a>() =0;
+<a name="l00102"></a>00102 
+<a name="l00111"></a>00111             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a5ddef49beaa10e3dfd0e6e58af104c19">partial_dat_to_dist</a>(<span class="keywordtype">size_t</span> lower, <span class="keywordtype">size_t</span> upper, <span class="keyword">const</span> <span class="keywordtype">double</span> *x);
+<a name="l00112"></a>00112 
+<a name="l00119"></a>00119             <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var.html#a631139ddccf1de90af2b8cb9a7f6d50a">pdf</a>(arma::mat *loc) =0;
+<a name="l00120"></a>00120 
+<a name="l00128"></a>00128             <span class="keyword">virtual</span> arma::mat <a class="code" href="classdivopt_1_1c__rand__var.html#a6fa8732f6467cfb9b71b9590c2f88e5b">pdf_grad</a>(arma::mat *loc) =0;
+<a name="l00129"></a>00129 
+<a name="l00133"></a>00133             <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var.html#af2b87125538d2ccf2fd427d104c5397d">unpack</a>() =0;
 <a name="l00134"></a>00134 
-<a name="l00138"></a><a class="code" href="classc__rand__var.html#a6bdf916d8aa06727128106e54bc36813">00138</a>         <span class="keywordtype">size_t</span> <a class="code" href="classc__rand__var.html#a6bdf916d8aa06727128106e54bc36813">dim</a>;
-<a name="l00139"></a>00139 
-<a name="l00143"></a><a class="code" href="classc__rand__var.html#af0c3924c20a6118bbe142637f735bd32">00143</a>         <span class="keywordtype">size_t</span> <a class="code" href="classc__rand__var.html#af0c3924c20a6118bbe142637f735bd32">dim_prob</a>;
-<a name="l00144"></a>00144 
-<a name="l00148"></a><a class="code" href="classc__rand__var.html#a259d5bac81373870d51a9cbac2e4aa5b">00148</a>         std::vector&lt;double&gt; <a class="code" href="classc__rand__var.html#a259d5bac81373870d51a9cbac2e4aa5b">raw_data</a>;
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150 };
+<a name="l00135"></a>00135         <span class="keyword">protected</span>:
+<a name="l00136"></a>00136 
+<a name="l00140"></a><a class="code" href="classdivopt_1_1c__rand__var.html#ad263b31b0e272d1c00a7368362ed19e4">00140</a>             <span class="keywordtype">size_t</span> <a class="code" href="classdivopt_1_1c__rand__var.html#ad263b31b0e272d1c00a7368362ed19e4">dim</a>;
+<a name="l00141"></a>00141 
+<a name="l00145"></a><a class="code" href="classdivopt_1_1c__rand__var.html#accebcd3c62fcf1958e6d21b82bd0d4ae">00145</a>             <span class="keywordtype">size_t</span> <a class="code" href="classdivopt_1_1c__rand__var.html#accebcd3c62fcf1958e6d21b82bd0d4ae">dim_prob</a>;
+<a name="l00146"></a>00146 
+<a name="l00150"></a><a class="code" href="classdivopt_1_1c__rand__var.html#a5817d4b94c53e6e6a7f8d4027cbce4e1">00150</a>             std::vector&lt;double&gt; <a class="code" href="classdivopt_1_1c__rand__var.html#a5817d4b94c53e6e6a7f8d4027cbce4e1">raw_data</a>;
 <a name="l00151"></a>00151 
-<a name="l00152"></a>00152 <span class="preprocessor">#endif // C_RAND_VAR_H</span>
+<a name="l00152"></a>00152     };
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154 }
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156 <span class="preprocessor">#endif // C_RAND_VAR_H</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -147,7 +151,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 13 2015 13:00:53 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

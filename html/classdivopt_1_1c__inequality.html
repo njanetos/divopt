@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>divopt: c_inequality Class Reference</title>
+<title>divopt: divopt::c_inequality Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -75,47 +75,67 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><b>divopt</b>      </li>
+      <li class="navelem"><a class="el" href="classdivopt_1_1c__inequality.html">c_inequality</a>      </li>
+    </ul>
+  </div>
 </div>
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">c_inequality Class Reference</div>  </div>
+<div class="title">divopt::c_inequality Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="c_inequality" -->
+<!-- doxytag: class="divopt::c_inequality" -->
 <p>Encodes information about an inequality in one dimension.  
- <a href="classc__inequality.html#details">More...</a></p>
+ <a href="classdivopt_1_1c__inequality.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="c__inequality_8h_source.html">c_inequality.h</a>&gt;</code></p>
 
-<p><a href="classc__inequality-members.html">List of all members.</a></p>
+<p><a href="classdivopt_1_1c__inequality-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__inequality.html#ada032a618e56bdaa99b1c24ae556d700">c_inequality</a> (size_t dim, float val, binary_relation bin)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__inequality.html#ac476147d31b420279abe35a980e1fccd">get_dim</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__inequality.html#a78a1f4d784ea3dd8b83345f14f28ede2">get_val</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">binary_relation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__inequality.html#ab85ed92bf1208be7c9aa8822c63fc816">get_binary_relation</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__inequality.html#a3d4de45d504aaf879da1f7d7ae25f861">c_inequality</a> (size_t dim, float val, e_binary_relation bin)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__inequality.html#afb5dd6c446121411ed6c448d626fc140">get_dim</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__inequality.html#a1a8d25293c061d3c401dd0b80182831a">get_val</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">e_binary_relation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__inequality.html#a5ee170b0008faf856d8977ac367a1322">get_binary_relation</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dd534bef185e5895f438fc27ff451ea"></a><!-- doxytag: member="c_inequality::dim" ref="a2dd534bef185e5895f438fc27ff451ea" args="" -->
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab06f2c5d46b1b2ba8e4563c3bac9717b"></a><!-- doxytag: member="divopt::c_inequality::dim" ref="ab06f2c5d46b1b2ba8e4563c3bac9717b" args="" -->
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>dim</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae40270751c975cfbb7c0aa885cc5d4c5"></a><!-- doxytag: member="c_inequality::val" ref="ae40270751c975cfbb7c0aa885cc5d4c5" args="" -->
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5674ef217950aca841be30c1fff85aa"></a><!-- doxytag: member="divopt::c_inequality::val" ref="ab5674ef217950aca841be30c1fff85aa" args="" -->
 float&#160;</td><td class="memItemRight" valign="bottom"><b>val</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a452c9bb6b6ec1630bd3f9c03887555ad"></a><!-- doxytag: member="c_inequality::bin" ref="a452c9bb6b6ec1630bd3f9c03887555ad" args="" -->
-binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15fbcc215a10dd50da5544c27286a5aa"></a><!-- doxytag: member="divopt::c_inequality::bin" ref="a15fbcc215a10dd50da5544c27286a5aa" args="" -->
+e_binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Encodes information about an inequality in one dimension. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ada032a618e56bdaa99b1c24ae556d700"></a><!-- doxytag: member="c_inequality::c_inequality" ref="ada032a618e56bdaa99b1c24ae556d700" args="(size_t dim, float val, binary_relation bin)" -->
+<a class="anchor" id="a3d4de45d504aaf879da1f7d7ae25f861"></a><!-- doxytag: member="divopt::c_inequality::c_inequality" ref="a3d4de45d504aaf879da1f7d7ae25f861" args="(size_t dim, float val, e_binary_relation bin)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classc__inequality.html#ada032a618e56bdaa99b1c24ae556d700">c_inequality::c_inequality</a> </td>
+          <td class="memname"><a class="el" href="classdivopt_1_1c__inequality.html#a3d4de45d504aaf879da1f7d7ae25f861">divopt::c_inequality::c_inequality</a> </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>dim</em>, </td>
@@ -129,7 +149,7 @@ binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">binary_relation&#160;</td>
+          <td class="paramtype">e_binary_relation&#160;</td>
           <td class="paramname"><em>bin</em>&#160;</td>
         </tr>
         <tr>
@@ -153,15 +173,15 @@ binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></t
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ab85ed92bf1208be7c9aa8822c63fc816"></a><!-- doxytag: member="c_inequality::get_binary_relation" ref="ab85ed92bf1208be7c9aa8822c63fc816" args="()" -->
+<a class="anchor" id="a5ee170b0008faf856d8977ac367a1322"></a><!-- doxytag: member="divopt::c_inequality::get_binary_relation" ref="a5ee170b0008faf856d8977ac367a1322" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">binary_relation <a class="el" href="classc__inequality.html#ab85ed92bf1208be7c9aa8822c63fc816">c_inequality::get_binary_relation</a> </td>
+          <td class="memname">divopt::e_binary_relation <a class="el" href="classdivopt_1_1c__inequality.html#a5ee170b0008faf856d8977ac367a1322">divopt::c_inequality::get_binary_relation</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -171,15 +191,15 @@ binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></t
 
 </div>
 </div>
-<a class="anchor" id="ac476147d31b420279abe35a980e1fccd"></a><!-- doxytag: member="c_inequality::get_dim" ref="ac476147d31b420279abe35a980e1fccd" args="()" -->
+<a class="anchor" id="afb5dd6c446121411ed6c448d626fc140"></a><!-- doxytag: member="divopt::c_inequality::get_dim" ref="afb5dd6c446121411ed6c448d626fc140" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t <a class="el" href="classc__inequality.html#ac476147d31b420279abe35a980e1fccd">c_inequality::get_dim</a> </td>
+          <td class="memname">size_t <a class="el" href="classdivopt_1_1c__inequality.html#afb5dd6c446121411ed6c448d626fc140">divopt::c_inequality::get_dim</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -189,15 +209,15 @@ binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></t
 
 </div>
 </div>
-<a class="anchor" id="a78a1f4d784ea3dd8b83345f14f28ede2"></a><!-- doxytag: member="c_inequality::get_val" ref="a78a1f4d784ea3dd8b83345f14f28ede2" args="()" -->
+<a class="anchor" id="a1a8d25293c061d3c401dd0b80182831a"></a><!-- doxytag: member="divopt::c_inequality::get_val" ref="a1a8d25293c061d3c401dd0b80182831a" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float <a class="el" href="classc__inequality.html#a78a1f4d784ea3dd8b83345f14f28ede2">c_inequality::get_val</a> </td>
+          <td class="memname">float <a class="el" href="classdivopt_1_1c__inequality.html#a1a8d25293c061d3c401dd0b80182831a">divopt::c_inequality::get_val</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -229,7 +249,7 @@ binary_relation&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></t
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 13 2015 13:00:53 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
