@@ -19,7 +19,7 @@ divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
 }
 
-double divopt::c_rand_var_norm::cdf(arma::mat *loc) {
+float divopt::c_rand_var_norm::cdf(arma::mat *loc) {
 
     // Find the adjusted score.
     arma::mat adj_pos = (*loc - mean) / sqrt(cov.diag());
@@ -47,7 +47,13 @@ double divopt::c_rand_var_norm::cdf(arma::mat *loc) {
 
 }
 
-double divopt::c_rand_var_norm::cdf(std::vector<c_inequality> *inequalities) {
+float divopt::c_rand_var_norm::cdf(std::vector<c_inequality> *inequalities) {
+
+    float res = 0.0f;
+
+    if (!divopt::c_util::is_clean(inequalities)) {
+        return res;
+    }
 
     return 0.0;
 

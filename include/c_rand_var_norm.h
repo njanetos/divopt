@@ -17,8 +17,8 @@ namespace divopt {
 
             c_rand_var_norm(size_t dim);
 
-            double cdf(arma::mat *loc);
-            double cdf(std::vector<c_inequality> *inequalities);
+            float cdf(arma::mat *loc);
+            float cdf(std::vector<c_inequality> *inequalities);
             arma::mat cdf_grad(arma::mat *loc);
             double div(c_rand_var *var);
             arma::mat div_grad(c_rand_var *oth);

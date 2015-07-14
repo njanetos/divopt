@@ -45,6 +45,13 @@ namespace divopt {
                                    const c_inequality *ineq2);
 
             /**
+             *  Returns true if the inequalities are well-defined.
+             *  \param inequalities The inequalities to check
+             *  \return True if they're well-defined, i.e., not a null event, and no nested inequalities.
+             */
+            static bool is_clean(const std::vector<c_inequality> *inequalities);
+
+            /**
              *  Returns whether one inequality nests another inequality.
              *  \param ineq1 The first inequality.
              *  \param ineq2 The second inequality.

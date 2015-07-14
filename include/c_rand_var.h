@@ -30,7 +30,7 @@ namespace divopt {
              *  \param loc The location to compute the cumulative density at.
              *  \return The cumulative density.
              */
-            virtual double cdf(arma::mat *loc) =0;
+            virtual float cdf(arma::mat *loc) =0;
 
             /**
              *  Returns the probability of some event.
@@ -38,7 +38,7 @@ namespace divopt {
              *  \param inequalities The inequalities that define the event.
              *  \return The cumulative density.
              */
-            virtual double cdf(std::vector<c_inequality> *inequalities) =0;
+            virtual float cdf(std::vector<c_inequality> *inequalities) =0;
 
             /**
              *  Computes the gradient of my cdf at some location.

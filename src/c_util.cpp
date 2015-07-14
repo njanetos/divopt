@@ -73,6 +73,12 @@ bool divopt::c_util::null_event(const c_inequality *ineq1,
 
 }
 
+bool divopt::c_util::is_clean(const std::vector<c_inequality> *inequalities) {
+
+    return false;
+
+}
+
 int divopt::c_util::is_nested(const c_inequality *ineq1,
                               const c_inequality *ineq2) {
 
