@@ -4,7 +4,7 @@ INC         = include
 LIB 				= lib
 
 CLEANEXTS   = o a gcno
-CC					= g++
+CC					= g++-4.8
 CFLAGS			= -Wall -fexceptions -std=c++11 -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
 LIBS				= -L$(LIB) -lgcov -larmadillo -lMvtnorm
 
