@@ -146,7 +146,7 @@ TEST_CASE("Nuts and bolts of events") {
 
     std::vector<c_inequality> comb;
 
-    comb = c_util::reduce(&constraint, 0, 1);
+    comb = divopt::c_util::reduce(&constraint, 0, 1);
 
     REQUIRE( comb.size() == 2 );
 

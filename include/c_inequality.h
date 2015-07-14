@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 
+class c_util;
+
+
 namespace divopt {
 
     enum class e_binary_relation { GEQ, LEQ };
