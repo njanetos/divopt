@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <vector>
 #include <armadillo>
-#include "c_inequality.h"
 
 namespace divopt {
 
@@ -25,20 +24,12 @@ namespace divopt {
         public:
 
             /**
-             *  Returns the cumulative density at a location.
-             *
-             *  \param loc The location to compute the cumulative density at.
-             *  \return The cumulative density.
-             */
-            virtual float cdf(arma::mat *loc) =0;
-
-            /**
              *  Returns the probability of some event.
              *
              *  \param inequalities The inequalities that define the event.
              *  \return The cumulative density.
              */
-            virtual float cdf(std::vector<c_inequality> *inequalities) =0;
+            virtual float cdf(arma::mat *inequalities) =0;
 
             /**
              *  Computes the gradient of my cdf at some location.

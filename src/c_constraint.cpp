@@ -3,7 +3,7 @@
 using namespace divopt;
 
 divopt::c_constraint::c_constraint() {
-    std::vector< std::vector<c_inequality> > inequalities;
+    std::vector<arma::mat> inequalities;
     prob = 0.5;
 }
 
@@ -13,24 +13,9 @@ divopt::c_constraint::c_constraint(float prob) {
 
 }
 
-void divopt::c_constraint::add_inequality(c_inequality inequality) {
-
-    std::vector<c_inequality> new_inequalities;
-    new_inequalities.push_back(inequality);
-    inequalities.push_back(new_inequalities);
-
-}
-
-void divopt::c_constraint::add_inequality(std::vector<c_inequality> inequalities) {
+void divopt::c_constraint::add_inequality(arma::mat inequalities) {
 
     this->inequalities.push_back(inequalities);
-
-}
-
-void divopt::c_constraint::add_inequality(c_inequality inequality, size_t pos) {
-
-    if (inequalities.size() < pos + 1) inequalities.resize(pos + 1);
-    (inequalities[pos]).push_back(inequality);
 
 }
 
@@ -58,7 +43,7 @@ void divopt::c_constraint::set_prob(float prob) {
 
 }
 
-std::vector< std::vector<c_inequality> > * divopt::c_constraint::get_inequalities() {
+std::vector<arma::mat> * divopt::c_constraint::get_inequalities() {
 
     return &inequalities;
 

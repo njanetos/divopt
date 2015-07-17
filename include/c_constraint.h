@@ -1,7 +1,6 @@
 #ifndef C_CONSTRAINT_H
 #define C_CONSTRAINT_H
 
-#include "c_inequality.h"
 #include "c_rand_var.h"
 
 namespace divopt {
@@ -34,23 +33,10 @@ namespace divopt {
             c_constraint(float prob);
 
             /**
-             *  Adds an inequality onto the last set of ANDs.
-             *  \param inequality The inequality to add.
-             */
-            void add_inequality(c_inequality inequality);
-
-            /**
-             *  Adds a vector of AND inequalities.
+             *  Adds a set of AND inequalities.
              *  \param inequalities A vector of inequalities.
              */
-            void add_inequality(std::vector<c_inequality> inequalities);
-
-            /**
-             *  Adds an AND inequality at position @p pos.
-             *  \param inequality The inequality to add.
-             *  \param pos The position to add it at.
-             */
-            void add_inequality(c_inequality inequality, size_t pos);
+            void add_inequality(arma::mat inequalities);
 
             /**
              *  Evaluates the probability of this event occurred under
@@ -78,7 +64,7 @@ namespace divopt {
              *  Returns a pointer to the underlying set of inequalities.
              *  \return Pointer to the inequalities.
              */
-            std::vector< std::vector<c_inequality> > * get_inequalities();
+            std::vector<arma::mat> * get_inequalities();
 
             /**
              *  Returns the probability of this event occuring.
@@ -88,7 +74,7 @@ namespace divopt {
 
         protected:
 
-            std::vector< std::vector<c_inequality> > inequalities;
+            std::vector<arma::mat> inequalities;
             float prob;
 
     };
