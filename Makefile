@@ -4,8 +4,8 @@ INC         = include
 LIB 				= lib
 
 CLEANEXTS   = o a gcno
-CC					= g++-4.8
-CFLAGS			= -Wall -fexceptions -std=c++11 -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
+CC					= g++
+CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage
 LIBS				= -L$(LIB) -lgcov -larmadillo -lMvtnorm
 
 _DEPS = mvtnorm.h c_util.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp c_constraint.h c_inequality.h
