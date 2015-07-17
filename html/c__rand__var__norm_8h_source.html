@@ -94,36 +94,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00017"></a>00017 
 <a name="l00018"></a>00018             <a class="code" href="classdivopt_1_1c__rand__var__norm.html" title="Represents an n-dimensional normal random variable.">c_rand_var_norm</a>(<span class="keywordtype">size_t</span> <a class="code" href="classdivopt_1_1c__rand__var.html#ad263b31b0e272d1c00a7368362ed19e4">dim</a>);
 <a name="l00019"></a>00019 
-<a name="l00020"></a>00020             <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#acf9741d640440ebf2b216ef6941a423e">cdf</a>(arma::mat *loc);
-<a name="l00021"></a>00021             <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#acf9741d640440ebf2b216ef6941a423e">cdf</a>(std::vector&lt;c_inequality&gt; *inequalities);
-<a name="l00022"></a>00022             arma::mat <a class="code" href="classdivopt_1_1c__rand__var__norm.html#af3cdc507ce57431b8e7adf31d9d43b25">cdf_grad</a>(arma::mat *loc);
-<a name="l00023"></a>00023             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#abdf1ec21f17eb4d67e48603550f3e134">div</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var);
-<a name="l00024"></a>00024             arma::mat <a class="code" href="classdivopt_1_1c__rand__var__norm.html#af6c8d8d58ab0a0e9e18d09ea610aa346">div_grad</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *oth);
-<a name="l00025"></a>00025             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#afdb198ee63254712f7c6aa0021a30ca9">ent</a>(arma::mat *loc, <a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var);
-<a name="l00026"></a>00026 
-<a name="l00032"></a>00032             arma::mat&amp; <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a1c776a9aacc027a948e17099c8304395">inv_cov</a>();
-<a name="l00033"></a>00033 
-<a name="l00039"></a>00039             arma::mat&amp; <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a160d8b98203d30649a09ed4ffdea8bb9">inv_ch</a>();
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a4b2bec9177f3e1ba8e7b3a212a6138b7">pdf</a>(arma::mat *loc);
-<a name="l00042"></a>00042             arma::mat <a class="code" href="classdivopt_1_1c__rand__var__norm.html#ae6de55fcebe4d49d010e76943b53eb23">pdf_grad</a>(arma::mat *loc);
-<a name="l00043"></a>00043             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#aa132723e7b1639d39649042c84afe703">pack</a>();
-<a name="l00044"></a>00044             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#ae6de55fcebe4d49d010e76943b53eb23">pdf_grad</a>(<span class="keywordtype">double</span> *loc, <span class="keywordtype">double</span> *res);
-<a name="l00045"></a>00045             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a74609f0002a3d05501ef3a3896938669">unpack</a>();
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047             arma::mat mean, cov, corr, ch, var;
-<a name="l00048"></a>00048             <span class="keywordtype">double</span> norm_factor, det_cov, gauss_factor;
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050         <span class="keyword">protected</span>:
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052             <span class="keywordtype">bool</span> inv_ch_is_computed, inv_cov_is_computed;
-<a name="l00053"></a>00053             arma::mat m_inv_cov, m_inv_ch;
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055     };
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 }
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="preprocessor">#endif // C_RAND_VAR_NORM_H</span>
+<a name="l00020"></a>00020             <span class="keywordtype">float</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#ae97bbd872263013025d9083333c7c750">cdf</a>(arma::mat *inequalities);
+<a name="l00021"></a>00021             arma::mat <a class="code" href="classdivopt_1_1c__rand__var__norm.html#af3cdc507ce57431b8e7adf31d9d43b25">cdf_grad</a>(arma::mat *loc);
+<a name="l00022"></a>00022             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#abdf1ec21f17eb4d67e48603550f3e134">div</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var);
+<a name="l00023"></a>00023             arma::mat <a class="code" href="classdivopt_1_1c__rand__var__norm.html#af6c8d8d58ab0a0e9e18d09ea610aa346">div_grad</a>(<a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *oth);
+<a name="l00024"></a>00024             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#afdb198ee63254712f7c6aa0021a30ca9">ent</a>(arma::mat *loc, <a class="code" href="classdivopt_1_1c__rand__var.html" title="Represents a random variable.">c_rand_var</a> *var);
+<a name="l00025"></a>00025 
+<a name="l00031"></a>00031             arma::mat&amp; <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a1c776a9aacc027a948e17099c8304395">inv_cov</a>();
+<a name="l00032"></a>00032 
+<a name="l00038"></a>00038             arma::mat&amp; <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a160d8b98203d30649a09ed4ffdea8bb9">inv_ch</a>();
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040             <span class="keywordtype">double</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a4b2bec9177f3e1ba8e7b3a212a6138b7">pdf</a>(arma::mat *loc);
+<a name="l00041"></a>00041             arma::mat <a class="code" href="classdivopt_1_1c__rand__var__norm.html#ae6de55fcebe4d49d010e76943b53eb23">pdf_grad</a>(arma::mat *loc);
+<a name="l00042"></a>00042             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#aa132723e7b1639d39649042c84afe703">pack</a>();
+<a name="l00043"></a>00043             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#ae6de55fcebe4d49d010e76943b53eb23">pdf_grad</a>(<span class="keywordtype">double</span> *loc, <span class="keywordtype">double</span> *res);
+<a name="l00044"></a>00044             <span class="keywordtype">void</span> <a class="code" href="classdivopt_1_1c__rand__var__norm.html#a74609f0002a3d05501ef3a3896938669">unpack</a>();
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046             arma::mat mean, cov, corr, ch, var;
+<a name="l00047"></a>00047             <span class="keywordtype">double</span> norm_factor, det_cov, gauss_factor;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049         <span class="keyword">protected</span>:
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051             <span class="keywordtype">bool</span> inv_ch_is_computed, inv_cov_is_computed;
+<a name="l00052"></a>00052             arma::mat m_inv_cov, m_inv_ch;
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     };
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="preprocessor">#endif // C_RAND_VAR_NORM_H</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -142,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 17 2015 19:45:26 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

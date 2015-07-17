@@ -19,9 +19,7 @@
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual float \hyperlink{classdivopt_1_1c__rand__var_a04962b760cf8d3b62cecaf84db8888d6}{cdf} (arma\-::mat $\ast$loc)=0
-\item 
-virtual float \hyperlink{classdivopt_1_1c__rand__var_a4ae3877a3c46cacee48c48f7effac56b}{cdf} (std\-::vector$<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $\ast$inequalities)=0
+virtual float \hyperlink{classdivopt_1_1c__rand__var_ab69e1781b6d2502a893cfa932ef5244d}{cdf} (arma\-::mat $\ast$inequalities)=0
 \item 
 virtual arma\-::mat \hyperlink{classdivopt_1_1c__rand__var_a98aad18751922552e96d1808745b34d6}{cdf\-\_\-grad} (arma\-::mat $\ast$loc)=0
 \item 
@@ -64,34 +62,13 @@ std\-::vector$<$ double $>$ \hyperlink{classdivopt_1_1c__rand__var_a5817d4b94c53
 \-Abstract class that represents a random variable. \-Contains functions for finding the cdf, the pdf, the entropy, the divergence, and the gradients of all these things. \-Every random variable is represented by a vector of raw data, implementing classes are responsible for packing and unpacking that raw data to form the elements of the random variable itself. \-The gradients are always with respect to the vector of raw data. 
 
 \subsection{\-Member \-Function \-Documentation}
-\hypertarget{classdivopt_1_1c__rand__var_a04962b760cf8d3b62cecaf84db8888d6}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf@{cdf}}
+\hypertarget{classdivopt_1_1c__rand__var_ab69e1781b6d2502a893cfa932ef5244d}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf@{cdf}}
 \index{cdf@{cdf}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
 \subsubsection[{cdf}]{\setlength{\rightskip}{0pt plus 5cm}virtual float {\bf divopt\-::c\-\_\-rand\-\_\-var\-::cdf} (
 \begin{DoxyParamCaption}
-\item[{arma\-::mat $\ast$}]{loc}
+\item[{arma\-::mat $\ast$}]{inequalities}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a04962b760cf8d3b62cecaf84db8888d6}
-\-Returns the cumulative density at a location.
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em loc} & \-The location to compute the cumulative density at. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-The cumulative density. 
-\end{DoxyReturn}
-
-
-\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_acf9741d640440ebf2b216ef6941a423e}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
-
-\hypertarget{classdivopt_1_1c__rand__var_a4ae3877a3c46cacee48c48f7effac56b}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf@{cdf}}
-\index{cdf@{cdf}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}
-\subsubsection[{cdf}]{\setlength{\rightskip}{0pt plus 5cm}virtual float {\bf divopt\-::c\-\_\-rand\-\_\-var\-::cdf} (
-\begin{DoxyParamCaption}
-\item[{std\-::vector$<$ {\bf c\-\_\-inequality} $>$ $\ast$}]{inequalities}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_a4ae3877a3c46cacee48c48f7effac56b}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classdivopt_1_1c__rand__var_ab69e1781b6d2502a893cfa932ef5244d}
 \-Returns the probability of some event.
 
 
@@ -104,7 +81,7 @@ std\-::vector$<$ double $>$ \hyperlink{classdivopt_1_1c__rand__var_a5817d4b94c53
 \end{DoxyReturn}
 
 
-\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_a96006e8533878fcc4e60e4eaca636d7b}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
+\-Implemented in \hyperlink{classdivopt_1_1c__rand__var__norm_ae97bbd872263013025d9083333c7c750}{divopt\-::c\-\_\-rand\-\_\-var\-\_\-norm}.
 
 \hypertarget{classdivopt_1_1c__rand__var_a98aad18751922552e96d1808745b34d6}{\index{divopt\-::c\-\_\-rand\-\_\-var@{divopt\-::c\-\_\-rand\-\_\-var}!cdf\-\_\-grad@{cdf\-\_\-grad}}
 \index{cdf\-\_\-grad@{cdf\-\_\-grad}!divopt::c_rand_var@{divopt\-::c\-\_\-rand\-\_\-var}}

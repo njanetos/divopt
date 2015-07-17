@@ -17,11 +17,7 @@
 \item 
 \hyperlink{classdivopt_1_1c__constraint_a51f6d7e631c0fc45fa07954fa3f03b6e}{c\-\_\-constraint} (float prob)
 \item 
-void \hyperlink{classdivopt_1_1c__constraint_a263411cb48b03426e79f0a510f754cba}{add\-\_\-inequality} (\hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} inequality)
-\item 
-void \hyperlink{classdivopt_1_1c__constraint_a0c1a0b70ce9e8474fafb837175019976}{add\-\_\-inequality} (std\-::vector$<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ inequalities)
-\item 
-void \hyperlink{classdivopt_1_1c__constraint_a97bc8c242ec55f0990604ef268c5216d}{add\-\_\-inequality} (\hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} inequality, size\-\_\-t pos)
+void \hyperlink{classdivopt_1_1c__constraint_aa82b65fdba6b91d1f20821012370264c}{add\-\_\-inequality} (arma\-::mat inequalities)
 \item 
 float \hyperlink{classdivopt_1_1c__constraint_a615ea0956d9c28712f8eeeaecb29e0d9}{eval\-\_\-prob} (\hyperlink{classdivopt_1_1c__rand__var}{c\-\_\-rand\-\_\-var} $\ast$rand\-\_\-var)
 \item 
@@ -29,16 +25,14 @@ bool \hyperlink{classdivopt_1_1c__constraint_ae07db5dcb26bdedc94768c62b7c403d8}{
 \item 
 void \hyperlink{classdivopt_1_1c__constraint_a4eab366ff54ab0397a5a50cf70a312f4}{set\-\_\-prob} (float prob)
 \item 
-std\-::vector$<$ std\-::vector\*
-$<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $>$ $\ast$ \hyperlink{classdivopt_1_1c__constraint_a115deba8a25f3bcd8d799e930db969c4}{get\-\_\-inequalities} ()
+std\-::vector$<$ arma\-::mat $>$ $\ast$ \hyperlink{classdivopt_1_1c__constraint_aa2771a6e52ff89fd0fff62d080d29d1a}{get\-\_\-inequalities} ()
 \item 
 float \hyperlink{classdivopt_1_1c__constraint_a8d49fcb40dfdd2f99c90b36840a77d16}{get\-\_\-prob} ()
 \end{DoxyCompactItemize}
 \subsection*{\-Protected \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classdivopt_1_1c__constraint_ae258c9e1b09282acface0b4172d3376d}{std\-::vector$<$ std\-::vector\*
-$<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $>$ {\bfseries inequalities}}\label{classdivopt_1_1c__constraint_ae258c9e1b09282acface0b4172d3376d}
+\hypertarget{classdivopt_1_1c__constraint_acfc1d794380a92f4384c113ba5e48685}{std\-::vector$<$ arma\-::mat $>$ {\bfseries inequalities}}\label{classdivopt_1_1c__constraint_acfc1d794380a92f4384c113ba5e48685}
 
 \item 
 \hypertarget{classdivopt_1_1c__constraint_a7cb45c815580f9f58a02ad58c9497fa0}{float {\bfseries prob}}\label{classdivopt_1_1c__constraint_a7cb45c815580f9f58a02ad58c9497fa0}
@@ -49,7 +43,7 @@ $<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $>$ {\bfseri
 \subsection{\-Detailed \-Description}
 \-Encodes information about a constraint on a random variable. 
 
-\-Constraints take the form of a logical list of constraints on the \-C\-D\-F, together with a probability. \-For example, one constraint we might like to encode would be '\-The probability that x1 $<$ 0.\-3 \-A\-N\-D x2 $>$ 0.\-1 \-O\-R x1 $>$ -\/0.\-1 is 0.\-25'. \-The class encodes that information in the following way\-: \-The vector inequalities would have two elements, each of which is a vector of {\ttfamily \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality}}. \-The first vector is of length two, and represents 'x1 $<$ 0.\-3 \-A\-N\-D x2 $>$ 0.\-1', the second vector of is of length 1, and represents 'x1 $>$ -\/0.\-1'. 
+\-Constraints take the form of a logical list of constraints on the \-C\-D\-F, together with a probability. \-For example, one constraint we might like to encode would be '\-The probability that x1 $<$ 0.\-3 \-A\-N\-D x2 $>$ 0.\-1 \-O\-R x1 $>$ -\/0.\-1 is 0.\-25'. \-The class encodes that information in the following way\-: \-The vector inequalities would have two elements, each of which is a vector of {\ttfamily c\-\_\-inequality}. \-The first vector is of length two, and represents 'x1 $<$ 0.\-3 \-A\-N\-D x2 $>$ 0.\-1', the second vector of is of length 1, and represents 'x1 $>$ -\/0.\-1'. 
 
 \subsection{\-Constructor \& \-Destructor \-Documentation}
 \hypertarget{classdivopt_1_1c__constraint_af7708cbcea2a4c3a9c75f9cae4aa86c9}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!c\-\_\-constraint@{c\-\_\-constraint}}
@@ -69,43 +63,16 @@ $<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $>$ {\bfseri
 \-Initializes a new, empty set of constraints, and sets prob. 
 
 \subsection{\-Member \-Function \-Documentation}
-\hypertarget{classdivopt_1_1c__constraint_a263411cb48b03426e79f0a510f754cba}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!add\-\_\-inequality@{add\-\_\-inequality}}
+\hypertarget{classdivopt_1_1c__constraint_aa82b65fdba6b91d1f20821012370264c}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!add\-\_\-inequality@{add\-\_\-inequality}}
 \index{add\-\_\-inequality@{add\-\_\-inequality}!divopt::c_constraint@{divopt\-::c\-\_\-constraint}}
 \subsubsection[{add\-\_\-inequality}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf divopt\-::c\-\_\-constraint\-::add\-\_\-inequality} (
 \begin{DoxyParamCaption}
-\item[{{\bf c\-\_\-inequality}}]{inequality}
+\item[{arma\-::mat}]{inequalities}
 \end{DoxyParamCaption}
-)}}\label{classdivopt_1_1c__constraint_a263411cb48b03426e79f0a510f754cba}
-\-Adds an inequality onto the last set of \-A\-N\-Ds. 
-\begin{DoxyParams}{\-Parameters}
-{\em inequality} & \-The inequality to add. \\
-\hline
-\end{DoxyParams}
-\hypertarget{classdivopt_1_1c__constraint_a0c1a0b70ce9e8474fafb837175019976}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!add\-\_\-inequality@{add\-\_\-inequality}}
-\index{add\-\_\-inequality@{add\-\_\-inequality}!divopt::c_constraint@{divopt\-::c\-\_\-constraint}}
-\subsubsection[{add\-\_\-inequality}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf divopt\-::c\-\_\-constraint\-::add\-\_\-inequality} (
-\begin{DoxyParamCaption}
-\item[{std\-::vector$<$ {\bf c\-\_\-inequality} $>$}]{inequalities}
-\end{DoxyParamCaption}
-)}}\label{classdivopt_1_1c__constraint_a0c1a0b70ce9e8474fafb837175019976}
-\-Adds a vector of \-A\-N\-D inequalities. 
+)}}\label{classdivopt_1_1c__constraint_aa82b65fdba6b91d1f20821012370264c}
+\-Adds a set of \-A\-N\-D inequalities. 
 \begin{DoxyParams}{\-Parameters}
 {\em inequalities} & \-A vector of inequalities. \\
-\hline
-\end{DoxyParams}
-\hypertarget{classdivopt_1_1c__constraint_a97bc8c242ec55f0990604ef268c5216d}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!add\-\_\-inequality@{add\-\_\-inequality}}
-\index{add\-\_\-inequality@{add\-\_\-inequality}!divopt::c_constraint@{divopt\-::c\-\_\-constraint}}
-\subsubsection[{add\-\_\-inequality}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf divopt\-::c\-\_\-constraint\-::add\-\_\-inequality} (
-\begin{DoxyParamCaption}
-\item[{{\bf c\-\_\-inequality}}]{inequality, }
-\item[{size\-\_\-t}]{pos}
-\end{DoxyParamCaption}
-)}}\label{classdivopt_1_1c__constraint_a97bc8c242ec55f0990604ef268c5216d}
-\-Adds an \-A\-N\-D inequality at position {\ttfamily pos}. 
-\begin{DoxyParams}{\-Parameters}
-{\em inequality} & \-The inequality to add. \\
-\hline
-{\em pos} & \-The position to add it at. \\
 \hline
 \end{DoxyParams}
 \hypertarget{classdivopt_1_1c__constraint_a615ea0956d9c28712f8eeeaecb29e0d9}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!eval\-\_\-prob@{eval\-\_\-prob}}
@@ -123,13 +90,13 @@ $<$ \hyperlink{classdivopt_1_1c__inequality}{c\-\_\-inequality} $>$ $>$ {\bfseri
 \begin{DoxyReturn}{\-Returns}
 \-The probability of this event occurring. 
 \end{DoxyReturn}
-\hypertarget{classdivopt_1_1c__constraint_a115deba8a25f3bcd8d799e930db969c4}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!get\-\_\-inequalities@{get\-\_\-inequalities}}
+\hypertarget{classdivopt_1_1c__constraint_aa2771a6e52ff89fd0fff62d080d29d1a}{\index{divopt\-::c\-\_\-constraint@{divopt\-::c\-\_\-constraint}!get\-\_\-inequalities@{get\-\_\-inequalities}}
 \index{get\-\_\-inequalities@{get\-\_\-inequalities}!divopt::c_constraint@{divopt\-::c\-\_\-constraint}}
-\subsubsection[{get\-\_\-inequalities}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::vector$<$ {\bf c\-\_\-inequality} $>$ $>$ $\ast$ {\bf divopt\-::c\-\_\-constraint\-::get\-\_\-inequalities} (
+\subsubsection[{get\-\_\-inequalities}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ arma\-::mat $>$ $\ast$ {\bf divopt\-::c\-\_\-constraint\-::get\-\_\-inequalities} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classdivopt_1_1c__constraint_a115deba8a25f3bcd8d799e930db969c4}
+)}}\label{classdivopt_1_1c__constraint_aa2771a6e52ff89fd0fff62d080d29d1a}
 \-Returns a pointer to the underlying set of inequalities. \begin{DoxyReturn}{\-Returns}
 \-Pointer to the inequalities. 
 \end{DoxyReturn}

@@ -123,8 +123,7 @@ Inheritance diagram for divopt::c_rand_var:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">cdf</a> (arma::mat *loc)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a4ae3877a3c46cacee48c48f7effac56b">cdf</a> (std::vector&lt; <a class="el" href="classdivopt_1_1c__inequality.html">c_inequality</a> &gt; *inequalities)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#ab69e1781b6d2502a893cfa932ef5244d">cdf</a> (arma::mat *inequalities)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual arma::mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a98aad18751922552e96d1808745b34d6">cdf_grad</a> (arma::mat *loc)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a45fac8707b07c02eb2e6ea0fff47994a">dat_to_dist</a> (const double *x)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdivopt_1_1c__rand__var.html#a921fa0ba7a22c97cc0594888d221e379">div</a> (<a class="el" href="classdivopt_1_1c__rand__var.html">c_rand_var</a> *var)=0</td></tr>
@@ -147,41 +146,14 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Represents a random variable. </p>
 <p>Abstract class that represents a random variable. Contains functions for finding the cdf, the pdf, the entropy, the divergence, and the gradients of all these things. Every random variable is represented by a vector of raw data, implementing classes are responsible for packing and unpacking that raw data to form the elements of the random variable itself. The gradients are always with respect to the vector of raw data. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a04962b760cf8d3b62cecaf84db8888d6"></a><!-- doxytag: member="divopt::c_rand_var::cdf" ref="a04962b760cf8d3b62cecaf84db8888d6" args="(arma::mat *loc)=0" -->
+<a class="anchor" id="ab69e1781b6d2502a893cfa932ef5244d"></a><!-- doxytag: member="divopt::c_rand_var::cdf" ref="ab69e1781b6d2502a893cfa932ef5244d" args="(arma::mat *inequalities)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float <a class="el" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">divopt::c_rand_var::cdf</a> </td>
+          <td class="memname">virtual float <a class="el" href="classdivopt_1_1c__rand__var.html#ab69e1781b6d2502a893cfa932ef5244d">divopt::c_rand_var::cdf</a> </td>
           <td>(</td>
           <td class="paramtype">arma::mat *&#160;</td>
-          <td class="paramname"><em>loc</em></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Returns the cumulative density at a location.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">loc</td><td>The location to compute the cumulative density at. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The cumulative density. </dd></dl>
-
-<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#acf9741d640440ebf2b216ef6941a423e">divopt::c_rand_var_norm</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4ae3877a3c46cacee48c48f7effac56b"></a><!-- doxytag: member="divopt::c_rand_var::cdf" ref="a4ae3877a3c46cacee48c48f7effac56b" args="(std::vector&lt; c_inequality &gt; *inequalities)=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual float <a class="el" href="classdivopt_1_1c__rand__var.html#a04962b760cf8d3b62cecaf84db8888d6">divopt::c_rand_var::cdf</a> </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classdivopt_1_1c__inequality.html">c_inequality</a> &gt; *&#160;</td>
           <td class="paramname"><em>inequalities</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -197,7 +169,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The cumulative density. </dd></dl>
 
-<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#a96006e8533878fcc4e60e4eaca636d7b">divopt::c_rand_var_norm</a>.</p>
+<p>Implemented in <a class="el" href="classdivopt_1_1c__rand__var__norm.html#ae97bbd872263013025d9083333c7c750">divopt::c_rand_var_norm</a>.</p>
 
 </div>
 </div>
@@ -580,7 +552,7 @@ Protected Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 14 2015 19:03:36 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 17 2015 19:45:26 for divopt by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
