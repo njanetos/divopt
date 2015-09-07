@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <stdlib.h>
+#include <armadillo>
 
 #define PRECISION 0.000001
 

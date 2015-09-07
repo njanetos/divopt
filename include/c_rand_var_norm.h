@@ -7,6 +7,7 @@
 #include <cmath>
 #include "c_rand_var.h"
 #include "mvtnorm.h"
+#include "utils.h"
 
 namespace divopt {
 

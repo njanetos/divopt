@@ -3,7 +3,7 @@
 #include "catch.hpp"
 #include "c_rand_var_norm.h"
 #include "c_logger.h"
-#include "c_util.h"
+#include "utils.h"
 
 using namespace divopt;
 

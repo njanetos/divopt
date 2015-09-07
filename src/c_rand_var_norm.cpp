@@ -1,5 +1,5 @@
 #include "c_rand_var_norm.h"
-#include "c_util.h"
+
 #include "c_logger.h"
 
 divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
@@ -113,20 +113,20 @@ double divopt::c_rand_var_norm::div(c_rand_var& var) {
     double w_prod;
 
     // Loop through all possible abscissa combinations
-    while (index[dim-1] < c_util::QUADRATURE_DIM) {
+    while (index[dim-1] < utils::QUADRATURE_DIM) {
 
         // Start with weight = 1, find total weight by multiplying
         // Start reading in the abscissa values
         w_prod = 1.0;
         for (size_t i = 0; i < dim; ++i) {
-            abs(i) = c_util::ABS[index[i]];
-            w_prod *= c_util::WEIGHTS[index[i]];
+            abs(i) = utils::ABS[index[i]];
+            w_prod *= utils::WEIGHTS[index[i]];
         }
 
         // Advance the index by one
         ++index[0];
         for (size_t i = 0; i < dim-1; ++i) {
-            if (index[i] >= c_util::QUADRATURE_DIM) {
+            if (index[i] >= utils::QUADRATURE_DIM) {
                 index[i] = 0;
                 ++index[i+1];
             } else {
@@ -135,9 +135,9 @@ double divopt::c_rand_var_norm::div(c_rand_var& var) {
         }
 
         // Make sure the weights aren't really small before performing computations.
-        if (w_prod > c_util::WEIGHT_FLOOR) {
+        if (w_prod > utils::WEIGHT_FLOOR) {
             // Transform the matrix to take into account correlation
-            tr_abs = c_util::SQRT_TWO*ch*abs + mean;
+            tr_abs = utils::SQRT_TWO*ch*abs + mean;
 
             // Find the entropy and add onto the result, times the weight.
             res += ent(tr_abs, var)*w_prod;
@@ -272,8 +272,8 @@ void divopt::c_rand_var_norm::unpack() {
 
     // Find the remaining scalar values
     det_cov = det(cov);
-    norm_factor = 1/(sqrt(pow(2*c_util::PI, dim)*det_cov));
-    gauss_factor = arma::det(ch)/sqrt(pow(c_util::PI, dim)*det_cov);
+    norm_factor = 1/(sqrt(pow(2*utils::PI, dim)*det_cov));
+    gauss_factor = arma::det(ch)/sqrt(pow(utils::PI, dim)*det_cov);
 
     // Flag inverse matrices as in need of computation
     inv_cov_is_computed = false;

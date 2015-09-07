@@ -2,10 +2,7 @@
 #define C_RAND_VAR_H
 
 #include "common.h"
-
-#include <stdlib.h>
-#include <vector>
-#include <armadillo>
+#include "utils.h"
 
 namespace divopt {
 

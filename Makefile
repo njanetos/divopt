@@ -9,10 +9,10 @@ CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-c
 CFLAGS_BUILD= -Wall -fexceptions -g -I$(INC) -I/usr/include
 LIBS				= -L$(LIB) -lgcov -larmadillo -lMvtnorm
 
-_DEPS = mvtnorm.h c_util.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp c_constraint.h
+_DEPS = mvtnorm.h utils.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp common.h
 DEPS = $(patsubst %,$(INC)/%,$(_DEPS))
 
-_OBJ_LIB = c_util.o c_rand_var_norm.o c_rand_var.o c_logger.o c_constraint.o
+_OBJ_LIB = utils.o c_rand_var_norm.o c_rand_var.o c_logger.o
 OBJ_LIB = $(patsubst %,%,$(_OBJ_LIB))
 
 # Default target
