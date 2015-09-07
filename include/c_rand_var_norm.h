@@ -1,6 +1,8 @@
 #ifndef C_RAND_VAR_NORM_H
 #define C_RAND_VAR_NORM_H
 
+#include "common.h"
+
 #include <armadillo>
 #include <cmath>
 #include "c_rand_var.h"
@@ -17,11 +19,11 @@ namespace divopt {
 
             c_rand_var_norm(size_t dim);
 
-            float cdf(arma::mat *inequalities);
-            arma::mat cdf_grad(arma::mat *loc);
-            double div(c_rand_var *var);
-            arma::mat div_grad(c_rand_var *oth);
-            double ent(arma::mat *loc, c_rand_var *var);
+            real cdf(arma::mat& inequalities);
+            arma::mat cdf_grad(arma::mat& loc);
+            real div(c_rand_var& var);
+            arma::mat div_grad(c_rand_var& oth);
+            real ent(arma::mat& loc, c_rand_var& var);
 
             /**
              *  Returns the inverse of the covariance matrix. Since this
@@ -37,14 +39,13 @@ namespace divopt {
              */
             arma::mat& inv_ch();
 
-            double pdf(arma::mat *loc);
-            arma::mat pdf_grad(arma::mat *loc);
+            double pdf(arma::mat& loc);
+            arma::mat pdf_grad(arma::mat& loc);
             void pack();
-            void pdf_grad(double *loc, double *res);
             void unpack();
 
             arma::mat mean, cov, corr, ch, var;
-            double norm_factor, det_cov, gauss_factor;
+            real norm_factor, det_cov, gauss_factor;
 
         protected:
 

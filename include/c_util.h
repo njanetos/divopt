@@ -1,9 +1,10 @@
 #ifndef C_UTIL_H
 #define C_UTIL_H
 
+#include "common.h"
+
 #include <stdlib.h>
 #include <vector>
-#include "c_constraint.h"
 
 namespace divopt {
 

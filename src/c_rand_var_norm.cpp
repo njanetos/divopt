@@ -19,16 +19,58 @@ divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
 }
 
-float divopt::c_rand_var_norm::cdf(arma::mat *inequalities) {
+real divopt::c_rand_var_norm::cdf(arma::mat& inequalities) {
 
-    float res = 0.0f;
+    int infin[dim];
+    double delta[dim];
 
-    return 0.0;
+    arma::Mat<real> ineq(inequalities);
+
+    // Adjust the bounds
+    ineq.col(0) = (ineq.col(0) - mean) / sqrt(cov.diag());
+    ineq.col(1) = (ineq.col(1) - mean) / sqrt(cov.diag());
+
+    bool lower, upper;
+
+    for (size_t i = 0; i < dim; ++i) {
+        lower = (ineq(i, 0) == -1*std::numeric_limits<real>::infinity());
+        upper = (ineq(i, 1) == std::numeric_limits<real>::infinity());
+        if (lower && upper) {
+            infin[i] = -1;
+        } else if (lower && !upper) {
+            infin[i] = 0;
+        } else if (!lower && upper) {
+            infin[i] = 1;
+        } else if (!lower && !upper) {
+            infin[i] = 2;
+        }
+        delta[i] = 0;
+    }
+
+    // Build the correlation data
+    double corr_raw[dim*(dim-1)/2];
+    for (size_t i = 0; i < dim; ++i) {
+        for (size_t j = 0; j < i; ++j) {
+            corr_raw[j + ((i-1)*i)/2] = corr(i, j);
+        }
+    }
+
+    int nu = 0;
+	int maxpts = 25000;
+	double abseps = 0.001;
+	double releps = 0;
+	double error;
+	double val;
+	int inform;
+
+    pmvnorm((int*) &dim, &nu, ineq.colptr(0), ineq.colptr(1), infin, corr_raw, delta, &maxpts, &abseps, &releps, &error, &val, &inform);
+
+    return val;
 
 }
 
 // TODO This needs to use the analytic formula.
-arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat *loc) {
+arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat& loc) {
 
     c_rand_var_norm temp(this->dim);
     arma::mat res(dim_prob, 1);
@@ -49,7 +91,7 @@ arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat *loc) {
 
 }
 
-double divopt::c_rand_var_norm::div(c_rand_var *var) {
+double divopt::c_rand_var_norm::div(c_rand_var& var) {
 
     // Initialize the variable that will hold the divergence.
     double res = 0.0;
@@ -98,7 +140,7 @@ double divopt::c_rand_var_norm::div(c_rand_var *var) {
             tr_abs = c_util::SQRT_TWO*ch*abs + mean;
 
             // Find the entropy and add onto the result, times the weight.
-            res += ent(&tr_abs, var)*w_prod;
+            res += ent(tr_abs, var)*w_prod;
         }
 
     }
@@ -108,12 +150,12 @@ double divopt::c_rand_var_norm::div(c_rand_var *var) {
 
 }
 
-arma::mat divopt::c_rand_var_norm::div_grad(c_rand_var *oth) {
+arma::mat divopt::c_rand_var_norm::div_grad(c_rand_var& oth) {
 
-    c_rand_var_norm *curr = (c_rand_var_norm *) oth;
+    c_rand_var_norm & curr = dynamic_cast<c_rand_var_norm&>(oth);
 
-    arma::Mat<double> grad_mean = (mean - curr->mean).t()*curr->inv_cov();
-    arma::Mat<double> grad_cov = -1*inv_ch().t() + curr->inv_cov()*ch;
+    arma::Mat<double> grad_mean = (mean - curr.mean).t()*curr.inv_cov();
+    arma::Mat<double> grad_cov = -1*inv_ch().t() + curr.inv_cov()*ch;
 
     arma::Mat<double> res(dim_prob, 1);
 
@@ -134,9 +176,9 @@ arma::mat divopt::c_rand_var_norm::div_grad(c_rand_var *oth) {
 
 }
 
-double divopt::c_rand_var_norm::ent(arma::mat *loc, c_rand_var *var) {
+double divopt::c_rand_var_norm::ent(arma::mat& loc, c_rand_var& var) {
 
-    return std::log(pdf(loc)/var->pdf(loc));
+    return std::log(pdf(loc)/var.pdf(loc));
 
 }
 
@@ -194,14 +236,14 @@ void divopt::c_rand_var_norm::pack() {
 
 }
 
-double divopt::c_rand_var_norm::pdf(arma::mat *loc) {
+double divopt::c_rand_var_norm::pdf(arma::mat& loc) {
 
-    arma::mat expint = exp(-0.5*(*loc - mean).t()*inv_cov()*(*loc - mean));
+    arma::mat expint = exp(-0.5*(loc - mean).t()*inv_cov()*(loc - mean));
     return norm_factor*expint(0);
 
 }
 
-arma::mat divopt::c_rand_var_norm::pdf_grad(arma::mat *loc) {
+arma::mat divopt::c_rand_var_norm::pdf_grad(arma::mat& loc) {
 
     return NULL;
 

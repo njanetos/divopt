@@ -69,4 +69,4 @@ class c_logger {
         }
 };
 
-c_logger &log();
+c_logger &logg();

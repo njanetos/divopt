@@ -2,6 +2,6 @@
 
 c_logger logger;
 
-c_logger &log() {
+c_logger &logg() {
     return logger;
 }

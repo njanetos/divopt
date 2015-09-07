@@ -1,6 +1,8 @@
 #ifndef C_RAND_VAR_H
 #define C_RAND_VAR_H
 
+#include "common.h"
+
 #include <stdlib.h>
 #include <vector>
 #include <armadillo>
@@ -29,7 +31,7 @@ namespace divopt {
              *  \param inequalities The inequalities that define the event.
              *  \return The cumulative density.
              */
-            virtual float cdf(arma::mat *inequalities) =0;
+            virtual real cdf(arma::mat& inequalities) =0;
 
             /**
              *  Computes the gradient of my cdf at some location.
@@ -37,7 +39,7 @@ namespace divopt {
              *  \param loc Where to evaluate the cdf.
              *  \return Vector containing the gradient.
              */
-            virtual arma::mat cdf_grad(arma::mat *loc) =0;
+            virtual arma::mat cdf_grad(arma::mat& loc) =0;
 
             /**
              *  Copies in data to the raw data. You have to run unpack() for the
@@ -46,7 +48,7 @@ namespace divopt {
              *  \param dim_prob The dimension of the raw data vector.
              *  \param x Points to the data to copy.
              */
-            void dat_to_dist(const double *x);
+            void dat_to_dist(const real *x);
 
             /**
              *  Computes the divergence.
@@ -54,7 +56,7 @@ namespace divopt {
              *  \param var The distribution to find the divergence against.
              *  \return The Kullback-Leibler divergence.
              */
-            virtual double div(c_rand_var *var) =0;
+            virtual real div(c_rand_var& var) =0;
 
             /**
              *  Computes the gradient of the divergence between this random variable and
@@ -63,7 +65,7 @@ namespace divopt {
              *  \param oth The other random variable to compute against.
              *  \return A vector containing the gradient.
              */
-            virtual arma::mat div_grad(c_rand_var *oth) =0;
+            virtual arma::mat div_grad(c_rand_var& oth) =0;
 
             /**
              *  Computes the entropy.
@@ -72,19 +74,19 @@ namespace divopt {
              *  \param var The distribution to measure the entropy against.
              *  \return The relative entropy at some location.
              */
-            virtual double ent(arma::mat *loc, c_rand_var *var) =0;
+            virtual real ent(arma::mat& loc, c_rand_var& var) =0;
 
             /**
              *  Returns the dimension of the state space. (Not the optimization problem!)
              *  \return The dimension of the state space.
              */
-            double get_dim() const;
+            size_t get_dim() const;
 
             /**
              *  Returns the dimension of the optimization problem. (Not the state space!)
              *  \return The dimension of the optimization problem.
              */
-            double get_dim_prob() const;
+            size_t get_dim_prob() const;
 
             /**
              *  Takes the non-raw-data aspects and reads them into the raw data.
@@ -99,7 +101,7 @@ namespace divopt {
              *  \param upper Ending index to copy into.
              *  \param x The data to copy.
              */
-            void partial_dat_to_dist(size_t lower, size_t upper, const double *x);
+            void partial_dat_to_dist(size_t lower, size_t upper, const real *x);
 
             /**
              *  Returns the density at a location.
@@ -107,7 +109,7 @@ namespace divopt {
              *  \param loc The location to compute the density at.
              *  \return The density.
              */
-            virtual double pdf(arma::mat *loc) =0;
+            virtual real pdf(arma::mat& loc) =0;
 
             /**
              *  Returns the gradient of the density at some location.
@@ -116,7 +118,7 @@ namespace divopt {
              *  \return A vector with the gradient.
              *
              */
-            virtual arma::mat pdf_grad(arma::mat *loc) =0;
+            virtual arma::mat pdf_grad(arma::mat& loc) =0;
 
             /**
              *  Instantiates `non-raw-data' aspects of the distribution.
@@ -138,7 +140,7 @@ namespace divopt {
             /**
             *  The raw data of the problem. Should be of length dim_prob.
             */
-            std::vector<double> raw_data;
+            std::vector<real> raw_data;
 
     };
 

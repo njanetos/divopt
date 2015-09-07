@@ -2,7 +2,6 @@
 #include <armadillo>
 #include "catch.hpp"
 #include "c_rand_var_norm.h"
-#include "c_constraint.h"
 #include "c_logger.h"
 #include "c_util.h"
 
@@ -60,7 +59,7 @@ TEST_CASE("PDF") {
     location(0) = 0.2;
     location(1) = 0.4;
 
-    REQUIRE( (std::abs(rand_var_norm.pdf(&location) - 0.061589) < 0.01) );
+    REQUIRE( (std::abs(rand_var_norm.pdf(location) - 0.061589) < 0.01) );
 
 }
 
@@ -78,16 +77,18 @@ TEST_CASE("CDF") {
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
 
-    arma::Mat<double> location(2, 1);
-    location(0) = -0.2;
-    location(1) = 0.1;
+    arma::Mat<real> inequalities(2, 2);
+    inequalities(0, 0) = -1*std::numeric_limits<real>::infinity();
+    inequalities(1, 0) = -1*std::numeric_limits<real>::infinity();
+    inequalities(0, 1) = -0.2;
+    inequalities(1, 1) = 0.1;
 
-    REQUIRE( (std::abs(rand_var_norm.cdf(&location) - 0.087040) < 0.05) );
+    REQUIRE( (std::abs(rand_var_norm.cdf(inequalities) - 0.087040) < 0.05) );
 
-    location(0) = 0.2;
-    location(1) = 0.1;
+    inequalities(0, 1) = 0.2;
+    inequalities(1, 1) = 0.1;
 
-    REQUIRE( (std::abs(rand_var_norm.cdf(&location) - 0.13182) < 0.05) );
+    REQUIRE( (std::abs(rand_var_norm.cdf(inequalities) - 0.13182) < 0.05) );
 
 }
 
@@ -121,11 +122,11 @@ TEST_CASE("Divergence and entropy") {
     location(0) = -0.2;
     location(1) = 0.1;
 
-    REQUIRE( (std::abs(rand_var_norm.ent(&location, &rand_var_norm2) + 0.72020) < 0.01) );
+    REQUIRE( (std::abs(rand_var_norm.ent(location, rand_var_norm2) + 0.72020) < 0.01) );
 
-    REQUIRE( (std::abs(rand_var_norm.div(&rand_var_norm2) - 1.8025) < 0.01) );
+    REQUIRE( (std::abs(rand_var_norm.div(rand_var_norm2) - 1.8025) < 0.01) );
 
-    REQUIRE( (std::abs(rand_var_norm.div(&rand_var_norm)) < 0.01) );
+    REQUIRE( (std::abs(rand_var_norm.div(rand_var_norm)) < 0.01) );
 
 }
 
