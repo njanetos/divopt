@@ -1,11 +1,6 @@
 #include "server_http.hpp"
 #include "client_http.hpp"
 
-//Added for the json-example
-#define BOOST_SPIRIT_THREADSAFE
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
 //Added for the default_resource example
 #include <fstream>
 #include <boost/filesystem.hpp>
@@ -21,9 +16,10 @@
 #include "c_rand_var_norm.h"
 #include "c_logger.h"
 
+#include "picojson.h"
+
 using namespace std;
-//Added for the json-example:
-using namespace boost::property_tree;
+using namespace picojson;
 using namespace divopt;
 
 typedef SimpleWeb::Server<SimpleWeb::HTTP> HttpServer;
@@ -33,76 +29,58 @@ int main() {
     //HTTP-server at port 8080 using 4 threads
     HttpServer server(8080, 4);
 
-    //GET-example for the path /match/[number], responds with the matched string in path (number)
-    //For instance a request GET /match/123 will receive: 123
-    server.resource["^/match/([0-9]+)$"]["GET"]=[](HttpServer::Response& response, shared_ptr<HttpServer::Request> request) {
-        logg().info() << "Request received: " << request->path_match[1];
+    server.resource["^/quote$"]["POST"]=[](HttpServer::Response& response, shared_ptr<HttpServer::Request> request) {
+        try {
 
-        string number = request->path_match[1];
-        response << "HTTP/1.1 200 OK\r\nContent-Length: " << number.length() << "\r\n\r\n" << number;
-    };
+            response << "HTTP/1.1 200 OK\r\nContent-Length: " << "\r\n\r\n";
 
-    server.resource["^/quote/([0-9|,|.|INF|-]+)$"]["GET"]=[](HttpServer::Response& response, shared_ptr<HttpServer::Request> request) {
+            value v;
+            string err = parse(v, request->content);
+            const value::object& obj = v.get<object>();
 
-        logg().info() << "Request received: " << request->path_match[1];
+            int dim;
 
-        string val = request->path_match[1];
-        istringstream ss(val);
-        string token;
-        vector<string> tokens;
+            dim = obj.find("dim")->second.get<double>();
 
-        while(getline(ss, token, ',')) {
-            tokens.push_back(token);
-        }
+            vector<value> raw_values = obj.find("raw")->second.get<vector<value>>();
 
-
-        logg().info() << "Received " << tokens.size();
-        for (size_t i = 0; i < tokens.size(); ++i) {
-            logg().info() << tokens[i];
-        }
-
-        int dim = atoi(tokens[0].c_str());
-
-        int curr = 1;
-
-        double raw_data[dim+dim*(dim+1)/2];
-        for (size_t i = 0; i < dim+dim*(dim+1)/2; ++i) {
-            raw_data[i] = atof(tokens[curr+i].c_str());
-        }
-
-        curr = curr + dim+dim*(dim+1)/2;
-
-        arma::Mat<double> inequalities(dim, 2);
-
-        for (size_t i = 0; i < dim; ++i) {
-            if (tokens[curr+i] == "INF") {
-                inequalities(i, 0) = -1*std::numeric_limits<double>::infinity();
-            } else {
-                inequalities(i, 0) = atof(tokens[curr+i].c_str());
+            vector<double> raw_data(raw_values.size());
+            for (size_t i = 0; i < raw_values.size(); ++i) {
+                raw_data[i] = raw_values[i].get<double>();
             }
-        }
 
-        curr = curr + dim;
+            vector<value> low_val = obj.find("low")->second.get<vector<value>>();
+            vector<value> hig_val = obj.find("high")->second.get<vector<value>>();
 
-        for (size_t i = 0; i < dim; ++i) {
-            if (tokens[curr+i] == "INF") {
-                inequalities(i, 1) = std::numeric_limits<double>::infinity();
-            } else {
-                inequalities(i, 1) = atof(tokens[curr+i].c_str());
+            arma::Mat<double> inequalities(dim, 2);
+            for (size_t i = 0; i < low_val.size(); ++i) {
+                if (low_val[i].is<string>()) {
+                    inequalities(i, 0) = -1*std::numeric_limits<double>::infinity();
+                } else {
+                    inequalities(i, 0) = low_val[i].get<double>();
+                }
+
+                if (hig_val[i].is<string>()) {
+                    inequalities(i, 1) = std::numeric_limits<double>::infinity();
+                } else {
+                    inequalities(i, 1) = hig_val[i].get<double>();
+                }
             }
+
+            c_rand_var_norm rand_var_norm(dim);
+
+            rand_var_norm.dat_to_dist(&raw_data[0]);
+            rand_var_norm.unpack();
+
+            string ret_val = to_string(100*rand_var_norm.cdf(inequalities));
+
+            response << "HTTP/1.1 200 OK\r\nContent-Length: " << strlen(ret_val.c_str()) << "\r\n\r\n" << ret_val;
+
+
         }
-
-        c_rand_var_norm rand_var_norm(dim);
-        rand_var_norm.dat_to_dist(raw_data);
-        rand_var_norm.unpack();
-
-        logg().info() << rand_var_norm.mean;
-        logg().info() << rand_var_norm.cov;
-        logg().info() << inequalities;
-
-        string ret_val = to_string(100*GOOrand_var_norm.cdf(inequalities));
-
-        response << "HTTP/1.1 200 OK\r\nContent-Length: " << ret_val.length() << "\r\n\r\n" << ret_val;
+        catch(exception& e) {
+            response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
+        }
     };
 
     thread server_thread([&server](){
