@@ -90,7 +90,7 @@ divopt::c_rand_var_norm divopt::utils::json_to_rand_var_norm(std::string json_st
     std::string err = parse(v, json_string);
 
     if (!err.empty()) {
-        throw std::invalid_argument("Failed to parse JSON.");
+        throw std::invalid_argument(err);
     }
 
     if (!v.is<object>()) {
@@ -131,7 +131,7 @@ arma::Mat<real> divopt::utils::json_to_inequalities(std::string json_string) {
     std::string err = parse(v, json_string);
 
     if (!err.empty()) {
-        throw std::invalid_argument("Failed to parse JSON.");
+        throw std::invalid_argument(err);
     }
 
     if (!v.is<object>()) {
@@ -180,7 +180,7 @@ double divopt::utils::get_double_json(std::string json_string, std::string key) 
     std::string err = parse(v, json_string);
 
     if (!err.empty()) {
-        throw std::invalid_argument("Failed to parse JSON.");
+        throw std::invalid_argument(err);
     }
 
     if (!v.is<object>()) {
