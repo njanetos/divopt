@@ -122,6 +122,11 @@ namespace divopt {
              */
             virtual void unpack() =0;
 
+            /**
+            *  The raw data of the problem. Should be of length dim_prob.
+            */
+            std::vector<real> raw_data;
+
         protected:
 
             /**
@@ -134,10 +139,7 @@ namespace divopt {
              */
             size_t dim_prob;
 
-            /**
-            *  The raw data of the problem. Should be of length dim_prob.
-            */
-            std::vector<real> raw_data;
+
 
     };
 
