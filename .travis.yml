@@ -27,7 +27,7 @@ after_success:
 - git checkout gh-pages
 - git pull origin gh-pages
 - git rm -rf .
-- mv -v ${TRAVIS_BUILD_DIR}/documentation/* .
+- mv -v ${TRAVIS_BUILD_DIR}/documentation/html* .
 - git add . -A
 - CHANGESET=$(git rev-parse --verify HEAD)
 - git commit -m "Automatic Travis update of documentation ${CHANGESET}"
