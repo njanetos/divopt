@@ -4,10 +4,21 @@
 #include "common.h"
 
 #include "picojson.h"
+#include <nlopt.hpp>
 
 namespace divopt {
 
     class c_rand_var_norm;
+
+    struct con_data {
+        c_rand_var_norm *current;
+        arma::Mat<real> inequalities;
+        double p;
+    };
+
+    struct obj_data {
+        c_rand_var_norm *current;
+    };
 
     class utils {
 
@@ -26,6 +37,9 @@ namespace divopt {
             static arma::Mat<real> json_to_inequalities(std::string json_string);
             static double get_double_json(std::string json_string, std::string key);
             static std::string rand_var_norm_to_json(c_rand_var_norm& rand_var_norm);
+
+            static real obj_norm(unsigned n, const double *x, double *grad, void *data);
+            static real con_norm(unsigned n, const double *x, double *grad, void *data);
 
             const static double PI;
             const static double SQRT_TWO;

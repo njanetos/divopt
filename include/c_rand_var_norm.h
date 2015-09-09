@@ -21,7 +21,7 @@ namespace divopt {
             c_rand_var_norm(size_t dim);
 
             real cdf(arma::mat& inequalities);
-            arma::mat cdf_grad(arma::mat& loc);
+            arma::mat cdf_grad(arma::mat& inequalities);
             real div(c_rand_var& var);
             arma::mat div_grad(c_rand_var& oth);
             real ent(arma::mat& loc, c_rand_var& var);
@@ -44,6 +44,9 @@ namespace divopt {
             arma::mat pdf_grad(arma::mat& loc);
             void pack();
             void unpack();
+
+            std::vector<real> get_lower_bounds() const;
+            std::vector<real> get_upper_bounds() const;
 
             arma::mat mean, cov, corr, ch, var;
             real norm_factor, det_cov, gauss_factor;

@@ -69,8 +69,37 @@ real divopt::c_rand_var_norm::cdf(arma::mat& inequalities) {
 
 }
 
+std::vector<real> divopt::c_rand_var_norm::get_lower_bounds() const {
+    std::vector<real> ret_val(get_dim_prob());
+
+    for (size_t i = 0; i < get_dim(); ++i) {
+        ret_val[i] = -HUGE_VAL;
+    }
+
+    for (size_t i = get_dim(); i < get_dim_prob(); ++i) {
+        ret_val[i] = 0;
+    }
+
+    return ret_val;
+}
+
+std::vector<real> divopt::c_rand_var_norm::get_upper_bounds() const {
+    std::vector<real> ret_val(get_dim_prob());
+
+    for (size_t i = 0; i < get_dim(); ++i) {
+        ret_val[i] = HUGE_VAL;
+    }
+
+    for (size_t i = get_dim(); i < get_dim_prob(); ++i) {
+        ret_val[i] = HUGE_VAL;
+    }
+
+    return ret_val;
+}
+
+
 // TODO This needs to use the analytic formula.
-arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat& loc) {
+arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 
     c_rand_var_norm temp(this->dim);
     arma::mat res(dim_prob, 1);
@@ -78,12 +107,12 @@ arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat& loc) {
     temp.dat_to_dist(&(this->raw_data[0]));
     temp.unpack();
 
-    double base = temp.cdf(loc);
+    double base = temp.cdf(inequalities);
 
     for (size_t i = 0; i < dim+dim*(dim+1)/2; ++i) {
         temp.raw_data[i] += 0.001;
         temp.unpack();
-        res(i) = (temp.cdf(loc) - base)/0.001;
+        res(i) = (temp.cdf(inequalities) - base)/0.001;
         temp.raw_data[i] -= 0.001;
     }
 

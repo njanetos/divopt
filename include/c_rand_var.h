@@ -85,6 +85,10 @@ namespace divopt {
              */
             size_t get_dim_prob() const;
 
+
+            virtual std::vector<real> get_lower_bounds() const =0;
+            virtual std::vector<real> get_upper_bounds() const =0;
+
             /**
              *  Takes the non-raw-data aspects and reads them into the raw data.
              */
