@@ -3,7 +3,6 @@
 *.lo
 *.o
 *.obj
-*.a
 
 # Precompiled Headers
 *.gch
@@ -14,6 +13,7 @@
 *.dylib
 *.dll
 libdivopt.a
+divopt.a
 
 # Fortran module files
 *.mod
