@@ -75,18 +75,33 @@ namespace divopt {
 
             /**
              *  Returns the dimension of the state space. (Not the optimization problem!)
+             *
              *  \return The dimension of the state space.
              */
             size_t get_dim() const;
 
             /**
              *  Returns the dimension of the optimization problem. (Not the state space!)
+             *
              *  \return The dimension of the optimization problem.
              */
             size_t get_dim_prob() const;
 
-
+            /**
+             *  Returns a vector corresponding to the lower bound constraint for any optimization problem
+             *  over the parameterization of this random variable.
+             *
+             *  \return The vector of lower bounds. For example, 0, 0, 1, 1 would be a restriction that
+             *  the first and second parameters cannot drop below 0 (e.g., they are variances).
+             */
             virtual std::vector<real> get_lower_bounds() const =0;
+
+            /**
+             *  Returns a vector corresponding to the upper bound constraint for any optimization problem
+             *  over the parameterization of this random variable.
+             *
+             *  \return The vector of upper bounds.
+             */
             virtual std::vector<real> get_upper_bounds() const =0;
 
             /**

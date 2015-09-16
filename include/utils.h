@@ -25,7 +25,7 @@ namespace divopt {
         public:
 
             /**
-             *
+             *  Quotes a price for a market and asset encoded in the JSON string.
              *
              *  \param json_string
              *  \return
@@ -33,7 +33,7 @@ namespace divopt {
             static real quote_current_price(std::string json_string);
 
             /**
-             *
+             *  Quotes a price for a market encoded in current and an asset defined by the inequalities.
              *
              *  \param current
              *  \param inequalities
