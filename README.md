@@ -28,7 +28,7 @@ The server listens for POST requests with JSON-formatted content. The JSON conte
 
 The server listens at `/quote` for information about quoting prices. Here is the typical format of the content which would be sent.
 
-```JSON
+```JSON5
 {
   dim: 3,
   raw: [1, 1.3, 1.2, 1, 0, 1, 0, 0.2, 1},
@@ -51,7 +51,7 @@ The server returns a JSON-formatted string with the market's current estimate th
 ## Buying / selling
 
 The server listens at `/update` for requests to buy or sell, i.e., predictions. Typical content here would now look like 
-```JSON
+```JSON5
 {
   dim: 3,
   raw: [1, 1.3, 1.2, 1, 0, 1, 0, 0.2, 1},
