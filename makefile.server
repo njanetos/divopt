@@ -1,0 +1,28 @@
+# Specify the target file and the install directory
+SRC 			= src
+INC 			= include
+LIB 			= lib
+
+CLEANEXTS   		= o a gcno
+CC			= g++
+CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -std=c++11
+CFLAGS_BUILD		= -Wall -fexceptions -g -I$(INC) -I/usr/include
+LIBS			= -L$(LIB) -larmadillo -lMvtnorm lib/libnlopt.a -lpthread -lboost_system -lboost_thread -lboost_coroutine -lboost_context -lboost_filesystem
+
+_DEPS = mvtnorm.h utils.h c_rand_var_norm.h c_rand_var.h c_logger.h catch.hpp common.h
+DEPS = $(patsubst %,$(INC)/%,$(_DEPS))
+
+_OBJ = utils.o c_rand_var_norm.o c_rand_var.o c_logger.o server.o
+OBJ = $(patsubst %,%,$(_OBJ))
+
+# Default target
+.PHONY: all
+all: tiresias_server
+
+tiresias_server: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+# Dependencies
+
+%.o: $(SRC)/%.cpp $(DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
