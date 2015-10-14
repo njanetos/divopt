@@ -22,7 +22,7 @@ make test
 
 # Library
 
-See the documentation folder for documentation of the source code. 
+See the [documentation folder](http://njanetos.github.io/tiresias/html/) for documentation of the source code. 
 
 # API
 
