@@ -20,6 +20,10 @@ make test
 ./tiresisas_tests
 ```
 
+# Library
+
+See the documentation folder for documentation of the source code. 
+
 # API
 
 The server listens for POST requests with JSON-formatted content. The JSON content encodes and returns the current parameterization of market prices.
