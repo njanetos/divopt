@@ -4,8 +4,8 @@ INC         		= include
 LIB 			= lib
 
 CLEANEXTS   		= o a gcno
-CC			= g++
-CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -ftest-coverage -std=c++11
+CC			= g++-4.8
+CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -std=c++11
 CFLAGS_BUILD		= -Wall -fexceptions -g -I$(INC) -I/usr/include
 LIBS			= -L$(LIB) -lgcov -larmadillo -lMvtnorm lib/libnlopt.a
 
