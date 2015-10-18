@@ -4,7 +4,7 @@
 #include "common.h"
 
 #include "picojson.h"
-#include "nlopt.hpp"
+#include <nlopt>
 
 namespace divopt {
 
