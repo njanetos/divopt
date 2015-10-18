@@ -11,7 +11,7 @@ addons:
     - libarmadillo-dev
     - libarmadillo2
     - libboost-math-dev
-    - libnlopt-dev
+    - libnlopt-dev0
 script:
 - make test
 after_success:
