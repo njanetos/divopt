@@ -11,9 +11,9 @@ before_install:
 - sudo apt-get install -y libarmadillo2 libarmadillo-dev
 - sudo pip install cpp-coveralls
 script:
-- make
+- make test
 after_success:
-- "./divopt"
+- "./tiresias_tests"
 - coveralls --exclude lib --exclude include --exclude src/c_logger.cpp --gcov-options
   '\-lp'
 - export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
