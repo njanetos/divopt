@@ -2,7 +2,7 @@ box: njanetos/tiresias-docker
 build:
     steps:
         - script:
-            name: tests
+            name: build
             code: |
                 cd tiresias
                 make all
