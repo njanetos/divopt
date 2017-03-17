@@ -4,8 +4,6 @@ build:
         - script:
             name: build
             code: |
-                echo `ls`
-                cd tiresias
                 make all
                 ./tiresias_tests
 
