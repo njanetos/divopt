@@ -4,5 +4,7 @@ build:
         - script:
             name: tests
             code: |
+                cd tiresias
+                make all
                 ./tiresias_tests
 

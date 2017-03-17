@@ -8,7 +8,4 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/njanetos/tiresias.git && \
-    cd tiresias && \
-    make all && \
-    ./tiresias_tests
+RUN git clone https://github.com/njanetos/tiresias.git
