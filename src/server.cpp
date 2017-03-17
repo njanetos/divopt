@@ -17,17 +17,11 @@ int main() {
     HttpServer server(8080, 4);
 
     server.resource["^/quote$"]["POST"]=[](HttpServer::Response& response, shared_ptr<HttpServer::Request> request) {
-
         try {
             stringstream ss;
             ss << request->content.rdbuf();
-
-            logg().info() << ss.str();
-
             string ret_val = to_string(utils::quote_current_price(ss.str()));
-
             logg().info() << "Replied with " << ret_val;
-
             response << "HTTP/1.1 200 OK\r\nContent-Length: " << ret_val.size() << "\r\n\r\n" << ret_val;
 
         }
@@ -39,16 +33,11 @@ int main() {
     };
 
     server.resource["^/update$"]["POST"]=[](HttpServer::Response& response, shared_ptr<HttpServer::Request> request) {
-
-        logg().info() << "Recieved request " << request->content.rdbuf();
-
         try {
             stringstream ss;
-            ss << request->content.rdbuf();;
+            ss << request->content.rdbuf();
             string ret_val = utils::update_json(ss.str());
-
             logg().info() << "Replied with " << ret_val;
-
             response << "HTTP/1.1 200 OK\r\nContent-Length: " << ret_val.size() << "\r\n\r\n" << ret_val;
 
         }
