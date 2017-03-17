@@ -1,0 +1,8 @@
+box: njanetos/tiresias
+build:
+    steps:
+        - script:
+            name: tests
+            code: |
+                ./tiresias_tests
+
