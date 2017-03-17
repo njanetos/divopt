@@ -1,0 +1,7 @@
+_OBJ = utils.o c_rand_var_norm.o c_rand_var.o c_logger.o server.o
+OBJ = $(patsubst %,%,$(_OBJ))
+
+all: tiresias.a
+
+tiresias.a: $(OBJ)
+	ar rvs tiresias.a $@
