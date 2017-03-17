@@ -25,4 +25,4 @@ tiresias_tests: $(OBJ)
 # Dependencies
 
 %.o: $(SRC)/%.cpp $(DEPS)
-	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) -c -o $@ $<
