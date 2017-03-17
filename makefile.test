@@ -5,7 +5,7 @@ LIB 			= lib
 
 CLEANEXTS   		= o a gcno
 CC			= g++
-CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -fprofile-arcs -std=c++11
+CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -std=c++11
 CFLAGS_BUILD		= -Wall -fexceptions -g -I$(INC) -I/usr/include
 LIBS			= -L$(LIB) -larmadillo -lMvtnorm lib/libnlopt.a
 
