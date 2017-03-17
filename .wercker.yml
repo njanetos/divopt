@@ -1,4 +1,4 @@
-box: njanetos/tiresias
+box: njanetos/tiresias-docker
 build:
     steps:
         - script:
