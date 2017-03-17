@@ -1,3 +1,6 @@
+all:
+	make server && make test
+
 test:
 	make -f makefile.test
 
