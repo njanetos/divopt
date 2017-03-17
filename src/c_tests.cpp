@@ -130,6 +130,20 @@ TEST_CASE("Divergence and entropy") {
 
 }
 
+TEST_CASE("Large state space") {
+  c_rand_var_norm rand_var_norm(5);
+
+  std::string json;
+
+  json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  REQUIRE( (std::abs(utils::quote_current_price(json) - 100) < 0.01) );
+
+  json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+
+  REQUIRE( (std::abs(utils::quote_current_price(json) - 4.7233) < 0.01) );
+
+}
+
 TEST_CASE("Nuts and bolts of events") {
 
 
