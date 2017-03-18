@@ -4,6 +4,6 @@ build:
         - script:
             name: build
             code: |
-                make all
+                make test
                 ./tiresias_tests
 

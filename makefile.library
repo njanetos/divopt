@@ -1,4 +1,4 @@
 all: libtiresias.a
 
 libtiresias.a:
-	ar -r -c -s libtiresias.a libtiresias.o c_rand_var_norm.o /usr/local/lib/libnlopt.a lib/libMvtnorm.a
+	ar -r -c -s libtiresias.a libtiresias.o c_rand_var_norm.o
