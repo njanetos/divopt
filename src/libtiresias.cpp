@@ -6,7 +6,7 @@
 
 using namespace picojson;
 
-double tiresias::quote_current_price(std::string json_string) {
+double tiresias::quote(std::string json_string) {
 
     c_rand_var_norm rand_var_norm = json_to_rand_var_norm(json_string);
     arma::Mat<double> inequalities = json_to_inequalities(json_string);
@@ -15,7 +15,7 @@ double tiresias::quote_current_price(std::string json_string) {
 
 }
 
-double tiresias::quote_current_price(c_rand_var_norm& current, arma::Mat<double>& inequalities) {
+double tiresias::quote(c_rand_var_norm& current, arma::Mat<double>& inequalities) {
     return current.cdf(inequalities);
 }
 
@@ -24,11 +24,11 @@ double tiresias::quote_cost(double current_price, double delta_x) {
 }
 
 double tiresias::quote_cost(c_rand_var_norm &current, arma::Mat<double>& inequalities, double delta_x) {
-    return quote_cost(quote_current_price(current, inequalities), delta_x);
+    return quote_cost(quote(current, inequalities), delta_x);
 }
 
 double tiresias::shares_outstanding(c_rand_var_norm& current, arma::Mat<double>& inequalities) {
-    return shares_outstanding(current, quote_current_price(current, inequalities));
+    return shares_outstanding(current, quote(current, inequalities));
 }
 
 double tiresias::shares_outstanding(c_rand_var_norm& current, double price) {

@@ -166,7 +166,7 @@ double c_rand_var_norm::div(c_rand_var_norm& var) {
         // Make sure the weights aren't really small before performing computations.
         if (w_prod > WEIGHT_FLOOR) {
             // Transform the matrix to take into account correlation
-            tr_abs = SQRT_TWO*ch*abs + mean;
+            tr_abs = sqrt_two*ch*abs + mean;
 
             // Find the entropy and add onto the result, times the weight.
             res += ent(tr_abs, var)*w_prod;
@@ -301,8 +301,8 @@ void c_rand_var_norm::unpack() {
 
     // Find the remaining scalar values
     det_cov = det(cov);
-    norm_factor = 1/(sqrt(pow(2*PI, dim)*det_cov));
-    gauss_factor = arma::det(ch)/sqrt(pow(PI, dim)*det_cov);
+    norm_factor = 1/(sqrt(pow(2*pi, dim)*det_cov));
+    gauss_factor = arma::det(ch)/sqrt(pow(pi, dim)*det_cov);
 
     // Flag inverse matrices as in need of computation
     inv_cov_is_computed = false;

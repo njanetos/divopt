@@ -1,13 +1,13 @@
 # Specify the target file and the install directory
-SRC         		= src
-INC         		= include
-LIB 			= lib
+SRC = src
+INC = include
+LIB = lib
 
 CLEANEXTS   		= o a gcno
 CC			= g++
-CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/include -std=c++11
-CFLAGS_BUILD		= -Wall -fexceptions -g -I$(INC) -I/usr/include
-LIBS			= -L$(LIB) -larmadillo -lMvtnorm lib/libnlopt.a
+CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/local/include -std=c++11 -fPIC
+CFLAGS_BUILD		= -Wall -fexceptions -g -I$(INC) -I/usr/local/include -fPIC
+LIBS			= -L$(LIB) -L/usr/local/lib -larmadillo -lMvtnorm -lnlopt
 
 _DEPS = mvtnorm.h libtiresias.h c_rand_var_norm.h c_logger.h catch.hpp common.h
 DEPS = $(patsubst %,$(INC)/%,$(_DEPS))

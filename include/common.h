@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <armadillo>
 
-#define PRECISION 0.000001
+#define PRECISION   0.000001
 
 typedef double real;
 
@@ -24,8 +24,9 @@ struct obj_data {
     c_rand_var_norm *current;
 };
 
-const double PI =         3.1415926535897932384626;
-const double SQRT_TWO =   1.4142135623730950488016;
+const double pi = 3.1415926535897932384626;
+const double sqrt_two = 1.4142135623730950488016;
+
 const double WEIGHTS[] ={ 0.0199532420590459132077,
                                          0.3936193231522411598285,
                                          0.9453087204829418812260,

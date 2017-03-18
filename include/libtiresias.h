@@ -1,5 +1,5 @@
-#ifndef C_UTIL_H
-#define C_UTIL_H
+#ifndef LIBTIRESIAS_H
+#define LIBTIRESIAS_H
 
 class c_rand_var_norm;
 
@@ -13,7 +13,7 @@ class tiresias {
          *  \param json_string
          *  \return
          */
-        static double quote_current_price(std::string json_string);
+        static double quote(std::string json_string);
 
         /**
          *
@@ -40,7 +40,7 @@ class tiresias {
          *  \param inequalities
          *  \return
          */
-        static double quote_current_price(c_rand_var_norm &current, arma::Mat<double>& inequalities);
+        static double quote(c_rand_var_norm &current, arma::Mat<double>& inequalities);
 
         /**
          *
@@ -90,13 +90,6 @@ class tiresias {
         static double obj_norm(unsigned n, const double *x, double *grad, void *data);
         static double con_norm(unsigned n, const double *x, double *grad, void *data);
 
-        const static double PI;
-        const static double SQRT_TWO;
-        const static double WEIGHTS[];
-        const static double ABS[];
-        const static size_t QUADRATURE_DIM;
-        const static double WEIGHT_FLOOR;
-
 };
 
-#endif // C_UTIL_H
+#endif // LIBTIRESIAS_H

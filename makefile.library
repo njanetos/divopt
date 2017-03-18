@@ -1,7 +1,4 @@
-_OBJ = libtiresias.o c_rand_var_norm.o
-OBJ = $(patsubst %,%,$(_OBJ))
+all: libtiresias.a
 
-all: tiresias.a
-
-tiresias.a: $(OBJ)
-	ar rvs tiresias.a $@
+libtiresias.a:
+	ar -r -c -s libtiresias.a libtiresias.o c_rand_var_norm.o /usr/local/lib/libnlopt.a lib/libMvtnorm.a
