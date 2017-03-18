@@ -9,5 +9,5 @@ library:
 
 clean:
 	rm -f *.o *~ core $(INC)/*~
-	rm tiresias_tests
-        rm libtiresias.a
+	rm -f tiresias_tests
+	rm -f libtiresias.a
