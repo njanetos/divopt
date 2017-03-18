@@ -2,7 +2,7 @@
 
 #include "c_logger.h"
 
-divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
+c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
     // Set the dimension of the state space.
     this->dim = dim;
@@ -19,7 +19,7 @@ divopt::c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
 }
 
-real divopt::c_rand_var_norm::cdf(arma::mat& inequalities) {
+real c_rand_var_norm::cdf(arma::mat& inequalities) {
 
     int infin[dim];
     double delta[dim];
@@ -69,7 +69,7 @@ real divopt::c_rand_var_norm::cdf(arma::mat& inequalities) {
 
 }
 
-std::vector<real> divopt::c_rand_var_norm::get_lower_bounds() const {
+std::vector<real> c_rand_var_norm::get_lower_bounds() const {
     std::vector<real> ret_val(get_dim_prob());
 
     for (size_t i = 0; i < get_dim(); ++i) {
@@ -83,7 +83,7 @@ std::vector<real> divopt::c_rand_var_norm::get_lower_bounds() const {
     return ret_val;
 }
 
-std::vector<real> divopt::c_rand_var_norm::get_upper_bounds() const {
+std::vector<real> c_rand_var_norm::get_upper_bounds() const {
     std::vector<real> ret_val(get_dim_prob());
 
     for (size_t i = 0; i < get_dim(); ++i) {
@@ -99,7 +99,7 @@ std::vector<real> divopt::c_rand_var_norm::get_upper_bounds() const {
 
 
 // TODO This needs to use the analytic formula.
-arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
+arma::mat c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 
     c_rand_var_norm temp(this->dim);
     arma::mat res(dim_prob, 1);
@@ -120,7 +120,7 @@ arma::mat divopt::c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 
 }
 
-double divopt::c_rand_var_norm::div(c_rand_var& var) {
+double c_rand_var_norm::div(c_rand_var_norm& var) {
 
     // Initialize the variable that will hold the divergence.
     double res = 0.0;
@@ -142,20 +142,20 @@ double divopt::c_rand_var_norm::div(c_rand_var& var) {
     double w_prod;
 
     // Loop through all possible abscissa combinations
-    while (index[dim-1] < utils::QUADRATURE_DIM) {
+    while (index[dim-1] < QUADRATURE_DIM) {
 
         // Start with weight = 1, find total weight by multiplying
         // Start reading in the abscissa values
         w_prod = 1.0;
         for (size_t i = 0; i < dim; ++i) {
-            abs(i) = utils::ABS[index[i]];
-            w_prod *= utils::WEIGHTS[index[i]];
+            abs(i) = ABS[index[i]];
+            w_prod *= WEIGHTS[index[i]];
         }
 
         // Advance the index by one
         ++index[0];
         for (size_t i = 0; i < dim-1; ++i) {
-            if (index[i] >= utils::QUADRATURE_DIM) {
+            if (index[i] >= QUADRATURE_DIM) {
                 index[i] = 0;
                 ++index[i+1];
             } else {
@@ -164,9 +164,9 @@ double divopt::c_rand_var_norm::div(c_rand_var& var) {
         }
 
         // Make sure the weights aren't really small before performing computations.
-        if (w_prod > utils::WEIGHT_FLOOR) {
+        if (w_prod > WEIGHT_FLOOR) {
             // Transform the matrix to take into account correlation
-            tr_abs = utils::SQRT_TWO*ch*abs + mean;
+            tr_abs = SQRT_TWO*ch*abs + mean;
 
             // Find the entropy and add onto the result, times the weight.
             res += ent(tr_abs, var)*w_prod;
@@ -179,7 +179,7 @@ double divopt::c_rand_var_norm::div(c_rand_var& var) {
 
 }
 
-arma::mat divopt::c_rand_var_norm::div_grad(c_rand_var& oth) {
+arma::mat c_rand_var_norm::div_grad(c_rand_var_norm& oth) {
 
     c_rand_var_norm & curr = dynamic_cast<c_rand_var_norm&>(oth);
 
@@ -205,13 +205,13 @@ arma::mat divopt::c_rand_var_norm::div_grad(c_rand_var& oth) {
 
 }
 
-double divopt::c_rand_var_norm::ent(arma::mat& loc, c_rand_var& var) {
+double c_rand_var_norm::ent(arma::mat& loc, c_rand_var_norm& var) {
 
     return std::log(pdf(loc)/var.pdf(loc));
 
 }
 
-arma::mat& divopt::c_rand_var_norm::inv_cov() {
+arma::mat& c_rand_var_norm::inv_cov() {
 
     // Check if the inverse covariance matrix has already been computed.
     if (!inv_cov_is_computed) {
@@ -228,7 +228,7 @@ arma::mat& divopt::c_rand_var_norm::inv_cov() {
 
 }
 
-arma::mat& divopt::c_rand_var_norm::inv_ch() {
+arma::mat& c_rand_var_norm::inv_ch() {
 
     // Check if the inverse of the Cholesky factorization has been computed.
     if (!inv_ch_is_computed) {
@@ -249,7 +249,7 @@ arma::mat& divopt::c_rand_var_norm::inv_ch() {
 
 }
 
-void divopt::c_rand_var_norm::pack() {
+void c_rand_var_norm::pack() {
 
     for (size_t i = 0; i < dim; ++i) {
         raw_data[i] = mean(i);
@@ -265,20 +265,20 @@ void divopt::c_rand_var_norm::pack() {
 
 }
 
-double divopt::c_rand_var_norm::pdf(arma::mat& loc) {
+double c_rand_var_norm::pdf(arma::mat& loc) {
 
     arma::mat expint = exp(-0.5*(loc - mean).t()*inv_cov()*(loc - mean));
     return norm_factor*expint(0);
 
 }
 
-arma::mat divopt::c_rand_var_norm::pdf_grad(arma::mat& loc) {
+arma::mat c_rand_var_norm::pdf_grad(arma::mat& loc) {
 
     return NULL;
 
 }
 
-void divopt::c_rand_var_norm::unpack() {
+void c_rand_var_norm::unpack() {
 
     // Instantiate mean (can be directly written in).
     mean = arma::mat(&raw_data[0], dim, 1, true, true);
@@ -301,11 +301,39 @@ void divopt::c_rand_var_norm::unpack() {
 
     // Find the remaining scalar values
     det_cov = det(cov);
-    norm_factor = 1/(sqrt(pow(2*utils::PI, dim)*det_cov));
-    gauss_factor = arma::det(ch)/sqrt(pow(utils::PI, dim)*det_cov);
+    norm_factor = 1/(sqrt(pow(2*PI, dim)*det_cov));
+    gauss_factor = arma::det(ch)/sqrt(pow(PI, dim)*det_cov);
 
     // Flag inverse matrices as in need of computation
     inv_cov_is_computed = false;
     inv_ch_is_computed = false;
+
+}
+
+void c_rand_var_norm::dat_to_dist(const double *x) {
+
+    partial_dat_to_dist(0, dim_prob, x);
+
+}
+
+void c_rand_var_norm::partial_dat_to_dist(size_t lower, size_t upper, const double *x) {
+
+    size_t k = 0;
+    for (size_t i = lower; i < upper; ++i) {
+        raw_data[i] = *(x+k);
+        ++k;
+    }
+
+}
+
+size_t c_rand_var_norm::get_dim() const {
+
+    return dim;
+
+}
+
+size_t c_rand_var_norm::get_dim_prob() const {
+
+    return dim_prob;
 
 }

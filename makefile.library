@@ -1,4 +1,4 @@
-_OBJ = utils.o c_rand_var_norm.o c_rand_var.o c_logger.o server.o
+_OBJ = libtiresias.o c_rand_var_norm.o
 OBJ = $(patsubst %,%,$(_OBJ))
 
 all: tiresias.a

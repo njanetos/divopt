@@ -1,39 +1,41 @@
-#include "utils.h"
-
+#include <armadillo>
+#include "libtiresias.h"
+#include "picojson.h"
 #include "c_rand_var_norm.h"
+#include "nlopt.hpp"
 
 using namespace picojson;
 
-real divopt::utils::quote_current_price(std::string json_string) {
+double tiresias::quote_current_price(std::string json_string) {
 
     c_rand_var_norm rand_var_norm = json_to_rand_var_norm(json_string);
-    arma::Mat<real> inequalities = json_to_inequalities(json_string);
+    arma::Mat<double> inequalities = json_to_inequalities(json_string);
 
     return 100*rand_var_norm.cdf(inequalities);
 
 }
 
-real divopt::utils::quote_current_price(c_rand_var_norm& current, arma::Mat<real>& inequalities) {
+double tiresias::quote_current_price(c_rand_var_norm& current, arma::Mat<double>& inequalities) {
     return current.cdf(inequalities);
 }
 
-real divopt::utils::quote_cost(real current_price, real delta_x) {
+double tiresias::quote_cost(double current_price, double delta_x) {
     return log(1-current_price) - log(exp(1-delta_x)/(exp(delta_x) - exp(1-delta_x)));
 }
 
-real divopt::utils::quote_cost(c_rand_var_norm &current, arma::Mat<real>& inequalities, real delta_x) {
+double tiresias::quote_cost(c_rand_var_norm &current, arma::Mat<double>& inequalities, double delta_x) {
     return quote_cost(quote_current_price(current, inequalities), delta_x);
 }
 
-real divopt::utils::shares_outstanding(c_rand_var_norm& current, arma::Mat<real>& inequalities) {
+double tiresias::shares_outstanding(c_rand_var_norm& current, arma::Mat<double>& inequalities) {
     return shares_outstanding(current, quote_current_price(current, inequalities));
 }
 
-real divopt::utils::shares_outstanding(c_rand_var_norm& current, real price) {
+double tiresias::shares_outstanding(c_rand_var_norm& current, double price) {
     return 1/(1 + log((1-price)/price));
 }
 
-divopt::c_rand_var_norm divopt::utils::update(c_rand_var_norm& rand_var_norm, arma::Mat<real>& inequalities, real prob) {
+c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm, arma::Mat<double>& inequalities, double prob) {
 
 
     nlopt::opt opt(nlopt::LD_SLSQP, rand_var_norm.get_dim_prob());
@@ -73,18 +75,14 @@ divopt::c_rand_var_norm divopt::utils::update(c_rand_var_norm& rand_var_norm, ar
 
 }
 
-divopt::c_rand_var_norm divopt::utils::update(std::string json_string) {
+std::string tiresias::update(std::string json_string) {
     c_rand_var_norm rand_var_norm = json_to_rand_var_norm(json_string);
-    arma::Mat<real> inequalities = json_to_inequalities(json_string);
-    return update(rand_var_norm, inequalities, get_double_json(json_string, "prob"));
-}
-
-std::string divopt::utils::update_json(std::string json_string) {
-    c_rand_var_norm upd = update(json_string);
+    arma::Mat<double> inequalities = json_to_inequalities(json_string);
+    c_rand_var_norm upd = update(rand_var_norm, inequalities, get_double_json(json_string, "prob"));
     return rand_var_norm_to_json(upd);
 }
 
-divopt::c_rand_var_norm divopt::utils::json_to_rand_var_norm(std::string json_string) {
+c_rand_var_norm tiresias::json_to_rand_var_norm(std::string json_string) {
 
     value v;
     std::string err = parse(v, json_string);
@@ -125,7 +123,7 @@ divopt::c_rand_var_norm divopt::utils::json_to_rand_var_norm(std::string json_st
 
 }
 
-arma::Mat<real> divopt::utils::json_to_inequalities(std::string json_string) {
+arma::Mat<double> tiresias::json_to_inequalities(std::string json_string) {
 
     value v;
     std::string err = parse(v, json_string);
@@ -174,7 +172,7 @@ arma::Mat<real> divopt::utils::json_to_inequalities(std::string json_string) {
 
 }
 
-double divopt::utils::get_double_json(std::string json_string, std::string key) {
+double tiresias::get_double_json(std::string json_string, std::string key) {
 
     value v;
     std::string err = parse(v, json_string);
@@ -195,7 +193,7 @@ double divopt::utils::get_double_json(std::string json_string, std::string key) 
 
 }
 
-std::string divopt::utils::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm) {
+std::string tiresias::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm) {
     value dim((double) rand_var_norm.get_dim());
 
     std::vector<value> raw_data(rand_var_norm.get_dim_prob());
@@ -215,7 +213,7 @@ std::string divopt::utils::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm)
     return all_value.serialize();
 }
 
-real divopt::utils::obj_norm(unsigned n, const double *x, double *grad, void *data) {
+double tiresias::obj_norm(unsigned n, const double *x, double *grad, void *data) {
 
     // Convert the pointer
     obj_data *d = (obj_data *) data;
@@ -229,7 +227,7 @@ real divopt::utils::obj_norm(unsigned n, const double *x, double *grad, void *da
     // Compute gradient
     if (grad) {
         // Find the gradient
-        arma::Mat<real> div_grad = temp.div_grad(*(d->current));
+        arma::Mat<double> div_grad = temp.div_grad(*(d->current));
 
         // Copy in the gradient
         for (size_t i = 0; i < temp.get_dim_prob(); ++i) {
@@ -238,12 +236,12 @@ real divopt::utils::obj_norm(unsigned n, const double *x, double *grad, void *da
     }
 
     // Compute divergence
-    real div = temp.div(*(d->current));
+    double div = temp.div(*(d->current));
 
     return div;
 }
 
-double divopt::utils::con_norm(unsigned n, const double *x, double *grad, void *data) {
+double tiresias::con_norm(unsigned n, const double *x, double *grad, void *data) {
 
     // Convert the pointer
     con_data * d = (con_data *) data;
@@ -254,7 +252,7 @@ double divopt::utils::con_norm(unsigned n, const double *x, double *grad, void *
 
     // Compute the gradient
     if (grad) {
-        arma::Mat<real> con_grad = temp.cdf_grad(d->inequalities);
+        arma::Mat<double> con_grad = temp.cdf_grad(d->inequalities);
 
         // Copy in the gradient
         for (size_t i = 0; i < temp.get_dim_prob(); ++i) {
@@ -267,18 +265,3 @@ double divopt::utils::con_norm(unsigned n, const double *x, double *grad, void *
 
     return cdf;
 }
-
-const double divopt::utils::PI =         3.1415926535897932384626;
-const double divopt::utils::SQRT_TWO =   1.4142135623730950488016;
-const double divopt::utils::WEIGHTS[] ={ 0.0199532420590459132077,
-                                         0.3936193231522411598285,
-                                         0.9453087204829418812260,
-                                         0.3936193231522411598285,
-                                         0.0199532420590459132077};
-const double divopt::utils::ABS[] = {   -2.0201828704560856329290,
-                                        -0.9585724646138185071128,
-                                         0.0000000000000000000000,
-                                         0.9585724646138185071128,
-                                         2.020182870456085632929};
-const size_t divopt::utils::QUADRATURE_DIM = 5;
-const double divopt::utils::WEIGHT_FLOOR = 0.000001;
