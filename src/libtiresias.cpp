@@ -40,7 +40,7 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
                                  double prob) {
 
     // initialize nlopt object
-    nlopt::opt opt(nlopt::LD_SLSQP, rand_var_norm.get_dim_prob());
+    nlopt::opt opt(nlopt::LD_SLSQP, rand_var_norm.get_opt_dim());
 
     // set up the data structure passed to the objective function
     obj_data obj;
@@ -67,7 +67,20 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     opt.set_maxeval(100);
     opt.set_xtol_rel(0.0001);
 
-    std::vector<double> x = rand_var_norm.raw_data;
+    // construct the initial vector of data
+    std::vector<double> x;
+    x.resize(rand_var_norm.get_opt_dim());
+    size_t k = 0;
+    for (size_t i = 0; i < rand_var_norm.get_dim_prob(); ++i) {
+        if (rand_var_norm.raw_data[rand_var_norm.get_dim_prob() + i] > 0.5) {
+            x[k] = rand_var_norm.raw_data[rand_var_norm.get_dim_prob() + i];
+            ++k;
+        }
+    }
+
+    if (k != rand_var_norm.get_opt_dim()) {
+        std::cout << "\n\nNOOOOOOOOOOO!\n\n\n";
+    }
 
     // optimize
     double minf;
@@ -219,12 +232,15 @@ std::string tiresias::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm) {
     return all_value.serialize();
 }
 
-double tiresias::obj_norm(unsigned n, const double *x, double *grad, void *data) {
+double tiresias::obj_norm(unsigned n,
+                          const double *x,
+                          double *grad,
+                          void *data) {
 
-    // Convert the pointer
+    // convert the pointer
     obj_data *d = (obj_data *) data;
 
-    // Clone the current guy
+    // clone the current guy
     c_rand_var_norm temp(d->current->get_dim());
 
     temp.dat_to_dist(x);

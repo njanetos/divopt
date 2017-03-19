@@ -4,18 +4,22 @@
 
 c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
-    // Set the dimension of the state space.
+    // set the dimension of the state space
     this->dim = dim;
 
-    // The dimension of the optimization problem is the mean vector plus the upper triangular Cholesky factorization of the covariance matrix.
-    this->dim_prob = dim + 2*dim*(dim+1)/2;
+    // the dimension of the optimization problem is the mean
+    // vector plus the upper triangular Cholesky factorization of the
+    // covariance matrix
+    this->dim_prob = dim + dim*(dim+1)/2;
 
-    // Flag expensive computations as not yet complete.
+    // flag expensive computations as not yet complete
     inv_ch_is_computed = false;
     inv_cov_is_computed = false;
 
-    // Prepare the raw data
-    raw_data.resize(dim_prob);
+    // prepare the raw data
+    // first half of the vector is raw data
+    // second half is optimization flags
+    raw_data.resize(2*dim_prob);
 }
 
 real c_rand_var_norm::cdf(arma::mat& inequalities) {
@@ -254,12 +258,11 @@ void c_rand_var_norm::pack() {
         }
     }
 
-    for (size_t i = 0; i < dim; ++i) {
-        for (size_t j = 0; j <= i; ++j) {
-            raw_data[k] = opt_flag(i, j);
-            ++k;
-        }
+    for (size_t i = 0; i < dim_prob; ++i) {
+        raw_data[k] = opt_flags[i];
+        ++k;
     }
+
 }
 
 double c_rand_var_norm::pdf(arma::mat& loc) {
@@ -273,10 +276,10 @@ arma::mat c_rand_var_norm::pdf_grad(arma::mat& loc) {
 
 void c_rand_var_norm::unpack() {
 
-    // Instantiate mean (can be directly written in).
+    // instantiate mean (can be directly written in).
     mean = arma::mat(&raw_data[0], dim, 1, true, true);
 
-    // Instantiate Cholesky factorization, C.
+    // instantiate Cholesky factorization, C.
     size_t k = dim;
     ch = arma::zeros<arma::mat>(dim, dim);
     for (size_t i = 0; i < dim; ++i) {
@@ -286,34 +289,30 @@ void c_rand_var_norm::unpack() {
         }
     }
 
-    // Compute covariance matrix, S = C*C'.
+    // compute covariance matrix, S = C*C'.
     cov = ch*ch.t();
 
-    // Get the correlation matrix.
+    // get the correlation matrix.
     corr = arma::diagmat(1/arma::sqrt(arma::diagmat(cov)))*cov*arma::diagmat(1/arma::sqrt(arma::diagmat(cov)));
 
-    // Find the remaining scalar values
+    // find the remaining scalar values
     det_cov = det(cov);
     norm_factor = 1/(sqrt(pow(2*pi, dim)*det_cov));
     gauss_factor = arma::det(ch)/sqrt(pow(pi, dim)*det_cov);
 
-    // Flag inverse matrices as in need of computation
+    // flag inverse matrices as in need of computation
     inv_cov_is_computed = false;
     inv_ch_is_computed = false;
 
-    // get the optimization flag matrix,
-    // if available, otherwise initialize to 1
-    opt_flag = arma::zeros<arma::mat>(dim, dim);
-    for (size_t i = 0; i < dim; ++i) {
-        for (size_t j = 0; j <= i; ++j) {
-            opt_flag(i, j) = raw_data.size() > k ? raw_data[k] : 1;
-            ++k;
-        }
+    // get optimization flags
+    opt_flags.resize(dim_prob);
+    for (size_t i = 0; i < dim_prob; ++i) {
+        opt_flags[i] = raw_data[dim_prob + i];
     }
 }
 
 void c_rand_var_norm::dat_to_dist(const double *x) {
-    partial_dat_to_dist(0, dim_prob, x);
+    partial_dat_to_dist(0, 2*dim_prob, x);
 }
 
 void c_rand_var_norm::partial_dat_to_dist(size_t lower,
@@ -332,4 +331,12 @@ size_t c_rand_var_norm::get_dim() const {
 
 size_t c_rand_var_norm::get_dim_prob() const {
     return dim_prob;
+}
+
+size_t c_rand_var_norm::get_opt_dim() const {
+    size_t n = 0;
+    for (size_t i = 0; i < dim_prob; ++i) {
+        n += raw_data[dim_prob+i];
+    }
+    return n;
 }

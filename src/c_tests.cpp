@@ -9,19 +9,24 @@ TEST_CASE("Nuts and bolts") {
 
     c_rand_var_norm rand_var_norm(2);
 
-    double raw_data[5];
+    double raw_data[10];
     raw_data[0] = 1;
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
     raw_data[4] = 2;
+    raw_data[5] = 1;
+    raw_data[6] = 1;
+    raw_data[7] = 1;
+    raw_data[8] = 1;
+    raw_data[9] = 1;
 
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
 
     REQUIRE(rand_var_norm.get_dim() == 2);
 
-    REQUIRE(rand_var_norm.get_dim_prob() == 8);
+    REQUIRE(rand_var_norm.get_dim_prob() == 5);
 
     REQUIRE(rand_var_norm.inv_cov()(0, 0) == 1.06250);
 
@@ -43,12 +48,17 @@ TEST_CASE("PDF") {
 
     c_rand_var_norm rand_var_norm(2);
 
-    double raw_data[5];
+    double raw_data[10];
     raw_data[0] = 1;
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
     raw_data[4] = 2;
+    raw_data[5] = 1;
+    raw_data[6] = 1;
+    raw_data[7] = 1;
+    raw_data[8] = 1;
+    raw_data[9] = 1;
 
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
@@ -65,12 +75,18 @@ TEST_CASE("CDF") {
 
     c_rand_var_norm rand_var_norm(2);
 
-    double raw_data[5];
+    double raw_data[10];
     raw_data[0] = 1;
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
     raw_data[4] = 2;
+    raw_data[5] = 1;
+    raw_data[6] = 1;
+    raw_data[7] = 1;
+    raw_data[8] = 1;
+    raw_data[9] = 1;
+
 
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
@@ -94,24 +110,36 @@ TEST_CASE("Divergence and entropy") {
 
     c_rand_var_norm rand_var_norm(2);
 
-    double raw_data[5];
+    double raw_data[10];
     raw_data[0] = 1;
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
     raw_data[4] = 2;
+    raw_data[5] = 1;
+    raw_data[6] = 1;
+    raw_data[7] = 1;
+    raw_data[8] = 1;
+    raw_data[9] = 1;
+
 
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
 
     c_rand_var_norm rand_var_norm2(2);
 
-    double raw_data2[5];
+    double raw_data2[10];
     raw_data2[0] = 0;
     raw_data2[1] = 0;
     raw_data2[2] = 2;
     raw_data2[3] = 0.1;
     raw_data2[4] = 1;
+    raw_data[5] = 1;
+    raw_data[6] = 1;
+    raw_data[7] = 1;
+    raw_data[8] = 1;
+    raw_data[9] = 1;
+
 
     rand_var_norm2.dat_to_dist(raw_data2);
     rand_var_norm2.unpack();
@@ -133,10 +161,10 @@ TEST_CASE("Large state space") {
 
   std::string json;
 
-  json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
   REQUIRE( (std::abs(tiresias::quote(json) - 100) < 0.01) );
 
-  json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
 
   REQUIRE( (std::abs(tiresias::quote(json) - 4.7233) < 0.01) );
 

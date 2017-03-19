@@ -46,11 +46,14 @@ class c_rand_var_norm {
         size_t get_dim() const;
         size_t get_dim_prob() const;
 
+        size_t get_opt_dim() const;
+
         std::vector<real> get_lower_bounds() const;
         std::vector<real> get_upper_bounds() const;
 
-        arma::mat mean, cov, corr, ch, var, opt_flag;
+        arma::mat mean, cov, corr, ch, var;
         real norm_factor, det_cov, gauss_factor;
+        std::vector<bool> opt_flags;
 
         /**
         *  The raw data of the problem. Should be of length dim_prob.
