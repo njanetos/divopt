@@ -16,6 +16,8 @@ class c_rand_var_norm {
 
         c_rand_var_norm(size_t dim);
 
+        void clone(c_rand_var_norm* parent);
+
         real cdf(arma::mat& inequalities);
         arma::mat cdf_grad(arma::mat& inequalities);
         real div(c_rand_var_norm& var);

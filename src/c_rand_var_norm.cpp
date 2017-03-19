@@ -22,6 +22,20 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
     raw_data.resize(2*dim_prob);
 }
 
+void c_rand_var_norm::clone(c_rand_var_norm* parent) {
+    this->dim = parent->dim;
+    this->mean = parent->mean;
+    this->cov = parent->cov;
+    this->corr = parent->corr;
+    this->ch = parent->ch;
+    this->var = parent->var;
+    this->norm_factor = parent->norm_factor;
+    this->det_cov = parent->det_cov;
+    this-> gauss_factor = parent->gauss_factor;
+    this->opt_flags = parent->opt_flags;
+    this->raw_data = parent->raw_data;
+}
+
 real c_rand_var_norm::cdf(arma::mat& inequalities) {
 
     int infin[dim];
@@ -72,30 +86,33 @@ real c_rand_var_norm::cdf(arma::mat& inequalities) {
 }
 
 std::vector<real> c_rand_var_norm::get_lower_bounds() const {
-    std::vector<real> ret_val(get_dim_prob());
+    std::vector<real> ret_val(get_opt_dim());
 
+    size_t k = 0;
     for (size_t i = 0; i < get_dim(); ++i) {
-        ret_val[i] = -HUGE_VAL;
+        if (opt_flags[i]) {
+            ret_val[k] = -HUGE_VAL;
+            ++k;
+        }
     }
 
     for (size_t i = get_dim(); i < get_dim_prob(); ++i) {
-        ret_val[i] = 0;
+        if (opt_flags[i]) {
+            // check whether i-dim is a triangular number!
+            int calc_num = 8*(i-dim) + 1;
+            int t = (int) sqrt(calc_num);
+            ret_val[k] = t * t == calc_num ? 0 : -HUGE_VAL;
+        }
     }
 
     return ret_val;
 }
 
 std::vector<real> c_rand_var_norm::get_upper_bounds() const {
-    std::vector<real> ret_val(get_dim_prob());
-
-    for (size_t i = 0; i < get_dim(); ++i) {
+    std::vector<real> ret_val(get_opt_dim());
+    for (size_t i = 0; i < ret_val.size(); ++i) {
         ret_val[i] = HUGE_VAL;
     }
-
-    for (size_t i = get_dim(); i < get_dim_prob(); ++i) {
-        ret_val[i] = HUGE_VAL;
-    }
-
     return ret_val;
 }
 
@@ -306,8 +323,9 @@ void c_rand_var_norm::unpack() {
 
     // get optimization flags
     opt_flags.resize(dim_prob);
-    for (size_t i = 0; i < dim_prob; ++i) {
-        opt_flags[i] = raw_data[dim_prob + i];
+
+    for (size_t i = 0; i < get_dim_prob(); ++i) {
+        opt_flags[i] = raw_data[get_dim_prob() + i] > 0.5;
     }
 }
 

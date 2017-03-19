@@ -23,8 +23,6 @@ class tiresias {
          */
         static std::string update(std::string json_string);
 
-    protected:
-
         /**
          *
          *
@@ -32,6 +30,8 @@ class tiresias {
          *  \return
          */
         static c_rand_var_norm json_to_rand_var_norm(std::string json_string);
+
+    protected:
 
         /**
          *  Quotes a price for a market encoded in current and an asset defined by the inequalities.

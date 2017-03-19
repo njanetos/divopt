@@ -62,7 +62,7 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     std::vector<double> tol(2);
     tol[0] = 0.01;
     tol[1] = 0.01;
-    opt.add_equality_constraint(con_norm, &con, 0.0001);
+    opt.add_inequality_constraint(con_norm, &con, 0.0001);
 
     opt.set_maxeval(100);
     opt.set_xtol_rel(0.0001);
@@ -72,14 +72,10 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     x.resize(rand_var_norm.get_opt_dim());
     size_t k = 0;
     for (size_t i = 0; i < rand_var_norm.get_dim_prob(); ++i) {
-        if (rand_var_norm.raw_data[rand_var_norm.get_dim_prob() + i] > 0.5) {
-            x[k] = rand_var_norm.raw_data[rand_var_norm.get_dim_prob() + i];
+        if (rand_var_norm.opt_flags[rand_var_norm.get_dim_prob() + i]) {
+            x[k] = rand_var_norm.raw_data[i];
             ++k;
         }
-    }
-
-    if (k != rand_var_norm.get_opt_dim()) {
-        std::cout << "\n\nNOOOOOOOOOOO!\n\n\n";
     }
 
     // optimize
@@ -87,8 +83,18 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     opt.optimize(x, minf);
 
     c_rand_var_norm update(rand_var_norm.get_dim());
-    update.dat_to_dist(&x[0]);
+    update.clone(&rand_var_norm);
+
+    k = 0;
+    for (size_t i = 0; i < rand_var_norm.get_dim_prob(); ++i) {
+        if (rand_var_norm.opt_flags[i]) {
+            update.raw_data[i] = x[k];
+            ++k;
+        }
+    }
     update.unpack();
+
+    std::cout << update.mean;
 
     return update;
 
@@ -242,9 +248,19 @@ double tiresias::obj_norm(unsigned n,
 
     // clone the current guy
     c_rand_var_norm temp(d->current->get_dim());
+    temp.clone(d->current);
 
-    temp.dat_to_dist(x);
+    // update the current guy
+    size_t k = 0;
+    for (size_t i = 0; i < temp.get_dim_prob(); ++i) {
+        if (temp.opt_flags[i]) {
+            temp.raw_data[i] = x[k];
+            ++k;
+        }
+    }
     temp.unpack();
+
+    std::cout << x[0] << ", " << x[1] << "\n";
 
     // Compute gradient
     if (grad) {
@@ -263,14 +279,30 @@ double tiresias::obj_norm(unsigned n,
     return div;
 }
 
-double tiresias::con_norm(unsigned n, const double *x, double *grad, void *data) {
+double tiresias::con_norm(unsigned n,
+                          const double *x,
+                          double *grad,
+                          void *data) {
 
     // Convert the pointer
     con_data * d = (con_data *) data;
 
+    // clone the current guy
     c_rand_var_norm temp(d->current->get_dim());
-    temp.dat_to_dist(x);
+    temp.clone(d->current);
+
+    // update the current guy
+    size_t k = 0;
+    for (size_t i = 0; i < temp.get_dim_prob(); ++i) {
+        if (temp.opt_flags[i]) {
+            temp.raw_data[i] = x[k];
+            ++k;
+        }
+    }
     temp.unpack();
+
+    std::cout << n << ", ";
+    std::cout << x[0] << ", " << x[1] << "\n";
 
     // Compute the gradient
     if (grad) {
@@ -283,7 +315,7 @@ double tiresias::con_norm(unsigned n, const double *x, double *grad, void *data)
     }
 
     // Find the cdf
-    double cdf = temp.cdf(d->inequalities) - d->p;
+    double cdf = -1*(temp.cdf(d->inequalities) - d->p);
 
     return cdf;
 }
