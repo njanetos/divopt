@@ -21,7 +21,7 @@ TEST_CASE("Nuts and bolts") {
 
     REQUIRE(rand_var_norm.get_dim() == 2);
 
-    REQUIRE(rand_var_norm.get_dim_prob() == 5);
+    REQUIRE(rand_var_norm.get_dim_prob() == 8);
 
     REQUIRE(rand_var_norm.inv_cov()(0, 0) == 1.06250);
 

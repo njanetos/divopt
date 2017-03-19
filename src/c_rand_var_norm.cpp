@@ -8,7 +8,7 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
     this->dim = dim;
 
     // The dimension of the optimization problem is the mean vector plus the upper triangular Cholesky factorization of the covariance matrix.
-    this->dim_prob = dim + dim*(dim+1)/2;
+    this->dim_prob = dim + 2*dim*(dim+1)/2;
 
     // Flag expensive computations as not yet complete.
     inv_ch_is_computed = false;
@@ -16,7 +16,6 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
 
     // Prepare the raw data
     raw_data.resize(dim_prob);
-
 }
 
 real c_rand_var_norm::cdf(arma::mat& inequalities) {
@@ -66,7 +65,6 @@ real c_rand_var_norm::cdf(arma::mat& inequalities) {
     pmvnorm((int*) &dim, &nu, ineq.colptr(0), ineq.colptr(1), infin, corr_raw, delta, &maxpts, &abseps, &releps, &error, &val, &inform);
 
     return val;
-
 }
 
 std::vector<real> c_rand_var_norm::get_lower_bounds() const {
@@ -117,7 +115,6 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
     }
 
     return res;
-
 }
 
 double c_rand_var_norm::div(c_rand_var_norm& var) {
@@ -176,7 +173,6 @@ double c_rand_var_norm::div(c_rand_var_norm& var) {
     res *= gauss_factor;
 
     return res;
-
 }
 
 arma::mat c_rand_var_norm::div_grad(c_rand_var_norm& oth) {
@@ -202,13 +198,10 @@ arma::mat c_rand_var_norm::div_grad(c_rand_var_norm& oth) {
     }
 
     return res;
-
 }
 
 double c_rand_var_norm::ent(arma::mat& loc, c_rand_var_norm& var) {
-
     return std::log(pdf(loc)/var.pdf(loc));
-
 }
 
 arma::mat& c_rand_var_norm::inv_cov() {
@@ -225,7 +218,6 @@ arma::mat& c_rand_var_norm::inv_cov() {
     }
 
     return m_inv_cov;
-
 }
 
 arma::mat& c_rand_var_norm::inv_ch() {
@@ -246,7 +238,6 @@ arma::mat& c_rand_var_norm::inv_ch() {
     }
 
     return m_inv_ch;
-
 }
 
 void c_rand_var_norm::pack() {
@@ -263,19 +254,21 @@ void c_rand_var_norm::pack() {
         }
     }
 
+    for (size_t i = 0; i < dim; ++i) {
+        for (size_t j = 0; j <= i; ++j) {
+            raw_data[k] = opt_flag(i, j);
+            ++k;
+        }
+    }
 }
 
 double c_rand_var_norm::pdf(arma::mat& loc) {
-
     arma::mat expint = exp(-0.5*(loc - mean).t()*inv_cov()*(loc - mean));
     return norm_factor*expint(0);
-
 }
 
 arma::mat c_rand_var_norm::pdf_grad(arma::mat& loc) {
-
     return NULL;
-
 }
 
 void c_rand_var_norm::unpack() {
@@ -308,32 +301,35 @@ void c_rand_var_norm::unpack() {
     inv_cov_is_computed = false;
     inv_ch_is_computed = false;
 
+    // get the optimization flag matrix,
+    // if available, otherwise initialize to 1
+    opt_flag = arma::zeros<arma::mat>(dim, dim);
+    for (size_t i = 0; i < dim; ++i) {
+        for (size_t j = 0; j <= i; ++j) {
+            opt_flag(i, j) = raw_data.size() > k ? raw_data[k] : 1;
+            ++k;
+        }
+    }
 }
 
 void c_rand_var_norm::dat_to_dist(const double *x) {
-
     partial_dat_to_dist(0, dim_prob, x);
-
 }
 
-void c_rand_var_norm::partial_dat_to_dist(size_t lower, size_t upper, const double *x) {
-
+void c_rand_var_norm::partial_dat_to_dist(size_t lower,
+                                          size_t upper,
+                                          const double *x) {
     size_t k = 0;
     for (size_t i = lower; i < upper; ++i) {
         raw_data[i] = *(x+k);
         ++k;
     }
-
 }
 
 size_t c_rand_var_norm::get_dim() const {
-
     return dim;
-
 }
 
 size_t c_rand_var_norm::get_dim_prob() const {
-
     return dim_prob;
-
 }

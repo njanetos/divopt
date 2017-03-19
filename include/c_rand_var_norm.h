@@ -49,7 +49,7 @@ class c_rand_var_norm {
         std::vector<real> get_lower_bounds() const;
         std::vector<real> get_upper_bounds() const;
 
-        arma::mat mean, cov, corr, ch, var;
+        arma::mat mean, cov, corr, ch, var, opt_flag;
         real norm_factor, det_cov, gauss_factor;
 
         /**

@@ -35,23 +35,28 @@ double tiresias::shares_outstanding(c_rand_var_norm& current, double price) {
     return 1/(1 + log((1-price)/price));
 }
 
-c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm, arma::Mat<double>& inequalities, double prob) {
+c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
+                                 arma::Mat<double>& inequalities,
+                                 double prob) {
 
-
+    // initialize nlopt object
     nlopt::opt opt(nlopt::LD_SLSQP, rand_var_norm.get_dim_prob());
 
-    // Set the constraints and objective data
+    // set up the data structure passed to the objective function
     obj_data obj;
     obj.current = &rand_var_norm;
+
+    // set up the data structure passed for constraints
     con_data con;
     con.current = &rand_var_norm;
     con.inequalities = inequalities;
     con.p = prob;
 
-    // Upper / Lower bounds
-
+    // set upper / Lower bounds
     opt.set_lower_bounds(rand_var_norm.get_lower_bounds());
     opt.set_upper_bounds(rand_var_norm.get_upper_bounds());
+
+    // set the objective function
     opt.set_min_objective(obj_norm, &obj);
 
     std::vector<double> tol(2);
@@ -64,6 +69,7 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm, arma::Mat<doubl
 
     std::vector<double> x = rand_var_norm.raw_data;
 
+    // optimize
     double minf;
     opt.optimize(x, minf);
 
