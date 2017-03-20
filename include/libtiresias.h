@@ -16,7 +16,7 @@ class tiresias {
         static double quote(std::string json_string);
 
         /**
-         *
+         *  Returns an updated market price, also encoded in a JSON string.
          *
          *  \param json_string
          *  \return
