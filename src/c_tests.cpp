@@ -161,23 +161,19 @@ TEST_CASE("Update and quote") {
 
   std::string json;
 
-  //json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
-  //REQUIRE( (std::abs(tiresias::quote(json) - 100) < 0.01) );
+  json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  REQUIRE( (std::abs(tiresias::quote(json) - 100) < 0.01) );
 
-  //json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
-  //REQUIRE( (std::abs(tiresias::quote(json) - 4.7233) < 0.01) );
+  json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  REQUIRE( (std::abs(tiresias::quote(json) - 4.7233) < 0.01) );
 
-  //c_rand_var_norm rand_var_norm_small(2);
-  //json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
-  //c_rand_var_norm rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
-  //REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.274344) < 0.01) );
+  json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
+  c_rand_var_norm rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
+  REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.2743) < 0.01) );
 
   json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 0, 0, 0],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
-  std::cout << tiresias::quote(json) << "\n";
-  c_rand_var_norm rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
-  std::cout << rand_var_norm_upd.cov;
-  std::cout << rand_var_norm_upd.mean;
-  //REQUIRE( (std::abs(rand_var_norm_upd2.mean[0] + 0.274344) < 0.01) );
+  rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
+  REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.3385) < 0.01) );
 
 }
 

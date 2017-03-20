@@ -40,7 +40,7 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
                                  double prob) {
 
     // initialize nlopt object
-    nlopt::opt opt(nlopt::LD_SLSQP, rand_var_norm.get_opt_dim());
+    nlopt::opt opt(nlopt::LN_COBYLA, rand_var_norm.get_opt_dim());
 
     // set up the data structure passed to the objective function
     obj_data obj;
@@ -59,12 +59,11 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     // set the objective function
     opt.set_min_objective(obj_norm, &obj);
 
-    std::vector<double> tol(2);
-    tol[0] = 0.01;
-    tol[1] = 0.01;
-    opt.add_inequality_constraint(con_norm, &con, 0.0001);
+    // set the constraint function
+    opt.add_equality_constraint(con_norm, &con, 0.001);
 
-    opt.set_maxeval(100);
+    // set algorithm parameters
+    opt.set_maxeval(1000);
     opt.set_xtol_rel(0.0001);
 
     // construct the initial vector of data
@@ -72,7 +71,7 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     x.resize(rand_var_norm.get_opt_dim());
     size_t k = 0;
     for (size_t i = 0; i < rand_var_norm.get_dim_prob(); ++i) {
-        if (rand_var_norm.opt_flags[rand_var_norm.get_dim_prob() + i]) {
+        if (rand_var_norm.opt_flags[i]) {
             x[k] = rand_var_norm.raw_data[i];
             ++k;
         }
@@ -93,8 +92,6 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
         }
     }
     update.unpack();
-
-    std::cout << update.mean;
 
     return update;
 
@@ -260,8 +257,6 @@ double tiresias::obj_norm(unsigned n,
     }
     temp.unpack();
 
-    std::cout << x[0] << ", " << x[1] << "\n";
-
     // Compute gradient
     if (grad) {
         // Find the gradient
@@ -301,9 +296,6 @@ double tiresias::con_norm(unsigned n,
     }
     temp.unpack();
 
-    std::cout << n << ", ";
-    std::cout << x[0] << ", " << x[1] << "\n";
-
     // Compute the gradient
     if (grad) {
         arma::Mat<double> con_grad = temp.cdf_grad(d->inequalities);
@@ -315,7 +307,7 @@ double tiresias::con_norm(unsigned n,
     }
 
     // Find the cdf
-    double cdf = -1*(temp.cdf(d->inequalities) - d->p);
+    double cdf = temp.cdf(d->inequalities) - d->p;
 
     return cdf;
 }
