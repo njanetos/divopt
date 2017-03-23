@@ -87,7 +87,6 @@ TEST_CASE("CDF") {
     raw_data[8] = 1;
     raw_data[9] = 1;
 
-
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
 
@@ -104,6 +103,15 @@ TEST_CASE("CDF") {
 
     REQUIRE( (std::abs(rand_var_norm.cdf(inequalities) - 0.13182) < 0.05) );
 
+    inequalities(0, 0) = -0.2;
+    inequalities(1, 0) = -0.1;
+
+    REQUIRE( (std::abs(rand_var_norm.cdf(inequalities) - 0.00373) < 0.05) );
+
+    inequalities(0, 0) = -0.2;
+    inequalities(1, 0) = -0.1;
+
+    REQUIRE( (std::abs(rand_var_norm.cdf(inequalities) - 0.00373) < 0.05) );
 }
 
 TEST_CASE("Divergence and entropy") {
@@ -140,7 +148,6 @@ TEST_CASE("Divergence and entropy") {
     raw_data[8] = 1;
     raw_data[9] = 1;
 
-
     rand_var_norm2.dat_to_dist(raw_data2);
     rand_var_norm2.unpack();
 
@@ -160,6 +167,12 @@ TEST_CASE("Update and quote") {
   c_rand_var_norm rand_var_norm(5);
 
   std::string json;
+
+  json = "{\"dim\":5,\"raw\":[19423.2596,20082.8618,20828.8575,21657.1473,22564.7895,1050.3518,0,813.599,0,0,469.7316,0,0,0,-180305.9812,0,0,0,0,441295.5282,1,1,1,1,1,1,1,1,0,1,1,0,0,1,1,0,0,0,1,1],\"low\":[\"-INF\",\"-INF\",\"-INF\",\"-INF\",\"-INF\"],\"high\":[\"INF\",\"INF\",\"INF\",\"INF\",\"28000\"],\"prob\":0.1}";
+  std::cout << "Updating...\n";
+  std::cout << tiresias::update(json) << "\n";
+  std::cout << "Finished.";
+
 
   json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
   REQUIRE( (std::abs(tiresias::quote(json) - 100) < 0.01) );

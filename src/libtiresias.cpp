@@ -5,8 +5,9 @@
 #include "nlopt.hpp"
 
 using namespace picojson;
+using namespace std;
 
-double tiresias::quote(std::string json_string) {
+double tiresias::quote(string json_string) {
 
     c_rand_var_norm rand_var_norm = json_to_rand_var_norm(json_string);
     arma::Mat<double> inequalities = json_to_inequalities(json_string);
@@ -39,6 +40,10 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
                                  arma::Mat<double>& inequalities,
                                  double prob) {
 
+    std::cout << inequalities << "\n";
+    std::cout << rand_var_norm.mean << "\n";
+    std::cout << rand_var_norm.ch << "\n";
+
     // initialize nlopt object
     nlopt::opt opt(nlopt::LN_COBYLA, rand_var_norm.get_opt_dim());
 
@@ -64,10 +69,10 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
 
     // set algorithm parameters
     opt.set_maxeval(1000);
-    opt.set_xtol_rel(0.0001);
+    opt.set_xtol_rel(0.00001);
 
     // construct the initial vector of data
-    std::vector<double> x;
+    vector<double> x;
     x.resize(rand_var_norm.get_opt_dim());
     size_t k = 0;
     for (size_t i = 0; i < rand_var_norm.get_dim_prob(); ++i) {
@@ -97,41 +102,42 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
 
 }
 
-std::string tiresias::update(std::string json_string) {
+string tiresias::update(string json_string) {
     c_rand_var_norm rand_var_norm = json_to_rand_var_norm(json_string);
     arma::Mat<double> inequalities = json_to_inequalities(json_string);
+
     c_rand_var_norm upd = update(rand_var_norm, inequalities, get_double_json(json_string, "prob"));
     return rand_var_norm_to_json(upd);
 }
 
-c_rand_var_norm tiresias::json_to_rand_var_norm(std::string json_string) {
+c_rand_var_norm tiresias::json_to_rand_var_norm(string json_string) {
 
     value v;
-    std::string err = parse(v, json_string);
+    string err = parse(v, json_string);
 
     if (!err.empty()) {
-        throw std::invalid_argument(err);
+        throw invalid_argument(err);
     }
 
     if (!v.is<object>()) {
-        throw std::invalid_argument("Malformed JSON.");
+        throw invalid_argument("Malformed JSON.");
     }
     const value::object& obj = v.get<object>();
 
     if (!obj.find("dim")->second.is<double>()) {
-        throw std::invalid_argument("Malformed JSON: Dimension.");
+        throw invalid_argument("Malformed JSON: Dimension.");
     }
     int dim = obj.find("dim")->second.get<double>();
 
-    if (!obj.find("raw")->second.is<std::vector<value>>()) {
-        throw std::invalid_argument("Malformed JSON: Raw values vector.");
+    if (!obj.find("raw")->second.is<vector<value>>()) {
+        throw invalid_argument("Malformed JSON: Raw values vector.");
     }
-    std::vector<value> raw_values = obj.find("raw")->second.get<std::vector<value>>();
+    vector<value> raw_values = obj.find("raw")->second.get<vector<value>>();
 
-    std::vector<double> raw_data(raw_values.size());
+    vector<double> raw_data(raw_values.size());
     for (size_t i = 0; i < raw_values.size(); ++i) {
         if (!raw_values[i].is<double>()) {
-            throw std::invalid_argument("Malformed JSON: Raw values.");
+            throw invalid_argument("Malformed JSON: Raw values.");
         }
         raw_data[i] = raw_values[i].get<double>();
     }
@@ -145,80 +151,73 @@ c_rand_var_norm tiresias::json_to_rand_var_norm(std::string json_string) {
 
 }
 
-arma::Mat<double> tiresias::json_to_inequalities(std::string json_string) {
+arma::Mat<double> tiresias::json_to_inequalities(string json_string) {
 
     value v;
-    std::string err = parse(v, json_string);
+    string err = parse(v, json_string);
 
     if (!err.empty()) {
-        throw std::invalid_argument(err);
+        throw invalid_argument(err);
     }
 
     if (!v.is<object>()) {
-        throw std::invalid_argument("Malformed JSON.");
+        throw invalid_argument("Malformed JSON.");
     }
     const value::object& obj = v.get<object>();
 
     if (!obj.find("dim")->second.is<double>()) {
-        throw std::invalid_argument("Malformed JSON: Dimension.");
+        throw invalid_argument("Malformed JSON: Dimension.");
     }
     int dim = obj.find("dim")->second.get<double>();
 
 
-    if (!obj.find("low")->second.is<std::vector<value>>()) {
-        throw std::invalid_argument("Malformed JSON: Lower inequality.");
+    if (!obj.find("low")->second.is<vector<value>>()) {
+        throw invalid_argument("Malformed JSON: Lower inequality.");
     }
-    std::vector<value> low_val = obj.find("low")->second.get<std::vector<value>>();
+    vector<value> low_val = obj.find("low")->second.get<vector<value>>();
 
-    if (!obj.find("high")->second.is<std::vector<value>>()) {
-        throw std::invalid_argument("Malformed JSON: Upper inequality.");
+    if (!obj.find("high")->second.is<vector<value>>()) {
+        throw invalid_argument("Malformed JSON: Upper inequality.");
     }
-    std::vector<value> hig_val = obj.find("high")->second.get<std::vector<value>>();
+    vector<value> hig_val = obj.find("high")->second.get<vector<value>>();
 
     arma::Mat<double> inequalities(dim, 2);
     for (size_t i = 0; i < low_val.size(); ++i) {
-        if (low_val[i].is<std::string>()) {
-            inequalities(i, 0) = -1*std::numeric_limits<double>::infinity();
-        } else {
-            inequalities(i, 0) = low_val[i].get<double>();
-        }
-
-        if (hig_val[i].is<std::string>()) {
-            inequalities(i, 1) = std::numeric_limits<double>::infinity();
-        } else {
-            inequalities(i, 1) = hig_val[i].get<double>();
-        }
+        inequalities(i, 0) = low_val[i].is<string>() ?
+          stod(low_val[i].get<string>()) : low_val[i].get<double>();
+        inequalities(i, 1) = hig_val[i].is<string>() ?
+          stod(hig_val[i].get<string>()) : hig_val[i].get<double>();
     }
 
     return inequalities;
 
 }
 
-double tiresias::get_double_json(std::string json_string, std::string key) {
+double tiresias::get_double_json(string json_string, string key) {
 
     value v;
-    std::string err = parse(v, json_string);
+    string err = parse(v, json_string);
 
     if (!err.empty()) {
-        throw std::invalid_argument(err);
+        throw invalid_argument(err);
     }
 
     if (!v.is<object>()) {
-        throw std::invalid_argument("Malformed JSON.");
+        throw invalid_argument("Malformed JSON.");
     }
     const value::object& obj = v.get<object>();
 
     if (!obj.find(key)->second.is<double>()) {
-        throw std::invalid_argument("Malformed JSON: Cannot find key.");
+        throw invalid_argument("Malformed JSON: Cannot find key.");
     }
     return obj.find(key)->second.get<double>();
 
 }
 
-std::string tiresias::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm) {
+string tiresias::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm) {
     value dim((double) rand_var_norm.get_dim());
 
-    std::vector<value> raw_data(rand_var_norm.get_dim_prob());
+    vector<value> raw_data(rand_var_norm.get_dim_prob());
     for (size_t i = 0; i < rand_var_norm.get_dim_prob(); ++i) {
         raw_data[i] = value(rand_var_norm.raw_data[i]);
     }
@@ -227,8 +226,8 @@ std::string tiresias::rand_var_norm_to_json(c_rand_var_norm& rand_var_norm) {
 
     object all;
 
-    all.insert(std::pair<std::string, value>("dim", dim));
-    all.insert(std::pair<std::string, value>("raw", raw_data_array));
+    all.insert(pair<string, value>("dim", dim));
+    all.insert(pair<string, value>("raw", raw_data_array));
 
     value all_value(all);
 

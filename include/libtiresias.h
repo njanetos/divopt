@@ -31,6 +31,14 @@ class tiresias {
          */
         static c_rand_var_norm json_to_rand_var_norm(std::string json_string);
 
+        /**
+         *
+         *
+         *  \param json_string
+         *  \return
+         */
+        static arma::Mat<double> json_to_inequalities(std::string json_string);
+
     protected:
 
         /**
@@ -51,14 +59,6 @@ class tiresias {
          *  \return
          */
         static c_rand_var_norm update(c_rand_var_norm& rand_var_norm, arma::Mat<double>& inequalities, double prob);
-
-        /**
-         *
-         *
-         *  \param json_string
-         *  \return
-         */
-        static arma::Mat<double> json_to_inequalities(std::string json_string);
 
         /**
          *
