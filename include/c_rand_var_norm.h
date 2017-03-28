@@ -21,6 +21,7 @@ class c_rand_var_norm {
         real cdf(arma::mat& inequalities);
         arma::mat cdf_grad(arma::mat& inequalities);
         real div(c_rand_var_norm& var);
+        real div_alternate(c_rand_var_norm& var);
         arma::mat div_grad(c_rand_var_norm& oth);
         real ent(arma::mat& loc, c_rand_var_norm& var);
 
@@ -62,11 +63,11 @@ class c_rand_var_norm {
         */
         std::vector<double> raw_data;
 
+        bool inv_ch_is_computed, inv_cov_is_computed;
+        arma::mat m_inv_cov, m_inv_ch;
 
     protected:
 
-        bool inv_ch_is_computed, inv_cov_is_computed;
-        arma::mat m_inv_cov, m_inv_ch;
 
         /**
          *  The dimension of the state space. (Not the optimization problem!)

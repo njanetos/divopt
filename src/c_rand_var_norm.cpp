@@ -116,7 +116,6 @@ std::vector<real> c_rand_var_norm::get_upper_bounds() const {
     return ret_val;
 }
 
-
 // TODO This needs to use the analytic formula.
 arma::mat c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 
@@ -139,8 +138,13 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 }
 
 double c_rand_var_norm::div(c_rand_var_norm& var) {
+  arma::Mat<double> res = 0.5 * (arma::trace(arma::inv(cov) * var.cov) + (mean - var.mean).t() * arma::inv(cov) * (mean - var.mean) - dim + log(arma::det(cov) / arma::det(var.cov)));
+  return res(0, 0);
+}
 
-    // Initialize the variable that will hold the divergence.
+double c_rand_var_norm::div_alternate(c_rand_var_norm& var) {
+
+    // initialize the variable that will hold the divergence
     double res = 0.0;
 
     // abs will hold the abscissa combination
@@ -151,7 +155,7 @@ double c_rand_var_norm::div(c_rand_var_norm& var) {
     // index is the current index
     size_t index[dim];
 
-    // Initialize index to 0
+    // initialize index to 0
     for (size_t i = 0; i < dim; ++i) {
         index[i] = 0;
     }
@@ -159,18 +163,18 @@ double c_rand_var_norm::div(c_rand_var_norm& var) {
     // w_prod is the weight to multiply by
     double w_prod;
 
-    // Loop through all possible abscissa combinations
+    // loop through all possible abscissa combinations
     while (index[dim-1] < QUADRATURE_DIM) {
 
-        // Start with weight = 1, find total weight by multiplying
-        // Start reading in the abscissa values
+        // start with weight = 1, find total weight by multiplying
+        // start reading in the abscissa values
         w_prod = 1.0;
         for (size_t i = 0; i < dim; ++i) {
             abs(i) = ABS[index[i]];
             w_prod *= WEIGHTS[index[i]];
         }
 
-        // Advance the index by one
+        // advance the index by one
         ++index[0];
         for (size_t i = 0; i < dim-1; ++i) {
             if (index[i] >= QUADRATURE_DIM) {
@@ -181,12 +185,12 @@ double c_rand_var_norm::div(c_rand_var_norm& var) {
             }
         }
 
-        // Make sure the weights aren't really small before performing computations.
+        // make sure the weights aren't small before performing computations
         if (w_prod > WEIGHT_FLOOR) {
-            // Transform the matrix to take into account correlation
+            // transform the matrix to take into account correlation
             tr_abs = sqrt_two*ch*abs + mean;
 
-            // Find the entropy and add onto the result, times the weight.
+            // find the entropy and add onto the result, times the weight
             res += ent(tr_abs, var)*w_prod;
         }
 
@@ -279,7 +283,6 @@ void c_rand_var_norm::pack() {
         raw_data[k] = opt_flags[i];
         ++k;
     }
-
 }
 
 double c_rand_var_norm::pdf(arma::mat& loc) {
@@ -296,7 +299,7 @@ void c_rand_var_norm::unpack() {
     // instantiate mean (can be directly written in).
     mean = arma::mat(&raw_data[0], dim, 1, true, true);
 
-    // instantiate Cholesky factorization, C.
+    // instantiate covariance matrix
     size_t k = dim;
     ch = arma::zeros<arma::mat>(dim, dim);
     for (size_t i = 0; i < dim; ++i) {
