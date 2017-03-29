@@ -14,7 +14,7 @@ TEST_CASE("Nuts and bolts") {
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
-    raw_data[4] = 2;
+    raw_data[4] = 4.25;
     raw_data[5] = 1;
     raw_data[6] = 1;
     raw_data[7] = 1;
@@ -40,8 +40,6 @@ TEST_CASE("Nuts and bolts") {
 
     REQUIRE( (rand_var_norm.mean(0, 0) == 0.2) );
 
-    REQUIRE( (rand_var_norm.inv_ch()(0, 0) == 1) );
-
 }
 
 TEST_CASE("PDF") {
@@ -53,7 +51,7 @@ TEST_CASE("PDF") {
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
-    raw_data[4] = 2;
+    raw_data[4] = 4.25;
     raw_data[5] = 1;
     raw_data[6] = 1;
     raw_data[7] = 1;
@@ -80,7 +78,7 @@ TEST_CASE("CDF") {
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
-    raw_data[4] = 2;
+    raw_data[4] = 4.25;
     raw_data[5] = 1;
     raw_data[6] = 1;
     raw_data[7] = 1;
@@ -123,13 +121,12 @@ TEST_CASE("Divergence and entropy") {
     raw_data[1] = 1;
     raw_data[2] = 1;
     raw_data[3] = 0.5;
-    raw_data[4] = 2;
+    raw_data[4] = 4.25;
     raw_data[5] = 1;
     raw_data[6] = 1;
     raw_data[7] = 1;
     raw_data[8] = 1;
     raw_data[9] = 1;
-
 
     rand_var_norm.dat_to_dist(raw_data);
     rand_var_norm.unpack();
@@ -139,8 +136,8 @@ TEST_CASE("Divergence and entropy") {
     double raw_data2[10];
     raw_data2[0] = 0;
     raw_data2[1] = 0;
-    raw_data2[2] = 2;
-    raw_data2[3] = 0.1;
+    raw_data2[2] = 4;
+    raw_data2[3] = 0.2;
     raw_data2[4] = 1;
     raw_data[5] = 1;
     raw_data[6] = 1;
@@ -157,37 +154,31 @@ TEST_CASE("Divergence and entropy") {
 
     REQUIRE( (std::abs(rand_var_norm.ent(location, rand_var_norm2) + 0.72020) < 0.01) );
 
-    REQUIRE( (std::abs(rand_var_norm.div(rand_var_norm2) - 1.7575) < 0.01) );
+    REQUIRE( (std::abs(rand_var_norm.div(rand_var_norm2) - 1.82326) < 0.01) );
 
     REQUIRE( (std::abs(rand_var_norm.div(rand_var_norm)) < 0.01) );
 
 }
 
 TEST_CASE("Update and quote") {
-  c_rand_var_norm rand_var_norm(5);
+  //c_rand_var_norm rand_var_norm(5);
 
   std::string json;
 
-  //json = "{\"dim\":5,\"raw\":[19423.2596,20082.8618,20828.8575,21657.1473,22564.7895,1050.3518,0,813.599,0,0,469.7316,0,0,0,-180305.9812,0,0,0,0,441295.5282,1,1,1,1,1,1,1,1,0,1,1,0,0,1,1,0,0,0,1,1],\"low\":[\"-INF\",\"-INF\",\"-INF\",\"-INF\",\"-INF\"],\"high\":[\"INF\",\"INF\",\"INF\",\"INF\",\"28000\"],\"prob\":0.1}";
-  //std::cout << "Updating...\n";
-  //std::cout << tiresias::update(json) << "\n";
-  //std::cout << "Finished.";
+  json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  REQUIRE( (std::abs(tiresias::quote(json) - 100) < 0.01) );
 
+  json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
+  REQUIRE( (std::abs(tiresias::quote(json) - 4.7233) < 0.01) );
 
-  //json = "{ \"dim\": 5, \"raw\": [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\", \"-INF\", \"-INF\", \"-INF\"], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
-  //REQUIRE( (std::abs(tiresias::quote(json) - 100) < 0.01) );
+  json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
+  c_rand_var_norm rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
+  std::cout << rand_var_norm_upd.mean << rand_var_norm_upd.cov;
+  REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.2745) < 0.01) );
 
-  //json = "{ \"dim\": 5, \"raw\": [0.1, 0.2, 0.15, 0.1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  \"low\": [0, 0, 0, 0, 0], \"high\": [\"INF\", \"INF\", \"INF\", \"INF\", \"INF\"]}";
-  //REQUIRE( (std::abs(tiresias::quote(json) - 4.7233) < 0.01) );
-
-  //json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 1, 1, 1],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
-  //c_rand_var_norm rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
-  //REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.2743) < 0.01) );
-
-  //json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 0, 0, 0],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
-  //rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
-  //REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.3385) < 0.01) );
-
+  json = "{ \"dim\": 2, \"raw\": [0, 0, 1, 0, 1, 1, 1, 0, 0, 0],  \"low\": [\"-INF\", \"-INF\"], \"high\": [0, 0], \"prob\": 0.4}";
+  rand_var_norm_upd = tiresias::json_to_rand_var_norm(tiresias::update(json));
+  REQUIRE( (std::abs(rand_var_norm_upd.mean[0] + 0.3385) < 0.01) );
 }
 
 TEST_CASE("Nuts and bolts of events") {

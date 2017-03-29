@@ -32,13 +32,6 @@ class c_rand_var_norm {
          */
         arma::mat& inv_cov();
 
-        /**
-         *  Returns the inverse of the Cholesky matrix. Since this
-         *  is an expensive operation, it is only inverted when called.
-         *  \return The inverse of the Cholesky matrix.
-         */
-        arma::mat& inv_ch();
-
         double pdf(arma::mat& loc);
         arma::mat pdf_grad(arma::mat& loc);
         void pack();
@@ -54,8 +47,8 @@ class c_rand_var_norm {
         std::vector<real> get_lower_bounds() const;
         std::vector<real> get_upper_bounds() const;
 
-        arma::mat mean, cov, corr, ch, var;
-        real norm_factor, det_cov, gauss_factor;
+        arma::mat mean, cov, corr, var;
+        real norm_factor, det_cov;
         std::vector<bool> opt_flags;
 
         /**
@@ -63,8 +56,8 @@ class c_rand_var_norm {
         */
         std::vector<double> raw_data;
 
-        bool inv_ch_is_computed, inv_cov_is_computed;
-        arma::mat m_inv_cov, m_inv_ch;
+        bool inv_cov_is_computed;
+        arma::mat m_inv_cov;
 
     protected:
 

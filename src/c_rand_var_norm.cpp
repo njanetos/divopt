@@ -13,7 +13,6 @@ c_rand_var_norm::c_rand_var_norm(size_t dim) {
     this->dim_prob = dim + dim*(dim+1)/2;
 
     // flag expensive computations as not yet complete
-    inv_ch_is_computed = false;
     inv_cov_is_computed = false;
 
     // prepare the raw data
@@ -27,11 +26,9 @@ void c_rand_var_norm::clone(c_rand_var_norm* parent) {
     this->mean = parent->mean;
     this->cov = parent->cov;
     this->corr = parent->corr;
-    this->ch = parent->ch;
     this->var = parent->var;
     this->norm_factor = parent->norm_factor;
     this->det_cov = parent->det_cov;
-    this-> gauss_factor = parent->gauss_factor;
     this->opt_flags = parent->opt_flags;
     this->raw_data = parent->raw_data;
 }
@@ -138,91 +135,32 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 }
 
 double c_rand_var_norm::div(c_rand_var_norm& var) {
-  arma::Mat<double> res = 0.5 * (arma::trace(arma::inv(cov) * var.cov) + (mean - var.mean).t() * arma::inv(cov) * (mean - var.mean) - dim + log(arma::det(cov) / arma::det(var.cov)));
+  arma::Mat<double> res = 0.5 * (
+      arma::trace(var.inv_cov() * cov)
+    + (mean - var.mean).t() * var.inv_cov() * (mean - var.mean)
+    - dim
+    + log(arma::det(var.cov) / arma::det(cov))
+  );
   return res(0, 0);
 }
 
-double c_rand_var_norm::div_alternate(c_rand_var_norm& var) {
-
-    // initialize the variable that will hold the divergence
-    double res = 0.0;
-
-    // abs will hold the abscissa combination
-    // tr_abs is the transformed position
-    arma::Mat<double> abs(dim, 1);
-    arma::Mat<double> tr_abs(dim, 1);
-
-    // index is the current index
-    size_t index[dim];
-
-    // initialize index to 0
-    for (size_t i = 0; i < dim; ++i) {
-        index[i] = 0;
-    }
-
-    // w_prod is the weight to multiply by
-    double w_prod;
-
-    // loop through all possible abscissa combinations
-    while (index[dim-1] < QUADRATURE_DIM) {
-
-        // start with weight = 1, find total weight by multiplying
-        // start reading in the abscissa values
-        w_prod = 1.0;
-        for (size_t i = 0; i < dim; ++i) {
-            abs(i) = ABS[index[i]];
-            w_prod *= WEIGHTS[index[i]];
-        }
-
-        // advance the index by one
-        ++index[0];
-        for (size_t i = 0; i < dim-1; ++i) {
-            if (index[i] >= QUADRATURE_DIM) {
-                index[i] = 0;
-                ++index[i+1];
-            } else {
-                break;
-            }
-        }
-
-        // make sure the weights aren't small before performing computations
-        if (w_prod > WEIGHT_FLOOR) {
-            // transform the matrix to take into account correlation
-            tr_abs = sqrt_two*ch*abs + mean;
-
-            // find the entropy and add onto the result, times the weight
-            res += ent(tr_abs, var)*w_prod;
-        }
-
-    }
-    res *= gauss_factor;
-
-    return res;
-}
-
+// TODO: this should use an analytic formula
 arma::mat c_rand_var_norm::div_grad(c_rand_var_norm& oth) {
 
-    c_rand_var_norm & curr = dynamic_cast<c_rand_var_norm&>(oth);
+  c_rand_var_norm temp(this->dim);
+  arma::mat res(dim_prob, 1);
+  temp.clone(this);
 
-    arma::Mat<double> grad_mean = (mean - curr.mean).t()*curr.inv_cov();
-    arma::Mat<double> grad_cov = -1*inv_ch().t() + curr.inv_cov()*ch;
+  double base = temp.div(oth);
 
-    arma::Mat<double> res(dim_prob, 1);
+  for (size_t i = 0; i < dim+dim*(dim+1)/2; ++i) {
+      temp.raw_data[i] += 0.001;
+      temp.unpack();
+      res(i) = (temp.div(oth) - base)/0.001;
+      temp.dat_to_dist(&(this->raw_data[0]));
+  }
 
-    // Copy in results
-    for (size_t i = 0; i < dim; ++i) {
-        res(i) = grad_mean(i);
-    }
-
-    size_t k = 0;
-    for (size_t i = 0; i < dim; ++i) {
-        for (size_t j = 0; j <= i; ++j) {
-            res(dim+k) = grad_cov(i, j);
-            ++k;
-        }
-    }
-
-    return res;
+  return res;
 }
 
 double c_rand_var_norm::ent(arma::mat& loc, c_rand_var_norm& var) {
@@ -245,26 +183,6 @@ arma::mat& c_rand_var_norm::inv_cov() {
     return m_inv_cov;
 }
 
-arma::mat& c_rand_var_norm::inv_ch() {
-
-    // Check if the inverse of the Cholesky factorization has been computed.
-    if (!inv_ch_is_computed) {
-
-        // Compute it.
-        m_inv_ch = inv(ch);
-
-        // Compute the inverse of the covariance matrix while we're at it.
-        m_inv_cov = m_inv_ch*m_inv_ch.t();
-
-        // Flag both as computed.
-        inv_ch_is_computed = true;
-        inv_cov_is_computed = true;
-
-    }
-
-    return m_inv_ch;
-}
-
 void c_rand_var_norm::pack() {
 
     for (size_t i = 0; i < dim; ++i) {
@@ -274,7 +192,7 @@ void c_rand_var_norm::pack() {
     size_t k = dim;
     for (size_t i = 0; i < dim; ++i) {
         for (size_t j = 0; j <= i; ++j) {
-            raw_data[k] = ch(i, j);
+            raw_data[k] = cov(i, j);
             ++k;
         }
     }
@@ -301,16 +219,14 @@ void c_rand_var_norm::unpack() {
 
     // instantiate covariance matrix
     size_t k = dim;
-    ch = arma::zeros<arma::mat>(dim, dim);
+    cov = arma::zeros<arma::mat>(dim, dim);
     for (size_t i = 0; i < dim; ++i) {
         for (size_t j = 0; j <= i; ++j) {
-            ch(i, j) = raw_data[k];
+            cov(i, j) = raw_data[k];
+            cov(j, i) = raw_data[k];
             ++k;
         }
     }
-
-    // compute covariance matrix, S = C*C'.
-    cov = ch*ch.t();
 
     // get the correlation matrix.
     corr = arma::diagmat(1/arma::sqrt(arma::diagmat(cov)))*cov*arma::diagmat(1/arma::sqrt(arma::diagmat(cov)));
@@ -318,11 +234,9 @@ void c_rand_var_norm::unpack() {
     // find the remaining scalar values
     det_cov = det(cov);
     norm_factor = 1/(sqrt(pow(2*pi, dim)*det_cov));
-    gauss_factor = arma::det(ch)/sqrt(pow(pi, dim)*det_cov);
 
     // flag inverse matrices as in need of computation
     inv_cov_is_computed = false;
-    inv_ch_is_computed = false;
 
     // get optimization flags
     opt_flags.resize(dim_prob);

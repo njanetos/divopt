@@ -38,14 +38,13 @@ double tiresias::shares_outstanding(c_rand_var_norm& current, double price) {
 
 c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
                                  arma::Mat<double>& inequalities,
-                                 double prob) {
-
-    std::cout << inequalities << "\n";
-    std::cout << rand_var_norm.mean << "\n";
-    std::cout << rand_var_norm.ch << "\n";
+                                 double prob,
+                                 double step = 0.01) {
 
     // initialize nlopt object
     nlopt::opt opt(nlopt::LN_COBYLA, rand_var_norm.get_opt_dim());
+
+    opt.set_initial_step(step);
 
     // set up the data structure passed to the objective function
     obj_data obj;
@@ -68,8 +67,8 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     opt.add_equality_constraint(con_norm, &con, 0.001);
 
     // set algorithm parameters
-    opt.set_maxeval(1000);
-    opt.set_xtol_rel(0.00001);
+    opt.set_maxeval(10000000);
+    opt.set_xtol_rel(0.001);
 
     // construct the initial vector of data
     vector<double> x;
