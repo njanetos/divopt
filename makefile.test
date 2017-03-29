@@ -3,8 +3,8 @@ SRC = src
 INC = include
 LIB = lib
 
-CLEANEXTS   		= o a gcno
-CC			= g++
+CLEANEXTS               = o a gcno
+CC			= g++-6
 CFLAGS			= -Wall -fexceptions -g -I$(INC) -I/usr/local/include -std=c++11 -fPIC
 CFLAGS_BUILD		= -Wall -fexceptions -g -I$(INC) -I/usr/local/include -fPIC
 LIBS			= -L$(LIB) -L/usr/local/lib -larmadillo -lMvtnorm -lnlopt
