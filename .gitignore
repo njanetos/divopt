@@ -50,3 +50,5 @@ travisci_rsa
 tiresias_server
 tiresias_tests
 
+# visual studio Code
+.vscode/
