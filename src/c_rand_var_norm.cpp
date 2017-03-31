@@ -135,13 +135,61 @@ arma::mat c_rand_var_norm::cdf_grad(arma::mat& inequalities) {
 }
 
 double c_rand_var_norm::div(c_rand_var_norm& var) {
-  arma::Mat<double> res = 0.5 * (
-      arma::trace(var.inv_cov() * cov)
-    + (mean - var.mean).t() * var.inv_cov() * (mean - var.mean)
-    - dim
-    + log(arma::det(var.cov) / arma::det(cov))
-  );
-  return res(0, 0);
+
+    // Initialize the variable that will hold the divergence.
+    double res = 0.0;
+
+    // abs will hold the abscissa combination
+    // tr_abs is the transformed position
+    arma::Mat<double> abs(dim, 1);
+    arma::Mat<double> tr_abs(dim, 1);
+
+    // index is the current index
+    size_t index[dim];
+
+    // Initialize index to 0
+    for (size_t i = 0; i < dim; ++i) {
+        index[i] = 0;
+    }
+
+    // w_prod is the weight to multiply by
+    double w_prod;
+
+    // Loop through all possible abscissa combinations
+    while (index[dim-1] < QUADRATURE_DIM) {
+
+        // Start with weight = 1, find total weight by multiplying
+        // Start reading in the abscissa values
+        w_prod = 1.0;
+        for (size_t i = 0; i < dim; ++i) {
+            abs(i) = ABS[index[i]];
+            w_prod *= WEIGHTS[index[i]];
+        }
+
+        // Advance the index by one
+        ++index[0];
+        for (size_t i = 0; i < dim-1; ++i) {
+            if (index[i] >= QUADRATURE_DIM) {
+                index[i] = 0;
+                ++index[i+1];
+            } else {
+                break;
+            }
+        }
+
+        // Make sure the weights aren't really small before performing computations.
+        if (w_prod > WEIGHT_FLOOR) {
+            // Transform the matrix to take into account correlation
+            tr_abs = sqrt_two*ch*abs + mean;
+
+            // Find the entropy and add onto the result, times the weight.
+            res += ent(tr_abs, var)*w_prod;
+        }
+
+    }
+    res *= gauss_factor;
+
+    return res;
 }
 
 // TODO: this should use an analytic formula
@@ -237,6 +285,9 @@ void c_rand_var_norm::unpack() {
 
     // flag inverse matrices as in need of computation
     inv_cov_is_computed = false;
+    
+    // compute the cholesky factorization
+    ch = arma::chol(cov);
 
     // get optimization flags
     opt_flags.resize(dim_prob);
@@ -244,6 +295,8 @@ void c_rand_var_norm::unpack() {
     for (size_t i = 0; i < get_dim_prob(); ++i) {
         opt_flags[i] = raw_data[get_dim_prob() + i] > 0.5;
     }
+    
+    gauss_factor = arma::det(ch)/sqrt(pow(pi, dim)*det_cov);
 }
 
 void c_rand_var_norm::dat_to_dist(const double *x) {

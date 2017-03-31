@@ -58,7 +58,7 @@ class tiresias {
          *  \param prob
          *  \return
          */
-        static c_rand_var_norm update(c_rand_var_norm& rand_var_norm, arma::Mat<double>& inequalities, double prob, double step);
+        static c_rand_var_norm update(c_rand_var_norm& rand_var_norm, arma::Mat<double>& inequalities, double prob);
 
         /**
          *

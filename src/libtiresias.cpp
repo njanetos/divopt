@@ -38,13 +38,12 @@ double tiresias::shares_outstanding(c_rand_var_norm& current, double price) {
 
 c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
                                  arma::Mat<double>& inequalities,
-                                 double prob,
-                                 double step = 0.01) {
+                                 double prob) {
 
     // initialize nlopt object
     nlopt::opt opt(nlopt::LN_COBYLA, rand_var_norm.get_opt_dim());
 
-    opt.set_initial_step(step);
+    opt.set_initial_step(100);
 
     // set up the data structure passed to the objective function
     obj_data obj;
@@ -67,7 +66,7 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     opt.add_equality_constraint(con_norm, &con, 0.001);
 
     // set algorithm parameters
-    opt.set_maxeval(10000000);
+    opt.set_maxeval(1000);
     opt.set_xtol_rel(0.001);
 
     // construct the initial vector of data
@@ -98,7 +97,6 @@ c_rand_var_norm tiresias::update(c_rand_var_norm& rand_var_norm,
     update.unpack();
 
     return update;
-
 }
 
 string tiresias::update(string json_string) {
@@ -268,6 +266,8 @@ double tiresias::obj_norm(unsigned n,
 
     // Compute divergence
     double div = temp.div(*(d->current));
+
+    std::cout << "Eval: " << div << "\n";
 
     return div;
 }

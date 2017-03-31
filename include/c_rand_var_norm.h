@@ -47,8 +47,8 @@ class c_rand_var_norm {
         std::vector<real> get_lower_bounds() const;
         std::vector<real> get_upper_bounds() const;
 
-        arma::mat mean, cov, corr, var;
-        real norm_factor, det_cov;
+        arma::mat mean, cov, corr, var, ch;
+        real norm_factor, det_cov, gauss_factor;
         std::vector<bool> opt_flags;
 
         /**
